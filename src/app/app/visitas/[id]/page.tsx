@@ -48,6 +48,7 @@ export default async function VisitPage({ params }: { params: Promise<{ id: stri
               {w.report && (
                 <div className="mt-5 flex flex-wrap gap-2">
                   <LinkButton href={`/app/relatorios/${w.report.id}`}><FileText className="size-4" /> Relatório {w.report.protocol}</LinkButton>
+                  <LinkButton href={`/app/relatorios/${w.report.id}`} variant="secondary">Enviar ao cliente</LinkButton>
                   <LinkButton href={`/app/piscinas/${w.pool.id}`} variant="secondary">Prontuário da piscina</LinkButton>
                 </div>
               )}

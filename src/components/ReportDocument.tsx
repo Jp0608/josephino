@@ -21,8 +21,8 @@ export function ReportDocument({ s, logoUrl, photoUrl }: { s: ReportSnapshot; lo
     <article className="print-card mx-auto w-full max-w-[820px] overflow-hidden rounded-2xl border border-[#e2e8ed] bg-white text-[#0b1d29] shadow-[0_12px_40px_-12px_rgba(6,38,58,.25)]" style={{ colorScheme: "light" }}>
       {/* Cabeçalho */}
       <header className="relative px-6 pb-6 pt-7 text-white md:px-10" style={{ background: `linear-gradient(135deg, ${brand}, #06263a)` }}>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex min-w-0 items-center gap-3">
             {logoUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={logoUrl} alt={s.company.name} className="h-12 w-auto max-w-[160px] rounded-lg bg-white object-contain p-1.5" />
@@ -31,11 +31,11 @@ export function ReportDocument({ s, logoUrl, photoUrl }: { s: ReportSnapshot; lo
             )}
             <div>
               <p className="font-display text-[19px] font-extrabold leading-tight">{s.company.name}</p>
-              {contact && <p className="text-[12px] opacity-80">{contact}</p>}
+              {contact && <p className="break-words text-[12px] opacity-80">{contact}</p>}
               {s.company.document && <p className="text-[11px] opacity-70">CNPJ/CPF {s.company.document}</p>}
             </div>
           </div>
-          <div className="text-right">
+          <div className="shrink-0 border-t border-white/20 pt-3 sm:border-0 sm:pt-0 sm:text-right">
             <p className="text-[11px] font-semibold uppercase tracking-[0.12em] opacity-75">Relatório técnico</p>
             <p className="font-display text-[15px] font-bold">{s.protocol}</p>
             <p className="text-[11px] opacity-75">Emitido em {dateTime(s.issuedAt)}</p>

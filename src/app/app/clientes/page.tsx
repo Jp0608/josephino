@@ -25,7 +25,7 @@ export default async function Customers({ searchParams }: { searchParams: Promis
     <>
       <PageHeader
         title="Clientes"
-        subtitle={`${res.total} ${res.total === 1 ? "cliente" : "clientes"}${status !== "all" ? ` ${STATUS[status as keyof typeof STATUS].toLowerCase()}` : ""}`}
+        subtitle={`${res.total} ${res.total === 1 ? "cliente" : "clientes"}${status !== "all" ? ` ${STATUS[status as keyof typeof STATUS].toLowerCase().replace(/s$/, res.total === 1 ? "" : "s")}` : ""}`}
         actions={can(ctx.role, "customers.write") && <LinkButton href="/app/clientes/novo"><Plus className="size-4" /> Novo cliente</LinkButton>}
       />
       <form className="mb-4 flex flex-col gap-2 md:flex-row" role="search">

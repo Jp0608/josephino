@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+
 import {
   Check, ChevronLeft, ChevronRight, Cloud, CloudOff, Loader2, Camera, Trash2, AlertTriangle, ShieldAlert, Plus, MessageCircle, FileText, Navigation, Droplets, CircleCheck,
 } from "lucide-react";
@@ -60,7 +60,6 @@ function toPayload(d: Draft, baseVersion: number) {
 }
 
 export function VisitFlow(p: FlowProps) {
-  const router = useRouter();
   const toast = useToast();
   const key = `ondaro:visit:${p.visitId}`;
   const [step, setStep] = useState(0);
@@ -254,8 +253,8 @@ export function VisitFlow(p: FlowProps) {
       localStorage.removeItem(key);
       localStorage.removeItem(`${key}:finish`);
       setDirty(false);
+      // Sem router.refresh(): a página passaria a mostrar a visita concluída e esconderia a tela de envio.
       setResult(j.data);
-      router.refresh();
     } catch {
       localStorage.setItem(`${key}:finish`, "1");
       setQueuedFinish(true);
