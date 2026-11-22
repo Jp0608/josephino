@@ -322,3 +322,13 @@ export async function listPools(ctx: C, opts: { q?: string; customerIds?: string
       .orderBy(asc(customers.name), asc(pools.name));
   });
 }
+
+export async function listCustomerOptions(ctx: C) {
+  return withTenant(ctx.tenantId, (tx) =>
+    tx
+      .select({ id: customers.id, name: customers.name })
+      .from(customers)
+      .where(and(eq(customers.tenantId, ctx.tenantId), inArray(customers.status, ["active", "paused"])))
+      .orderBy(asc(customers.name)),
+  );
+}
