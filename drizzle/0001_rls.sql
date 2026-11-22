@@ -1,3 +1,6 @@
+-- Todas as tabelas do Ondaro ficam no schema ondaro; nada fora dele é tocado.
+SET LOCAL search_path TO ondaro, public;
+--> statement-breakpoint
 -- Row Level Security: segunda barreira de isolamento entre empresas.
 -- O app executa consultas de empresa com SET LOCAL ROLE ondaro_app + app.tenant_id.
 -- Sem app.tenant_id definido, current_setting devolve NULL e nenhuma linha aparece.
@@ -9,9 +12,9 @@ END $$;
 --> statement-breakpoint
 GRANT ondaro_app TO CURRENT_USER;
 --> statement-breakpoint
-GRANT USAGE ON SCHEMA public TO ondaro_app;
+GRANT USAGE ON SCHEMA ondaro TO ondaro_app;
 --> statement-breakpoint
-CREATE OR REPLACE FUNCTION app_tenant() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT nullif(current_setting('app.tenant_id', true), '')::uuid $$;
+CREATE OR REPLACE FUNCTION ondaro.app_tenant() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT nullif(current_setting('app.tenant_id', true), '')::uuid $$;
 --> statement-breakpoint
 GRANT SELECT ON plans TO ondaro_app;
 --> statement-breakpoint

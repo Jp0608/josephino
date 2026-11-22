@@ -13,7 +13,7 @@
  */
 import { sql } from "drizzle-orm";
 import {
-  pgTable,
+  pgSchema,
   uuid,
   text,
   integer,
@@ -30,6 +30,9 @@ import {
   check,
 } from "drizzle-orm/pg-core";
 
+/** Todas as tabelas ficam no schema próprio "ondaro": convive com outros sistemas no mesmo banco sem tocar neles. */
+export const ondaro = pgSchema("ondaro");
+
 const id = () => uuid("id").primaryKey().defaultRandom();
 const tenantId = () => uuid("tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" });
 const createdAt = () => timestamp("created_at", { withTimezone: true }).notNull().defaultNow();
@@ -38,7 +41,7 @@ const qty = (name: string) => numeric(name, { precision: 14, scale: 3, mode: "nu
 
 /* ───────────────────────────── Plataforma (global) ───────────────────────────── */
 
-export const plans = pgTable("plans", {
+export const plans = ondaro.table("plans", {
   id: id(),
   code: text("code").notNull().unique(), // starter | pro | business | enterprise
   name: text("name").notNull(),
@@ -54,7 +57,7 @@ export const plans = pgTable("plans", {
   updatedAt: updatedAt(),
 });
 
-export const tenants = pgTable(
+export const tenants = ondaro.table(
   "tenants",
   {
     id: id(),
@@ -89,7 +92,7 @@ export const tenants = pgTable(
   (t) => [check("tenants_status_chk", sql`${t.status} in ('trialing','active','past_due','suspended','cancelled')`)],
 );
 
-export const users = pgTable("users", {
+export const users = ondaro.table("users", {
   id: id(),
   email: text("email").notNull().unique(), // sempre minúsculo
   name: text("name").notNull(),
@@ -101,7 +104,7 @@ export const users = pgTable("users", {
   updatedAt: updatedAt(),
 });
 
-export const sessions = pgTable(
+export const sessions = ondaro.table(
   "sessions",
   {
     id: id(),
@@ -118,7 +121,7 @@ export const sessions = pgTable(
   (t) => [index("sessions_user_idx").on(t.userId)],
 );
 
-export const passwordResets = pgTable("password_resets", {
+export const passwordResets = ondaro.table("password_resets", {
   id: id(),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   tokenHash: text("token_hash").notNull().unique(),
@@ -127,7 +130,7 @@ export const passwordResets = pgTable("password_resets", {
   createdAt: createdAt(),
 });
 
-export const authAttempts = pgTable(
+export const authAttempts = ondaro.table(
   "auth_attempts",
   {
     id: id(),
@@ -137,7 +140,7 @@ export const authAttempts = pgTable(
   (t) => [index("auth_attempts_key_idx").on(t.key, t.createdAt)],
 );
 
-export const platformAudit = pgTable("platform_audit", {
+export const platformAudit = ondaro.table("platform_audit", {
   id: id(),
   actorEmail: text("actor_email").notNull(),
   action: text("action").notNull(),
@@ -146,7 +149,7 @@ export const platformAudit = pgTable("platform_audit", {
   createdAt: createdAt(),
 });
 
-export const billingEvents = pgTable("billing_events", {
+export const billingEvents = ondaro.table("billing_events", {
   id: id(),
   tenantId: uuid("tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" }),
   kind: text("kind").notNull(), // trial_started | plan_changed | payment_confirmed | suspended | reactivated | trial_extended
@@ -162,7 +165,7 @@ export const billingEvents = pgTable("billing_events", {
 export const ROLES = ["owner", "admin", "manager", "supervisor", "technician", "finance", "sales"] as const;
 export type Role = (typeof ROLES)[number];
 
-export const memberships = pgTable(
+export const memberships = ondaro.table(
   "memberships",
   {
     id: id(),
@@ -183,7 +186,7 @@ export const memberships = pgTable(
 
 /* ───────────────────────────── Clientes e piscinas ───────────────────────────── */
 
-export const customers = pgTable(
+export const customers = ondaro.table(
   "customers",
   {
     id: id(),
@@ -222,7 +225,7 @@ export const customers = pgTable(
   ],
 );
 
-export const pools = pgTable(
+export const pools = ondaro.table(
   "pools",
   {
     id: id(),
@@ -259,7 +262,7 @@ export const pools = pgTable(
   ],
 );
 
-export const poolEquipment = pgTable(
+export const poolEquipment = ondaro.table(
   "pool_equipment",
   {
     id: id(),
@@ -286,7 +289,7 @@ export const poolEquipment = pgTable(
  * Parâmetros da água configurados pela empresa. As faixas começam VAZIAS:
  * o Ondaro não inventa limites técnicos — cada empresa informa a referência que adota.
  */
-export const parameterDefinitions = pgTable(
+export const parameterDefinitions = ondaro.table(
   "parameter_definitions",
   {
     id: id(),
@@ -307,7 +310,7 @@ export const parameterDefinitions = pgTable(
 
 /* ───────────────────────────── Agenda e visitas ───────────────────────────── */
 
-export const recurrences = pgTable(
+export const recurrences = ondaro.table(
   "recurrences",
   {
     id: id(),
@@ -346,7 +349,7 @@ export const VISIT_STATUSES = [
 ] as const;
 export type VisitStatus = (typeof VISIT_STATUSES)[number];
 
-export const visits = pgTable(
+export const visits = ondaro.table(
   "visits",
   {
     id: id(),
@@ -389,7 +392,7 @@ export const visits = pgTable(
   ],
 );
 
-export const visitChecklist = pgTable(
+export const visitChecklist = ondaro.table(
   "visit_checklist",
   {
     id: id(),
@@ -406,7 +409,7 @@ export const visitChecklist = pgTable(
   ],
 );
 
-export const measurements = pgTable(
+export const measurements = ondaro.table(
   "measurements",
   {
     id: id(),
@@ -433,7 +436,7 @@ export const measurements = pgTable(
   ],
 );
 
-export const visitProcedures = pgTable(
+export const visitProcedures = ondaro.table(
   "visit_procedures",
   {
     id: id(),
@@ -454,7 +457,7 @@ export const visitProcedures = pgTable(
 
 /* ───────────────────────────── Produtos e estoque ───────────────────────────── */
 
-export const products = pgTable(
+export const products = ondaro.table(
   "products",
   {
     id: id(),
@@ -481,7 +484,7 @@ export const products = pgTable(
   (t) => [unique("products_tenant_id").on(t.tenantId, t.id), index("products_tenant_name_idx").on(t.tenantId, t.name)],
 );
 
-export const inventoryMovements = pgTable(
+export const inventoryMovements = ondaro.table(
   "inventory_movements",
   {
     id: id(),
@@ -505,7 +508,7 @@ export const inventoryMovements = pgTable(
   ],
 );
 
-export const chemicalApplications = pgTable(
+export const chemicalApplications = ondaro.table(
   "chemical_applications",
   {
     id: id(),
@@ -535,7 +538,7 @@ export const chemicalApplications = pgTable(
 
 /* ───────────────────────────── Fotos e relatórios ───────────────────────────── */
 
-export const photos = pgTable(
+export const photos = ondaro.table(
   "photos",
   {
     id: id(),
@@ -554,7 +557,7 @@ export const photos = pgTable(
   (t) => [index("photos_visit_idx").on(t.tenantId, t.visitId), index("photos_pool_idx").on(t.tenantId, t.poolId)],
 );
 
-export const technicalReports = pgTable(
+export const technicalReports = ondaro.table(
   "technical_reports",
   {
     id: id(),
@@ -584,7 +587,7 @@ export const technicalReports = pgTable(
 
 /* ───────────────────────────── Contratos e financeiro ───────────────────────────── */
 
-export const servicePlans = pgTable(
+export const servicePlans = ondaro.table(
   "service_plans",
   {
     id: id(),
@@ -603,7 +606,7 @@ export const servicePlans = pgTable(
   (t) => [unique("service_plans_tenant_id").on(t.tenantId, t.id)],
 );
 
-export const contracts = pgTable(
+export const contracts = ondaro.table(
   "contracts",
   {
     id: id(),
@@ -631,7 +634,7 @@ export const contracts = pgTable(
   ],
 );
 
-export const invoices = pgTable(
+export const invoices = ondaro.table(
   "invoices",
   {
     id: id(),
@@ -660,7 +663,7 @@ export const invoices = pgTable(
   ],
 );
 
-export const payments = pgTable(
+export const payments = ondaro.table(
   "payments",
   {
     id: id(),
@@ -682,7 +685,7 @@ export const payments = pgTable(
   ],
 );
 
-export const expenses = pgTable(
+export const expenses = ondaro.table(
   "expenses",
   {
     id: id(),
@@ -705,7 +708,7 @@ export const expenses = pgTable(
 export const LEAD_STAGES = ["new", "contacted", "qualified", "quote_sent", "negotiation", "won", "lost"] as const;
 export type LeadStage = (typeof LEAD_STAGES)[number];
 
-export const leads = pgTable(
+export const leads = ondaro.table(
   "leads",
   {
     id: id(),
@@ -730,7 +733,7 @@ export const leads = pgTable(
   (t) => [unique("leads_tenant_id").on(t.tenantId, t.id), index("leads_tenant_stage_idx").on(t.tenantId, t.stage)],
 );
 
-export const leadActivities = pgTable(
+export const leadActivities = ondaro.table(
   "lead_activities",
   {
     id: id(),
@@ -747,7 +750,7 @@ export const leadActivities = pgTable(
   ],
 );
 
-export const proposals = pgTable(
+export const proposals = ondaro.table(
   "proposals",
   {
     id: id(),
@@ -775,7 +778,7 @@ export const proposals = pgTable(
 
 /* ───────────────────────────── Comunicação, portal, auditoria ───────────────────────────── */
 
-export const messageLogs = pgTable(
+export const messageLogs = ondaro.table(
   "message_logs",
   {
     id: id(),
@@ -800,7 +803,7 @@ export const messageLogs = pgTable(
   (t) => [index("message_logs_tenant_idx").on(t.tenantId, t.createdAt)],
 );
 
-export const serviceRequests = pgTable(
+export const serviceRequests = ondaro.table(
   "service_requests",
   {
     id: id(),
@@ -818,7 +821,7 @@ export const serviceRequests = pgTable(
   ],
 );
 
-export const auditLogs = pgTable(
+export const auditLogs = ondaro.table(
   "audit_logs",
   {
     id: id(),

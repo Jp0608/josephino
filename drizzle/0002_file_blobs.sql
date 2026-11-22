@@ -1,7 +1,10 @@
+-- Todas as tabelas do Ondaro ficam no schema ondaro; nada fora dele é tocado.
+SET LOCAL search_path TO ondaro, public;
+--> statement-breakpoint
 -- Armazenamento de imagens no próprio Postgres (para hospedagens sem disco persistente, como a Vercel).
 CREATE TABLE IF NOT EXISTS "file_blobs" (
 	"key" text PRIMARY KEY NOT NULL,
-	"tenant_id" uuid NOT NULL REFERENCES "tenants"("id") ON DELETE cascade,
+	"tenant_id" uuid NOT NULL REFERENCES "ondaro"."tenants"("id") ON DELETE cascade,
 	"mime" text NOT NULL,
 	"data" bytea NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL

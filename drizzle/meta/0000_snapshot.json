@@ -1,12 +1,12 @@
 {
-  "id": "011625ac-cef6-4dd7-9288-343d8e4d2bcc",
+  "id": "cc70aeaa-b0e6-44f3-a4b8-c74752364188",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.audit_logs": {
+    "ondaro.audit_logs": {
       "name": "audit_logs",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -114,6 +114,7 @@
           "name": "audit_logs_tenant_id_tenants_id_fk",
           "tableFrom": "audit_logs",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -130,9 +131,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.auth_attempts": {
+    "ondaro.auth_attempts": {
       "name": "auth_attempts",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -185,9 +186,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.billing_events": {
+    "ondaro.billing_events": {
       "name": "billing_events",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -246,6 +247,7 @@
           "name": "billing_events_tenant_id_tenants_id_fk",
           "tableFrom": "billing_events",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -262,9 +264,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.chemical_applications": {
+    "ondaro.chemical_applications": {
       "name": "chemical_applications",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -406,6 +408,7 @@
           "name": "chemical_applications_tenant_id_tenants_id_fk",
           "tableFrom": "chemical_applications",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -419,6 +422,7 @@
           "name": "chem_app_visit_fk",
           "tableFrom": "chemical_applications",
           "tableTo": "visits",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "visit_id"
@@ -437,9 +441,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.contracts": {
+    "ondaro.contracts": {
       "name": "contracts",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -577,6 +581,7 @@
           "name": "contracts_tenant_id_tenants_id_fk",
           "tableFrom": "contracts",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -590,6 +595,7 @@
           "name": "contracts_customer_fk",
           "tableFrom": "contracts",
           "tableTo": "customers",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "customer_id"
@@ -617,9 +623,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.customers": {
+    "ondaro.customers": {
       "name": "customers",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -845,6 +851,7 @@
           "name": "customers_tenant_id_tenants_id_fk",
           "tableFrom": "customers",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -877,9 +884,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.expenses": {
+    "ondaro.expenses": {
       "name": "expenses",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -979,6 +986,7 @@
           "name": "expenses_tenant_id_tenants_id_fk",
           "tableFrom": "expenses",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -995,14 +1003,14 @@
       "checkConstraints": {
         "expenses_amount_chk": {
           "name": "expenses_amount_chk",
-          "value": "\"expenses\".\"amount_cents\" >= 0"
+          "value": "\"ondaro\".\"expenses\".\"amount_cents\" >= 0"
         }
       },
       "isRLSEnabled": false
     },
-    "public.inventory_movements": {
+    "ondaro.inventory_movements": {
       "name": "inventory_movements",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -1125,6 +1133,7 @@
           "name": "inventory_movements_tenant_id_tenants_id_fk",
           "tableFrom": "inventory_movements",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -1138,6 +1147,7 @@
           "name": "inv_mov_product_fk",
           "tableFrom": "inventory_movements",
           "tableTo": "products",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "product_id"
@@ -1156,9 +1166,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.invoices": {
+    "ondaro.invoices": {
       "name": "invoices",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -1355,6 +1365,7 @@
           "name": "invoices_tenant_id_tenants_id_fk",
           "tableFrom": "invoices",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -1368,6 +1379,7 @@
           "name": "invoices_customer_fk",
           "tableFrom": "invoices",
           "tableTo": "customers",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "customer_id"
@@ -1395,14 +1407,14 @@
       "checkConstraints": {
         "invoices_amount_chk": {
           "name": "invoices_amount_chk",
-          "value": "\"invoices\".\"amount_cents\" >= 0"
+          "value": "\"ondaro\".\"invoices\".\"amount_cents\" >= 0"
         }
       },
       "isRLSEnabled": false
     },
-    "public.lead_activities": {
+    "ondaro.lead_activities": {
       "name": "lead_activities",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -1477,6 +1489,7 @@
           "name": "lead_activities_tenant_id_tenants_id_fk",
           "tableFrom": "lead_activities",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -1490,6 +1503,7 @@
           "name": "lead_act_lead_fk",
           "tableFrom": "lead_activities",
           "tableTo": "leads",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "lead_id"
@@ -1508,9 +1522,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.leads": {
+    "ondaro.leads": {
       "name": "leads",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -1655,6 +1669,7 @@
           "name": "leads_tenant_id_tenants_id_fk",
           "tableFrom": "leads",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -1680,9 +1695,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.measurements": {
+    "ondaro.measurements": {
       "name": "measurements",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -1845,6 +1860,7 @@
           "name": "measurements_tenant_id_tenants_id_fk",
           "tableFrom": "measurements",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -1858,6 +1874,7 @@
           "name": "measurements_visit_fk",
           "tableFrom": "measurements",
           "tableTo": "visits",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "visit_id"
@@ -1876,9 +1893,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.memberships": {
+    "ondaro.memberships": {
       "name": "memberships",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -1955,6 +1972,7 @@
           "name": "memberships_tenant_id_tenants_id_fk",
           "tableFrom": "memberships",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -1968,6 +1986,7 @@
           "name": "memberships_user_id_users_id_fk",
           "tableFrom": "memberships",
           "tableTo": "users",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "user_id"
           ],
@@ -2001,9 +2020,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.message_logs": {
+    "ondaro.message_logs": {
       "name": "message_logs",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2132,6 +2151,7 @@
           "name": "message_logs_tenant_id_tenants_id_fk",
           "tableFrom": "message_logs",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -2148,9 +2168,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.parameter_definitions": {
+    "ondaro.parameter_definitions": {
       "name": "parameter_definitions",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2258,6 +2278,7 @@
           "name": "parameter_definitions_tenant_id_tenants_id_fk",
           "tableFrom": "parameter_definitions",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -2274,9 +2295,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.password_resets": {
+    "ondaro.password_resets": {
       "name": "password_resets",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2323,6 +2344,7 @@
           "name": "password_resets_user_id_users_id_fk",
           "tableFrom": "password_resets",
           "tableTo": "users",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "user_id"
           ],
@@ -2347,9 +2369,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.payments": {
+    "ondaro.payments": {
       "name": "payments",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2449,6 +2471,7 @@
           "name": "payments_tenant_id_tenants_id_fk",
           "tableFrom": "payments",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -2462,6 +2485,7 @@
           "name": "payments_invoice_fk",
           "tableFrom": "payments",
           "tableTo": "invoices",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "invoice_id"
@@ -2480,9 +2504,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.photos": {
+    "ondaro.photos": {
       "name": "photos",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2610,6 +2634,7 @@
           "name": "photos_tenant_id_tenants_id_fk",
           "tableFrom": "photos",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -2626,9 +2651,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.plans": {
+    "ondaro.plans": {
       "name": "plans",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2733,9 +2758,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.platform_audit": {
+    "ondaro.platform_audit": {
       "name": "platform_audit",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2784,9 +2809,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.pool_equipment": {
+    "ondaro.pool_equipment": {
       "name": "pool_equipment",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -2898,6 +2923,7 @@
           "name": "pool_equipment_tenant_id_tenants_id_fk",
           "tableFrom": "pool_equipment",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -2911,6 +2937,7 @@
           "name": "pool_equipment_pool_fk",
           "tableFrom": "pool_equipment",
           "tableTo": "pools",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "pool_id"
@@ -2929,9 +2956,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.pools": {
+    "ondaro.pools": {
       "name": "pools",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -3139,6 +3166,7 @@
           "name": "pools_tenant_id_tenants_id_fk",
           "tableFrom": "pools",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -3152,6 +3180,7 @@
           "name": "pools_customer_fk",
           "tableFrom": "pools",
           "tableTo": "customers",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "customer_id"
@@ -3179,9 +3208,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.products": {
+    "ondaro.products": {
       "name": "products",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -3339,6 +3368,7 @@
           "name": "products_tenant_id_tenants_id_fk",
           "tableFrom": "products",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -3364,9 +3394,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.proposals": {
+    "ondaro.proposals": {
       "name": "proposals",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -3517,6 +3547,7 @@
           "name": "proposals_tenant_id_tenants_id_fk",
           "tableFrom": "proposals",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -3541,9 +3572,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.recurrences": {
+    "ondaro.recurrences": {
       "name": "recurrences",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -3654,6 +3685,7 @@
           "name": "recurrences_tenant_id_tenants_id_fk",
           "tableFrom": "recurrences",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -3667,6 +3699,7 @@
           "name": "recurrences_pool_fk",
           "tableFrom": "recurrences",
           "tableTo": "pools",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "pool_id"
@@ -3694,9 +3727,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.service_plans": {
+    "ondaro.service_plans": {
       "name": "service_plans",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -3781,6 +3814,7 @@
           "name": "service_plans_tenant_id_tenants_id_fk",
           "tableFrom": "service_plans",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -3806,9 +3840,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.service_requests": {
+    "ondaro.service_requests": {
       "name": "service_requests",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -3891,6 +3925,7 @@
           "name": "service_requests_tenant_id_tenants_id_fk",
           "tableFrom": "service_requests",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -3904,6 +3939,7 @@
           "name": "service_requests_customer_fk",
           "tableFrom": "service_requests",
           "tableTo": "customers",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "customer_id"
@@ -3922,9 +3958,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.sessions": {
+    "ondaro.sessions": {
       "name": "sessions",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -4012,6 +4048,7 @@
           "name": "sessions_user_id_users_id_fk",
           "tableFrom": "sessions",
           "tableTo": "users",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "user_id"
           ],
@@ -4025,6 +4062,7 @@
           "name": "sessions_tenant_id_tenants_id_fk",
           "tableFrom": "sessions",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -4049,9 +4087,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.technical_reports": {
+    "ondaro.technical_reports": {
       "name": "technical_reports",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -4223,6 +4261,7 @@
           "name": "technical_reports_tenant_id_tenants_id_fk",
           "tableFrom": "technical_reports",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -4236,6 +4275,7 @@
           "name": "reports_visit_fk",
           "tableFrom": "technical_reports",
           "tableTo": "visits",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "visit_id"
@@ -4262,9 +4302,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.tenants": {
+    "ondaro.tenants": {
       "name": "tenants",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -4450,6 +4490,7 @@
           "name": "tenants_plan_id_plans_id_fk",
           "tableFrom": "tenants",
           "tableTo": "plans",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "plan_id"
           ],
@@ -4474,14 +4515,14 @@
       "checkConstraints": {
         "tenants_status_chk": {
           "name": "tenants_status_chk",
-          "value": "\"tenants\".\"status\" in ('trialing','active','past_due','suspended','cancelled')"
+          "value": "\"ondaro\".\"tenants\".\"status\" in ('trialing','active','past_due','suspended','cancelled')"
         }
       },
       "isRLSEnabled": false
     },
-    "public.users": {
+    "ondaro.users": {
       "name": "users",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -4558,9 +4599,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.visit_checklist": {
+    "ondaro.visit_checklist": {
       "name": "visit_checklist",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -4641,6 +4682,7 @@
           "name": "visit_checklist_tenant_id_tenants_id_fk",
           "tableFrom": "visit_checklist",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -4654,6 +4696,7 @@
           "name": "visit_checklist_visit_fk",
           "tableFrom": "visit_checklist",
           "tableTo": "visits",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "visit_id"
@@ -4672,9 +4715,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.visit_procedures": {
+    "ondaro.visit_procedures": {
       "name": "visit_procedures",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -4767,6 +4810,7 @@
           "name": "visit_procedures_tenant_id_tenants_id_fk",
           "tableFrom": "visit_procedures",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -4780,6 +4824,7 @@
           "name": "visit_procedures_visit_fk",
           "tableFrom": "visit_procedures",
           "tableTo": "visits",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "visit_id"
@@ -4798,9 +4843,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.visits": {
+    "ondaro.visits": {
       "name": "visits",
-      "schema": "",
+      "schema": "ondaro",
       "columns": {
         "id": {
           "name": "id",
@@ -5083,6 +5128,7 @@
           "name": "visits_tenant_id_tenants_id_fk",
           "tableFrom": "visits",
           "tableTo": "tenants",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id"
           ],
@@ -5096,6 +5142,7 @@
           "name": "visits_pool_fk",
           "tableFrom": "visits",
           "tableTo": "pools",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "pool_id"
@@ -5111,6 +5158,7 @@
           "name": "visits_customer_fk",
           "tableFrom": "visits",
           "tableTo": "customers",
+          "schemaTo": "ondaro",
           "columnsFrom": [
             "tenant_id",
             "customer_id"
@@ -5140,7 +5188,9 @@
     }
   },
   "enums": {},
-  "schemas": {},
+  "schemas": {
+    "ondaro": "ondaro"
+  },
   "sequences": {},
   "roles": {},
   "policies": {},

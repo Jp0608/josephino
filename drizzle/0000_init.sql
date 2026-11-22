@@ -1,4 +1,6 @@
-CREATE TABLE "audit_logs" (
+CREATE SCHEMA IF NOT EXISTS "ondaro";
+--> statement-breakpoint
+CREATE TABLE "ondaro"."audit_logs" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"user_id" uuid,
@@ -9,13 +11,13 @@ CREATE TABLE "audit_logs" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "auth_attempts" (
+CREATE TABLE "ondaro"."auth_attempts" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"key" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "billing_events" (
+CREATE TABLE "ondaro"."billing_events" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"kind" text NOT NULL,
@@ -26,7 +28,7 @@ CREATE TABLE "billing_events" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "chemical_applications" (
+CREATE TABLE "ondaro"."chemical_applications" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"visit_id" uuid NOT NULL,
@@ -47,7 +49,7 @@ CREATE TABLE "chemical_applications" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "contracts" (
+CREATE TABLE "ondaro"."contracts" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"customer_id" uuid NOT NULL,
@@ -68,7 +70,7 @@ CREATE TABLE "contracts" (
 	CONSTRAINT "contracts_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "customers" (
+CREATE TABLE "ondaro"."customers" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"kind" text DEFAULT 'pf' NOT NULL,
@@ -101,7 +103,7 @@ CREATE TABLE "customers" (
 	CONSTRAINT "customers_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "expenses" (
+CREATE TABLE "ondaro"."expenses" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"category" text NOT NULL,
@@ -113,10 +115,10 @@ CREATE TABLE "expenses" (
 	"paid_at" timestamp with time zone,
 	"created_by" uuid,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	CONSTRAINT "expenses_amount_chk" CHECK ("expenses"."amount_cents" >= 0)
+	CONSTRAINT "expenses_amount_chk" CHECK ("ondaro"."expenses"."amount_cents" >= 0)
 );
 --> statement-breakpoint
-CREATE TABLE "inventory_movements" (
+CREATE TABLE "ondaro"."inventory_movements" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"product_id" uuid NOT NULL,
@@ -133,7 +135,7 @@ CREATE TABLE "inventory_movements" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "invoices" (
+CREATE TABLE "ondaro"."invoices" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"customer_id" uuid NOT NULL,
@@ -149,10 +151,10 @@ CREATE TABLE "invoices" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "invoices_tenant_id" UNIQUE("tenant_id","id"),
-	CONSTRAINT "invoices_amount_chk" CHECK ("invoices"."amount_cents" >= 0)
+	CONSTRAINT "invoices_amount_chk" CHECK ("ondaro"."invoices"."amount_cents" >= 0)
 );
 --> statement-breakpoint
-CREATE TABLE "lead_activities" (
+CREATE TABLE "ondaro"."lead_activities" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"lead_id" uuid NOT NULL,
@@ -162,7 +164,7 @@ CREATE TABLE "lead_activities" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "leads" (
+CREATE TABLE "ondaro"."leads" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"name" text NOT NULL,
@@ -184,7 +186,7 @@ CREATE TABLE "leads" (
 	CONSTRAINT "leads_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "measurements" (
+CREATE TABLE "ondaro"."measurements" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"visit_id" uuid NOT NULL,
@@ -202,7 +204,7 @@ CREATE TABLE "measurements" (
 	"status" text NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "memberships" (
+CREATE TABLE "ondaro"."memberships" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"user_id" uuid NOT NULL,
@@ -215,7 +217,7 @@ CREATE TABLE "memberships" (
 	CONSTRAINT "memberships_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "message_logs" (
+CREATE TABLE "ondaro"."message_logs" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"channel" text NOT NULL,
@@ -234,7 +236,7 @@ CREATE TABLE "message_logs" (
 	"sent_at" timestamp with time zone
 );
 --> statement-breakpoint
-CREATE TABLE "parameter_definitions" (
+CREATE TABLE "ondaro"."parameter_definitions" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"key" text NOT NULL,
@@ -249,7 +251,7 @@ CREATE TABLE "parameter_definitions" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "password_resets" (
+CREATE TABLE "ondaro"."password_resets" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" uuid NOT NULL,
 	"token_hash" text NOT NULL,
@@ -259,7 +261,7 @@ CREATE TABLE "password_resets" (
 	CONSTRAINT "password_resets_token_hash_unique" UNIQUE("token_hash")
 );
 --> statement-breakpoint
-CREATE TABLE "payments" (
+CREATE TABLE "ondaro"."payments" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"invoice_id" uuid NOT NULL,
@@ -273,7 +275,7 @@ CREATE TABLE "payments" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "photos" (
+CREATE TABLE "ondaro"."photos" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"visit_id" uuid,
@@ -288,7 +290,7 @@ CREATE TABLE "photos" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "plans" (
+CREATE TABLE "ondaro"."plans" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"code" text NOT NULL,
 	"name" text NOT NULL,
@@ -305,7 +307,7 @@ CREATE TABLE "plans" (
 	CONSTRAINT "plans_code_unique" UNIQUE("code")
 );
 --> statement-breakpoint
-CREATE TABLE "platform_audit" (
+CREATE TABLE "ondaro"."platform_audit" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"actor_email" text NOT NULL,
 	"action" text NOT NULL,
@@ -314,7 +316,7 @@ CREATE TABLE "platform_audit" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "pool_equipment" (
+CREATE TABLE "ondaro"."pool_equipment" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"pool_id" uuid NOT NULL,
@@ -330,7 +332,7 @@ CREATE TABLE "pool_equipment" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "pools" (
+CREATE TABLE "ondaro"."pools" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"customer_id" uuid NOT NULL,
@@ -359,7 +361,7 @@ CREATE TABLE "pools" (
 	CONSTRAINT "pools_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "products" (
+CREATE TABLE "ondaro"."products" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"name" text NOT NULL,
@@ -383,7 +385,7 @@ CREATE TABLE "products" (
 	CONSTRAINT "products_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "proposals" (
+CREATE TABLE "ondaro"."proposals" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"lead_id" uuid,
@@ -406,7 +408,7 @@ CREATE TABLE "proposals" (
 	CONSTRAINT "proposals_public_token_unique" UNIQUE("public_token")
 );
 --> statement-breakpoint
-CREATE TABLE "recurrences" (
+CREATE TABLE "ondaro"."recurrences" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"pool_id" uuid NOT NULL,
@@ -426,7 +428,7 @@ CREATE TABLE "recurrences" (
 	CONSTRAINT "recurrences_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "service_plans" (
+CREATE TABLE "ondaro"."service_plans" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"name" text NOT NULL,
@@ -442,7 +444,7 @@ CREATE TABLE "service_plans" (
 	CONSTRAINT "service_plans_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-CREATE TABLE "service_requests" (
+CREATE TABLE "ondaro"."service_requests" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"customer_id" uuid NOT NULL,
@@ -453,7 +455,7 @@ CREATE TABLE "service_requests" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "sessions" (
+CREATE TABLE "ondaro"."sessions" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"token_hash" text NOT NULL,
 	"user_id" uuid NOT NULL,
@@ -467,7 +469,7 @@ CREATE TABLE "sessions" (
 	CONSTRAINT "sessions_token_hash_unique" UNIQUE("token_hash")
 );
 --> statement-breakpoint
-CREATE TABLE "technical_reports" (
+CREATE TABLE "ondaro"."technical_reports" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"visit_id" uuid NOT NULL,
@@ -486,7 +488,7 @@ CREATE TABLE "technical_reports" (
 	CONSTRAINT "technical_reports_public_token_unique" UNIQUE("public_token")
 );
 --> statement-breakpoint
-CREATE TABLE "tenants" (
+CREATE TABLE "ondaro"."tenants" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"slug" text NOT NULL,
 	"name" text NOT NULL,
@@ -516,10 +518,10 @@ CREATE TABLE "tenants" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "tenants_slug_unique" UNIQUE("slug"),
-	CONSTRAINT "tenants_status_chk" CHECK ("tenants"."status" in ('trialing','active','past_due','suspended','cancelled'))
+	CONSTRAINT "tenants_status_chk" CHECK ("ondaro"."tenants"."status" in ('trialing','active','past_due','suspended','cancelled'))
 );
 --> statement-breakpoint
-CREATE TABLE "users" (
+CREATE TABLE "ondaro"."users" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"email" text NOT NULL,
 	"name" text NOT NULL,
@@ -532,7 +534,7 @@ CREATE TABLE "users" (
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-CREATE TABLE "visit_checklist" (
+CREATE TABLE "ondaro"."visit_checklist" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"visit_id" uuid NOT NULL,
@@ -542,7 +544,7 @@ CREATE TABLE "visit_checklist" (
 	"comment" text
 );
 --> statement-breakpoint
-CREATE TABLE "visit_procedures" (
+CREATE TABLE "ondaro"."visit_procedures" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"visit_id" uuid NOT NULL,
@@ -554,7 +556,7 @@ CREATE TABLE "visit_procedures" (
 	"notes" text
 );
 --> statement-breakpoint
-CREATE TABLE "visits" (
+CREATE TABLE "ondaro"."visits" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"customer_id" uuid NOT NULL,
@@ -585,90 +587,90 @@ CREATE TABLE "visits" (
 	CONSTRAINT "visits_tenant_id" UNIQUE("tenant_id","id")
 );
 --> statement-breakpoint
-ALTER TABLE "audit_logs" ADD CONSTRAINT "audit_logs_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "billing_events" ADD CONSTRAINT "billing_events_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "chemical_applications" ADD CONSTRAINT "chemical_applications_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "chemical_applications" ADD CONSTRAINT "chem_app_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "public"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "contracts" ADD CONSTRAINT "contracts_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "contracts" ADD CONSTRAINT "contracts_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "public"."customers"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "customers" ADD CONSTRAINT "customers_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "expenses" ADD CONSTRAINT "expenses_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "inventory_movements" ADD CONSTRAINT "inventory_movements_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "inventory_movements" ADD CONSTRAINT "inv_mov_product_fk" FOREIGN KEY ("tenant_id","product_id") REFERENCES "public"."products"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "invoices" ADD CONSTRAINT "invoices_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "invoices" ADD CONSTRAINT "invoices_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "public"."customers"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "lead_activities" ADD CONSTRAINT "lead_activities_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "lead_activities" ADD CONSTRAINT "lead_act_lead_fk" FOREIGN KEY ("tenant_id","lead_id") REFERENCES "public"."leads"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "leads" ADD CONSTRAINT "leads_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "measurements" ADD CONSTRAINT "measurements_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "measurements" ADD CONSTRAINT "measurements_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "public"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "memberships" ADD CONSTRAINT "memberships_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "memberships" ADD CONSTRAINT "memberships_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "message_logs" ADD CONSTRAINT "message_logs_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "parameter_definitions" ADD CONSTRAINT "parameter_definitions_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "password_resets" ADD CONSTRAINT "password_resets_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "payments" ADD CONSTRAINT "payments_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "payments" ADD CONSTRAINT "payments_invoice_fk" FOREIGN KEY ("tenant_id","invoice_id") REFERENCES "public"."invoices"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "photos" ADD CONSTRAINT "photos_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "pool_equipment" ADD CONSTRAINT "pool_equipment_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "pool_equipment" ADD CONSTRAINT "pool_equipment_pool_fk" FOREIGN KEY ("tenant_id","pool_id") REFERENCES "public"."pools"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "pools" ADD CONSTRAINT "pools_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "pools" ADD CONSTRAINT "pools_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "public"."customers"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "products" ADD CONSTRAINT "products_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "proposals" ADD CONSTRAINT "proposals_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "recurrences" ADD CONSTRAINT "recurrences_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "recurrences" ADD CONSTRAINT "recurrences_pool_fk" FOREIGN KEY ("tenant_id","pool_id") REFERENCES "public"."pools"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "service_plans" ADD CONSTRAINT "service_plans_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "service_requests" ADD CONSTRAINT "service_requests_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "service_requests" ADD CONSTRAINT "service_requests_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "public"."customers"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "sessions" ADD CONSTRAINT "sessions_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "technical_reports" ADD CONSTRAINT "technical_reports_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "technical_reports" ADD CONSTRAINT "reports_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "public"."visits"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "tenants" ADD CONSTRAINT "tenants_plan_id_plans_id_fk" FOREIGN KEY ("plan_id") REFERENCES "public"."plans"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "visit_checklist" ADD CONSTRAINT "visit_checklist_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "visit_checklist" ADD CONSTRAINT "visit_checklist_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "public"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "visit_procedures" ADD CONSTRAINT "visit_procedures_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "visit_procedures" ADD CONSTRAINT "visit_procedures_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "public"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "visits" ADD CONSTRAINT "visits_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "public"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "visits" ADD CONSTRAINT "visits_pool_fk" FOREIGN KEY ("tenant_id","pool_id") REFERENCES "public"."pools"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "visits" ADD CONSTRAINT "visits_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "public"."customers"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-CREATE INDEX "audit_tenant_idx" ON "audit_logs" USING btree ("tenant_id","created_at");--> statement-breakpoint
-CREATE INDEX "audit_entity_idx" ON "audit_logs" USING btree ("tenant_id","entity","entity_id");--> statement-breakpoint
-CREATE INDEX "auth_attempts_key_idx" ON "auth_attempts" USING btree ("key","created_at");--> statement-breakpoint
-CREATE INDEX "chem_app_visit_idx" ON "chemical_applications" USING btree ("tenant_id","visit_id");--> statement-breakpoint
-CREATE INDEX "contracts_customer_idx" ON "contracts" USING btree ("tenant_id","customer_id");--> statement-breakpoint
-CREATE INDEX "customers_tenant_name_idx" ON "customers" USING btree ("tenant_id","name");--> statement-breakpoint
-CREATE INDEX "customers_tenant_status_idx" ON "customers" USING btree ("tenant_id","status");--> statement-breakpoint
-CREATE INDEX "expenses_tenant_due_idx" ON "expenses" USING btree ("tenant_id","due_on");--> statement-breakpoint
-CREATE INDEX "inv_mov_product_idx" ON "inventory_movements" USING btree ("tenant_id","product_id","created_at");--> statement-breakpoint
-CREATE INDEX "invoices_tenant_due_idx" ON "invoices" USING btree ("tenant_id","status","due_on");--> statement-breakpoint
-CREATE INDEX "invoices_customer_idx" ON "invoices" USING btree ("tenant_id","customer_id");--> statement-breakpoint
-CREATE UNIQUE INDEX "invoices_contract_competence" ON "invoices" USING btree ("tenant_id","contract_id","competence") WHERE contract_id is not null and competence is not null;--> statement-breakpoint
-CREATE UNIQUE INDEX "invoices_visit_uq" ON "invoices" USING btree ("tenant_id","visit_id") WHERE visit_id is not null;--> statement-breakpoint
-CREATE INDEX "lead_act_lead_idx" ON "lead_activities" USING btree ("tenant_id","lead_id");--> statement-breakpoint
-CREATE INDEX "leads_tenant_stage_idx" ON "leads" USING btree ("tenant_id","stage");--> statement-breakpoint
-CREATE UNIQUE INDEX "measurements_visit_param" ON "measurements" USING btree ("tenant_id","visit_id","parameter_key");--> statement-breakpoint
-CREATE INDEX "measurements_pool_idx" ON "measurements" USING btree ("tenant_id","pool_id","parameter_key","measured_at");--> statement-breakpoint
-CREATE INDEX "memberships_user_idx" ON "memberships" USING btree ("user_id");--> statement-breakpoint
-CREATE INDEX "message_logs_tenant_idx" ON "message_logs" USING btree ("tenant_id","created_at");--> statement-breakpoint
-CREATE UNIQUE INDEX "param_def_tenant_key" ON "parameter_definitions" USING btree ("tenant_id","key");--> statement-breakpoint
-CREATE INDEX "payments_invoice_idx" ON "payments" USING btree ("tenant_id","invoice_id");--> statement-breakpoint
-CREATE INDEX "photos_visit_idx" ON "photos" USING btree ("tenant_id","visit_id");--> statement-breakpoint
-CREATE INDEX "photos_pool_idx" ON "photos" USING btree ("tenant_id","pool_id");--> statement-breakpoint
-CREATE INDEX "pool_equipment_pool_idx" ON "pool_equipment" USING btree ("tenant_id","pool_id");--> statement-breakpoint
-CREATE UNIQUE INDEX "pools_tenant_code" ON "pools" USING btree ("tenant_id","code");--> statement-breakpoint
-CREATE INDEX "pools_customer_idx" ON "pools" USING btree ("tenant_id","customer_id");--> statement-breakpoint
-CREATE INDEX "products_tenant_name_idx" ON "products" USING btree ("tenant_id","name");--> statement-breakpoint
-CREATE INDEX "proposals_lead_idx" ON "proposals" USING btree ("tenant_id","lead_id");--> statement-breakpoint
-CREATE INDEX "service_requests_tenant_idx" ON "service_requests" USING btree ("tenant_id","status");--> statement-breakpoint
-CREATE INDEX "sessions_user_idx" ON "sessions" USING btree ("user_id");--> statement-breakpoint
-CREATE UNIQUE INDEX "reports_visit_uq" ON "technical_reports" USING btree ("tenant_id","visit_id");--> statement-breakpoint
-CREATE UNIQUE INDEX "reports_protocol_uq" ON "technical_reports" USING btree ("tenant_id","protocol");--> statement-breakpoint
-CREATE INDEX "reports_customer_idx" ON "technical_reports" USING btree ("tenant_id","customer_id","created_at");--> statement-breakpoint
-CREATE UNIQUE INDEX "visit_checklist_item" ON "visit_checklist" USING btree ("tenant_id","visit_id","item_key");--> statement-breakpoint
-CREATE UNIQUE INDEX "visit_procedures_item" ON "visit_procedures" USING btree ("tenant_id","visit_id","proc_key");--> statement-breakpoint
-CREATE INDEX "visits_tenant_start_idx" ON "visits" USING btree ("tenant_id","scheduled_start");--> statement-breakpoint
-CREATE INDEX "visits_pool_idx" ON "visits" USING btree ("tenant_id","pool_id","scheduled_start");--> statement-breakpoint
-CREATE INDEX "visits_assignee_idx" ON "visits" USING btree ("tenant_id","assigned_user_id","scheduled_start");--> statement-breakpoint
-CREATE UNIQUE INDEX "visits_recurrence_slot" ON "visits" USING btree ("tenant_id","recurrence_id","scheduled_start") WHERE recurrence_id is not null;
+ALTER TABLE "ondaro"."audit_logs" ADD CONSTRAINT "audit_logs_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."billing_events" ADD CONSTRAINT "billing_events_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."chemical_applications" ADD CONSTRAINT "chemical_applications_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."chemical_applications" ADD CONSTRAINT "chem_app_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "ondaro"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."contracts" ADD CONSTRAINT "contracts_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."contracts" ADD CONSTRAINT "contracts_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "ondaro"."customers"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."customers" ADD CONSTRAINT "customers_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."expenses" ADD CONSTRAINT "expenses_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."inventory_movements" ADD CONSTRAINT "inventory_movements_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."inventory_movements" ADD CONSTRAINT "inv_mov_product_fk" FOREIGN KEY ("tenant_id","product_id") REFERENCES "ondaro"."products"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."invoices" ADD CONSTRAINT "invoices_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."invoices" ADD CONSTRAINT "invoices_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "ondaro"."customers"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."lead_activities" ADD CONSTRAINT "lead_activities_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."lead_activities" ADD CONSTRAINT "lead_act_lead_fk" FOREIGN KEY ("tenant_id","lead_id") REFERENCES "ondaro"."leads"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."leads" ADD CONSTRAINT "leads_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."measurements" ADD CONSTRAINT "measurements_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."measurements" ADD CONSTRAINT "measurements_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "ondaro"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."memberships" ADD CONSTRAINT "memberships_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."memberships" ADD CONSTRAINT "memberships_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "ondaro"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."message_logs" ADD CONSTRAINT "message_logs_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."parameter_definitions" ADD CONSTRAINT "parameter_definitions_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."password_resets" ADD CONSTRAINT "password_resets_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "ondaro"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."payments" ADD CONSTRAINT "payments_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."payments" ADD CONSTRAINT "payments_invoice_fk" FOREIGN KEY ("tenant_id","invoice_id") REFERENCES "ondaro"."invoices"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."photos" ADD CONSTRAINT "photos_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."pool_equipment" ADD CONSTRAINT "pool_equipment_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."pool_equipment" ADD CONSTRAINT "pool_equipment_pool_fk" FOREIGN KEY ("tenant_id","pool_id") REFERENCES "ondaro"."pools"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."pools" ADD CONSTRAINT "pools_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."pools" ADD CONSTRAINT "pools_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "ondaro"."customers"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."products" ADD CONSTRAINT "products_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."proposals" ADD CONSTRAINT "proposals_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."recurrences" ADD CONSTRAINT "recurrences_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."recurrences" ADD CONSTRAINT "recurrences_pool_fk" FOREIGN KEY ("tenant_id","pool_id") REFERENCES "ondaro"."pools"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."service_plans" ADD CONSTRAINT "service_plans_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."service_requests" ADD CONSTRAINT "service_requests_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."service_requests" ADD CONSTRAINT "service_requests_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "ondaro"."customers"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."sessions" ADD CONSTRAINT "sessions_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "ondaro"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."sessions" ADD CONSTRAINT "sessions_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."technical_reports" ADD CONSTRAINT "technical_reports_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."technical_reports" ADD CONSTRAINT "reports_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "ondaro"."visits"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."tenants" ADD CONSTRAINT "tenants_plan_id_plans_id_fk" FOREIGN KEY ("plan_id") REFERENCES "ondaro"."plans"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."visit_checklist" ADD CONSTRAINT "visit_checklist_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."visit_checklist" ADD CONSTRAINT "visit_checklist_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "ondaro"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."visit_procedures" ADD CONSTRAINT "visit_procedures_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."visit_procedures" ADD CONSTRAINT "visit_procedures_visit_fk" FOREIGN KEY ("tenant_id","visit_id") REFERENCES "ondaro"."visits"("tenant_id","id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."visits" ADD CONSTRAINT "visits_tenant_id_tenants_id_fk" FOREIGN KEY ("tenant_id") REFERENCES "ondaro"."tenants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."visits" ADD CONSTRAINT "visits_pool_fk" FOREIGN KEY ("tenant_id","pool_id") REFERENCES "ondaro"."pools"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ondaro"."visits" ADD CONSTRAINT "visits_customer_fk" FOREIGN KEY ("tenant_id","customer_id") REFERENCES "ondaro"."customers"("tenant_id","id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+CREATE INDEX "audit_tenant_idx" ON "ondaro"."audit_logs" USING btree ("tenant_id","created_at");--> statement-breakpoint
+CREATE INDEX "audit_entity_idx" ON "ondaro"."audit_logs" USING btree ("tenant_id","entity","entity_id");--> statement-breakpoint
+CREATE INDEX "auth_attempts_key_idx" ON "ondaro"."auth_attempts" USING btree ("key","created_at");--> statement-breakpoint
+CREATE INDEX "chem_app_visit_idx" ON "ondaro"."chemical_applications" USING btree ("tenant_id","visit_id");--> statement-breakpoint
+CREATE INDEX "contracts_customer_idx" ON "ondaro"."contracts" USING btree ("tenant_id","customer_id");--> statement-breakpoint
+CREATE INDEX "customers_tenant_name_idx" ON "ondaro"."customers" USING btree ("tenant_id","name");--> statement-breakpoint
+CREATE INDEX "customers_tenant_status_idx" ON "ondaro"."customers" USING btree ("tenant_id","status");--> statement-breakpoint
+CREATE INDEX "expenses_tenant_due_idx" ON "ondaro"."expenses" USING btree ("tenant_id","due_on");--> statement-breakpoint
+CREATE INDEX "inv_mov_product_idx" ON "ondaro"."inventory_movements" USING btree ("tenant_id","product_id","created_at");--> statement-breakpoint
+CREATE INDEX "invoices_tenant_due_idx" ON "ondaro"."invoices" USING btree ("tenant_id","status","due_on");--> statement-breakpoint
+CREATE INDEX "invoices_customer_idx" ON "ondaro"."invoices" USING btree ("tenant_id","customer_id");--> statement-breakpoint
+CREATE UNIQUE INDEX "invoices_contract_competence" ON "ondaro"."invoices" USING btree ("tenant_id","contract_id","competence") WHERE contract_id is not null and competence is not null;--> statement-breakpoint
+CREATE UNIQUE INDEX "invoices_visit_uq" ON "ondaro"."invoices" USING btree ("tenant_id","visit_id") WHERE visit_id is not null;--> statement-breakpoint
+CREATE INDEX "lead_act_lead_idx" ON "ondaro"."lead_activities" USING btree ("tenant_id","lead_id");--> statement-breakpoint
+CREATE INDEX "leads_tenant_stage_idx" ON "ondaro"."leads" USING btree ("tenant_id","stage");--> statement-breakpoint
+CREATE UNIQUE INDEX "measurements_visit_param" ON "ondaro"."measurements" USING btree ("tenant_id","visit_id","parameter_key");--> statement-breakpoint
+CREATE INDEX "measurements_pool_idx" ON "ondaro"."measurements" USING btree ("tenant_id","pool_id","parameter_key","measured_at");--> statement-breakpoint
+CREATE INDEX "memberships_user_idx" ON "ondaro"."memberships" USING btree ("user_id");--> statement-breakpoint
+CREATE INDEX "message_logs_tenant_idx" ON "ondaro"."message_logs" USING btree ("tenant_id","created_at");--> statement-breakpoint
+CREATE UNIQUE INDEX "param_def_tenant_key" ON "ondaro"."parameter_definitions" USING btree ("tenant_id","key");--> statement-breakpoint
+CREATE INDEX "payments_invoice_idx" ON "ondaro"."payments" USING btree ("tenant_id","invoice_id");--> statement-breakpoint
+CREATE INDEX "photos_visit_idx" ON "ondaro"."photos" USING btree ("tenant_id","visit_id");--> statement-breakpoint
+CREATE INDEX "photos_pool_idx" ON "ondaro"."photos" USING btree ("tenant_id","pool_id");--> statement-breakpoint
+CREATE INDEX "pool_equipment_pool_idx" ON "ondaro"."pool_equipment" USING btree ("tenant_id","pool_id");--> statement-breakpoint
+CREATE UNIQUE INDEX "pools_tenant_code" ON "ondaro"."pools" USING btree ("tenant_id","code");--> statement-breakpoint
+CREATE INDEX "pools_customer_idx" ON "ondaro"."pools" USING btree ("tenant_id","customer_id");--> statement-breakpoint
+CREATE INDEX "products_tenant_name_idx" ON "ondaro"."products" USING btree ("tenant_id","name");--> statement-breakpoint
+CREATE INDEX "proposals_lead_idx" ON "ondaro"."proposals" USING btree ("tenant_id","lead_id");--> statement-breakpoint
+CREATE INDEX "service_requests_tenant_idx" ON "ondaro"."service_requests" USING btree ("tenant_id","status");--> statement-breakpoint
+CREATE INDEX "sessions_user_idx" ON "ondaro"."sessions" USING btree ("user_id");--> statement-breakpoint
+CREATE UNIQUE INDEX "reports_visit_uq" ON "ondaro"."technical_reports" USING btree ("tenant_id","visit_id");--> statement-breakpoint
+CREATE UNIQUE INDEX "reports_protocol_uq" ON "ondaro"."technical_reports" USING btree ("tenant_id","protocol");--> statement-breakpoint
+CREATE INDEX "reports_customer_idx" ON "ondaro"."technical_reports" USING btree ("tenant_id","customer_id","created_at");--> statement-breakpoint
+CREATE UNIQUE INDEX "visit_checklist_item" ON "ondaro"."visit_checklist" USING btree ("tenant_id","visit_id","item_key");--> statement-breakpoint
+CREATE UNIQUE INDEX "visit_procedures_item" ON "ondaro"."visit_procedures" USING btree ("tenant_id","visit_id","proc_key");--> statement-breakpoint
+CREATE INDEX "visits_tenant_start_idx" ON "ondaro"."visits" USING btree ("tenant_id","scheduled_start");--> statement-breakpoint
+CREATE INDEX "visits_pool_idx" ON "ondaro"."visits" USING btree ("tenant_id","pool_id","scheduled_start");--> statement-breakpoint
+CREATE INDEX "visits_assignee_idx" ON "ondaro"."visits" USING btree ("tenant_id","assigned_user_id","scheduled_start");--> statement-breakpoint
+CREATE UNIQUE INDEX "visits_recurrence_slot" ON "ondaro"."visits" USING btree ("tenant_id","recurrence_id","scheduled_start") WHERE recurrence_id is not null;

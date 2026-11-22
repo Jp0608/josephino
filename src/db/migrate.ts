@@ -50,7 +50,7 @@ export const DEFAULT_PLANS = [
 
 export async function runMigrations() {
   const db = systemDb();
-  await migrate(db, { migrationsFolder: path.join(process.cwd(), "drizzle") });
+  await migrate(db, { migrationsFolder: path.join(process.cwd(), "drizzle"), migrationsSchema: "ondaro" });
   for (const p of DEFAULT_PLANS) {
     await db.insert(plans).values(p).onConflictDoNothing({ target: plans.code });
   }
