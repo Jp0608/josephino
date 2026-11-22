@@ -1,14 +1,19 @@
 import "server-only";
 import { mkdir, readFile, writeFile, unlink } from "node:fs/promises";
 import path from "node:path";
+import { sql } from "drizzle-orm";
+import { withTenant } from "@/db";
 import { newToken } from "./crypto";
 import { UserError } from "./errors";
 
 /**
  * Armazenamento privado de arquivos (fotos, logos). Nunca servido diretamente:
  * todo acesso passa por uma rota que confere a empresa ou o token público do documento.
- * Implementação em disco; para produção serverless, troque por S3/R2/Supabase Storage mantendo a mesma interface.
+ * Dois modos: disco (servidor com volume persistente) ou banco de dados (hospedagem serverless,
+ * como a Vercel, que não guarda arquivos). STORAGE_DRIVER=db força o banco; na Vercel é o padrão.
  */
+const useDb = () => process.env.STORAGE_DRIVER === "db" || (!!process.env.VERCEL && process.env.STORAGE_DRIVER !== "disk");
+const tenantOf = (key: string) => key.split("/")[0];
 const ROOT = () => path.resolve(process.env.STORAGE_DIR || path.join(process.cwd(), ".data", "uploads"));
 
 const ALLOWED: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
@@ -32,16 +37,31 @@ export async function saveImage(tenantId: string, buf: Buffer) {
   const mime = sniff(buf);
   if (!mime || !ALLOWED[mime]) throw new UserError("Formato não suportado. Envie JPG, PNG ou WEBP.");
   const key = `${tenantId}/${newToken(18)}.${ALLOWED[mime]}`;
+  if (useDb()) {
+    safeKey(key);
+    await withTenant(tenantId, (tx) => tx.execute(sql`insert into file_blobs (key, tenant_id, mime, data) values (${key}, ${tenantId}, ${mime}, ${buf})`));
+    return { key, mime, size: buf.length };
+  }
   const file = safeKey(key);
   await mkdir(path.dirname(file), { recursive: true });
   await writeFile(file, buf);
   return { key, mime, size: buf.length };
 }
 
-export async function readFileByKey(key: string) {
+export async function readFileByKey(key: string): Promise<Buffer> {
+  if (useDb()) {
+    safeKey(key);
+    const rows = (await withTenant(tenantOf(key), (tx) => tx.execute(sql`select data from file_blobs where key = ${key}`))) as unknown as { data: Buffer }[];
+    if (!rows[0]) throw new UserError("Arquivo não encontrado.");
+    return Buffer.from(rows[0].data);
+  }
   return readFile(safeKey(key));
 }
 
 export async function deleteFileByKey(key: string) {
+  if (useDb()) {
+    await withTenant(tenantOf(key), (tx) => tx.execute(sql`delete from file_blobs where key = ${key}`)).catch(() => {});
+    return;
+  }
   await unlink(safeKey(key)).catch(() => {});
 }

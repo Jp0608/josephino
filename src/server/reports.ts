@@ -49,7 +49,8 @@ export type ReportSnapshot = {
 };
 
 export function appUrl() {
-  return (process.env.APP_URL || "http://localhost:3100").replace(/\/$/, "");
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  return (process.env.APP_URL || (vercel ? `https://${vercel}` : "http://localhost:3100")).replace(/\/$/, "");
 }
 
 export function reportMessage(s: Pick<ReportSnapshot, "company" | "customer" | "pool" | "visit">, url: string) {

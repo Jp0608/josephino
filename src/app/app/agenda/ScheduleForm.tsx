@@ -45,6 +45,7 @@ export function ScheduleForm({ pools, team, defaults }: { pools: PoolOpt[]; team
     setPending(true);
     try {
       const r = await scheduleAction({ ...f, weekdays: f.repeat === "none" ? [] : days, force });
+      if (!r) return; // sucesso: o servidor já redirecionou para a agenda
       if (!r.ok) return setError(r.error);
       if (r.data && !r.data.ok) return setConflict(r.data);
       if (r.message) toast({ tone: "ok", text: r.message });

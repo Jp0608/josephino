@@ -1,13 +1,16 @@
 import "server-only";
 import { ZodError } from "zod";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import type { ActionResult } from "@/lib/action-types";
 import { UserError } from "./errors";
 
 /** Converte erros em mensagens seguras para o usuário. Erros inesperados são registrados no servidor. */
 export async function run<T>(fn: () => Promise<ActionResult<T>>): Promise<ActionResult<T>> {
+  let result: ActionResult<T>;
   try {
-    return await fn();
+    result = await fn();
   } catch (e) {
     if (isRedirectError(e)) throw e;
     if (e instanceof UserError) return { ok: false, error: e.message };
@@ -25,6 +28,14 @@ export async function run<T>(fn: () => Promise<ActionResult<T>>): Promise<Action
     console.error("[action]", e);
     return { ok: false, error: "Não foi possível concluir. Tente de novo em instantes." };
   }
+  // Navegação pós-sucesso feita pelo servidor (confiável); a mensagem segue num cookie de leitura única.
+  if (result.ok && result.redirect) {
+    if (result.message) {
+      (await cookies()).set("ondaro_flash", encodeURIComponent(result.message), { path: "/", maxAge: 30, sameSite: "lax" });
+    }
+    redirect(result.redirect);
+  }
+  return result;
 }
 
 /** FormData → objeto simples (checkbox "on" vira true; campos repetidos viram array com sufixo []). */

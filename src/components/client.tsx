@@ -1,7 +1,7 @@
 "use client";
 import { createContext, startTransition, useActionState, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { CheckCircle2, AlertTriangle, Loader2, X } from "lucide-react";
 import type { ActionResult } from "@/lib/action-types";
 import { btnClass, cx } from "./ui";
@@ -18,6 +18,16 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setItems((x) => [...x.slice(-2), { ...t, id }]);
     setTimeout(() => setItems((x) => x.filter((i) => i.id !== id)), t.tone === "error" ? 6000 : 3200);
   }, []);
+  // Mensagem de sucesso deixada pelo servidor antes de um redirecionamento (cookie de leitura única).
+  const pathname = usePathname();
+  useEffect(() => {
+    const m = document.cookie.match(/(?:^|; )ondaro_flash=([^;]*)/);
+    if (!m) return;
+    document.cookie = "ondaro_flash=; Max-Age=0; path=/";
+    try {
+      push({ tone: "ok", text: decodeURIComponent(decodeURIComponent(m[1])) });
+    } catch {}
+  }, [pathname, push]);
   return (
     <ToastCtx.Provider value={push}>
       {children}
@@ -148,6 +158,7 @@ export function ActionButton({
         setPending(true);
         try {
           const r = await action();
+          if (!r) return; // sucesso com redirecionamento feito pelo servidor
           if (r.ok) {
             if (r.message) toast({ tone: "ok", text: r.message });
             if (r.redirect) router.push(r.redirect);
