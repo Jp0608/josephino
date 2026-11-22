@@ -11,9 +11,15 @@ export async function newTenant(planCode: "starter" | "pro" | "business" = "busi
   n++;
   const email = `owner${Date.now()}${n}@test.dev`;
   const { tenant, user } = await createAccount(
-    { companyName: `Empresa ${n}`, name: `Dono ${n}`, email, password: "senha1234", planCode, acceptTerms: true },
+    { companyName: `Empresa ${n}`, name: `Dono ${n}`, email, password: "senha1234", planCode: planCode === "starter" ? "pro" : planCode, acceptTerms: true },
     { skipRateLimit: true },
   );
+  if (planCode === "starter") {
+    // Plano fora da vitrine, usado nos testes para provar o bloqueio de recursos.
+    const [st] = await systemDb().select().from(plans).where(eq(plans.code, "starter"));
+    await systemDb().update(tenants).set({ planId: st.id }).where(eq(tenants.id, tenant.id));
+    tenant.planId = st.id;
+  }
   const [plan] = await systemDb().select().from(plans).where(eq(plans.id, tenant.planId!));
   return { tenantId: tenant.id, userId: user.id, role: "owner" as Role, plan, tenant };
 }

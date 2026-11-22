@@ -30,7 +30,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
       )}
       <div className="mb-6 flex flex-col gap-1 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-sm font-medium capitalize text-muted">{longDay(new Date())}</p>
+          <p className="text-sm font-medium text-muted first-letter:uppercase">{longDay(new Date())}</p>
           <h1 className="text-[24px] font-extrabold text-ink md:text-[28px]">
             {hello}, {firstName}
           </h1>

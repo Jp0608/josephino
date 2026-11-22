@@ -20,7 +20,11 @@ export const FEATURE_LABEL: Record<string, string> = {
   ai: "Assistente com IA",
   multiunit: "Várias unidades",
   api: "API",
+  support_priority: "Suporte prioritário",
 };
+
+/** Recursos planejados que ainda não existem no sistema — exibidos como "em desenvolvimento", nunca como prontos. */
+export const UPCOMING_FEATURES = new Set(["ai", "multiunit", "api", "automations", "routes"]);
 
 export const FEATURE_CODES = Object.keys(FEATURE_LABEL);
 

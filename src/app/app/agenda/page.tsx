@@ -60,7 +60,7 @@ export default async function Agenda({ searchParams }: { searchParams: Promise<{
     <>
       <PageHeader
         title="Agenda"
-        subtitle={<span className="capitalize">{title}</span>}
+        subtitle={<span className="inline-block first-letter:uppercase">{title}</span>}
         actions={can(ctx.role, "agenda.write") && <LinkButton href={`/app/agenda/nova?data=${day}`}><Plus className="size-4" /> Agendar</LinkButton>}
       />
       <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">

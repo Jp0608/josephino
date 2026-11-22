@@ -25,7 +25,7 @@ export async function signupAction(_: ActionResult | null, fd: FormData): Promis
       email: String(o.email || ""),
       phone: String(o.phone || ""),
       password: String(o.password || ""),
-      planCode: (String(o.plan || "pro") as "starter" | "pro" | "business"),
+      planCode: (String(o.plan || "pro") as "pro" | "business"),
       acceptTerms: o.acceptTerms === true ? true : (false as unknown as true),
     });
     await createSession(user.id, tenant.id);

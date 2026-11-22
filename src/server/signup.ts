@@ -15,7 +15,7 @@ export const signupSchema = z.object({
   email: z.string().trim().toLowerCase().email("E-mail inválido"),
   phone: z.string().trim().max(30).optional(),
   password: z.string(),
-  planCode: z.enum(["starter", "pro", "business"]).default("pro"),
+  planCode: z.enum(["pro", "business"]).catch("pro").default("pro"),
   acceptTerms: z.literal(true, { error: "É preciso aceitar os termos de uso e a política de privacidade." }),
 });
 

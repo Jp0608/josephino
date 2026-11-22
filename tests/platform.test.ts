@@ -88,10 +88,13 @@ describe("Super administrador", () => {
     const ev = await systemDb().select().from(billingEvents).where(eq(billingEvents.tenantId, t.tenantId));
     expect(ev.some((e) => e.kind === "plan_change_requested" && e.planCode === "pro")).toBe(true);
     expect((await requestPlanChange(ctx, "pro")).duplicate).toBe(true);
-    // 2 usuários ativos não cabem no Starter (1 usuário)
+    // 4 usuários ativos não cabem no Profissional (3 usuários)
     const { addMember } = await import("./helpers");
-    await addMember(t.tenantId, "technician");
-    expect((await getUsage(t)).users).toBe(2);
-    await expect(requestPlanChange(ctx, "starter")).rejects.toThrow(/usuários ativos/);
+    const t2 = await newTenant("business");
+    for (let i = 0; i < 3; i++) await addMember(t2.tenantId, "technician");
+    expect((await getUsage(t2)).users).toBe(4);
+    await expect(requestPlanChange({ ...t2, email: "dono2@test.dev" }, "pro")).rejects.toThrow(/usuários ativos/);
+    // plano fora da vitrine não pode ser pedido
+    await expect(requestPlanChange(ctx, "starter")).rejects.toThrow();
   });
 });

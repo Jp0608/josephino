@@ -8,7 +8,7 @@ export const metadata = { title: "Criar conta" };
 
 export default async function SignupPage({ searchParams }: { searchParams: Promise<{ plano?: string }> }) {
   const { plano } = await searchParams;
-  const plan = ["starter", "pro", "business"].includes(plano || "") ? plano : "pro";
+  const plan = ["pro", "business"].includes(plano || "") ? plano : "pro";
   return (
     <>
       <h1 className="text-[26px] font-extrabold text-ink">Comece seu teste grátis</h1>
