@@ -85,10 +85,10 @@ export async function listCustomers(ctx: C, opts: { q?: string; status?: string;
     const rows = await tx
       .select({
         c: customers,
-        poolCount: sql<number>`(select count(*)::int from pools p where p.tenant_id = ${customers.tenantId} and p.customer_id = ${customers.id} and p.active)`,
-        lastVisit: sql<Date | null>`(select max(v.completed_at) from visits v where v.tenant_id = ${customers.tenantId} and v.customer_id = ${customers.id} and v.status = 'completed')`,
-        nextVisit: sql<Date | null>`(select min(v.scheduled_start) from visits v where v.tenant_id = ${customers.tenantId} and v.customer_id = ${customers.id} and v.status in ('scheduled','confirmed','on_the_way') and v.scheduled_start >= now())`,
-        overdueCents: sql<number>`(select coalesce(sum(i.amount_cents),0)::int from invoices i where i.tenant_id = ${customers.tenantId} and i.customer_id = ${customers.id} and i.status = 'open' and i.due_on < current_date)`,
+        poolCount: sql<number>`(select count(*)::int from pools p where p.tenant_id = customers.tenant_id and p.customer_id = customers.id and p.active)`,
+        lastVisit: sql<Date | null>`(select max(v.completed_at) from visits v where v.tenant_id = customers.tenant_id and v.customer_id = customers.id and v.status = 'completed')`,
+        nextVisit: sql<Date | null>`(select min(v.scheduled_start) from visits v where v.tenant_id = customers.tenant_id and v.customer_id = customers.id and v.status in ('scheduled','confirmed','on_the_way') and v.scheduled_start >= now())`,
+        overdueCents: sql<number>`(select coalesce(sum(i.amount_cents),0)::int from invoices i where i.tenant_id = customers.tenant_id and i.customer_id = customers.id and i.status = 'open' and i.due_on < current_date)`,
       })
       .from(customers)
       .where(where)
@@ -313,8 +313,8 @@ export async function listPools(ctx: C, opts: { q?: string; customerIds?: string
       .select({
         pool: pools,
         customerName: customers.name,
-        lastVisit: sql<Date | null>`(select max(v.completed_at) from visits v where v.tenant_id = ${pools.tenantId} and v.pool_id = ${pools.id} and v.status = 'completed')`,
-        outOfRange: sql<number>`(select count(*)::int from measurements m where m.tenant_id = ${pools.tenantId} and m.visit_id = (select v2.id from visits v2 where v2.tenant_id = ${pools.tenantId} and v2.pool_id = ${pools.id} and v2.status='completed' order by v2.completed_at desc limit 1) and m.status in ('below','above'))`,
+        lastVisit: sql<Date | null>`(select max(v.completed_at) from visits v where v.tenant_id = pools.tenant_id and v.pool_id = pools.id and v.status = 'completed')`,
+        outOfRange: sql<number>`(select count(*)::int from measurements m where m.tenant_id = pools.tenant_id and m.visit_id = (select v2.id from visits v2 where v2.tenant_id = pools.tenant_id and v2.pool_id = pools.id and v2.status='completed' order by v2.completed_at desc limit 1) and m.status in ('below','above'))`,
       })
       .from(pools)
       .innerJoin(customers, and(eq(customers.tenantId, pools.tenantId), eq(customers.id, pools.customerId)))

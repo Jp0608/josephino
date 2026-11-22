@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { requireCtx, hasFeature } from "@/server/auth";
 import { can, ROLE_LABEL } from "@/server/permissions";
 import { NAV } from "@/lib/nav";
@@ -6,6 +7,8 @@ import { AppShell } from "@/components/AppShell";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const ctx = await requireCtx();
+  // Senha provisória (criada pelo dono): troca obrigatória antes de usar o app. A página fica fora de /app.
+  if (ctx.mustChangePassword) redirect("/trocar-senha");
   const nav = NAV.filter((n) => !n.perm || can(ctx.role, n.perm)).map((n) => ({
     href: n.href,
     label: n.label,

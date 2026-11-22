@@ -102,4 +102,10 @@ describe("isolamento multi-tenant", () => {
     const mine = await listAgenda(tech, from, to);
     expect(mine).toHaveLength(1);
   });
+
+  it("lista de clientes conta piscinas e próxima visita do próprio cliente", async () => {
+    const res = await listCustomers(A, { q: "Secreto", status: "all" });
+    expect(res.rows[0].poolCount).toBe(1);
+    expect(res.rows[0].nextVisit).not.toBeNull();
+  });
 });

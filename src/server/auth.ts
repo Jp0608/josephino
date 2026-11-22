@@ -34,6 +34,8 @@ export type Ctx = {
   plan: typeof plans.$inferSelect | null;
   subscription: Subscription;
   isPlatformAdmin: boolean;
+  /** Senha provisória (criada pelo dono da empresa): precisa ser trocada antes de usar o app. */
+  mustChangePassword: boolean;
 };
 
 export function platformAdmins() {
@@ -156,6 +158,7 @@ export const getCtx = cache(async (): Promise<Ctx | null> => {
       sessionId: row.s.id, userId: row.u.id, name: row.u.name, email: row.u.email, role: "owner", membershipId: "",
       tenantId: "", tenant: null as never, plan: null,
       subscription: { status: "active", trialDaysLeft: null, readOnly: true, blocked: false }, isPlatformAdmin,
+      mustChangePassword: row.u.mustChangePassword,
     };
   }
   const [m] = await db
@@ -181,6 +184,7 @@ export const getCtx = cache(async (): Promise<Ctx | null> => {
     plan: m.p,
     subscription: computeSubscription(m.t, now),
     isPlatformAdmin,
+    mustChangePassword: row.u.mustChangePassword,
   };
 });
 
@@ -199,6 +203,7 @@ export async function actionCtx(perm?: Permission, opts: { write?: boolean } = {
   const ctx = await getCtx();
   if (!ctx || !ctx.tenantId) throw new ForbiddenError("Sua sessão expirou. Entre novamente.");
   if (ctx.subscription.blocked) throw new ForbiddenError("Conta suspensa.");
+  if (ctx.mustChangePassword) throw new ForbiddenError("Troque a senha provisória antes de continuar.");
   if (opts.write !== false && ctx.subscription.readOnly)
     throw new ForbiddenError("Seu período de teste terminou. Escolha um plano para voltar a registrar dados — nada foi apagado.");
   if (perm && !can(ctx.role, perm)) throw new ForbiddenError();

@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useActionState, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { createContext, startTransition, useActionState, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, AlertTriangle, Loader2, X } from "lucide-react";
@@ -44,6 +44,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 type Act = (prev: ActionResult | null, fd: FormData) => Promise<ActionResult>;
 
 const FieldErrCtx = createContext<Record<string, string>>({});
+const PendingCtx = createContext(false);
 export const useFieldError = (name: string) => useContext(FieldErrCtx)[name];
 
 export function ActionForm({
@@ -61,7 +62,7 @@ export function ActionForm({
   resetOnSuccess?: boolean;
   successToast?: boolean;
 }) {
-  const [state, formAction] = useActionState(action, null);
+  const [state, formAction, isPending] = useActionState(action, null);
   const toast = useToast();
   const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
@@ -77,8 +78,19 @@ export function ActionForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
   return (
+    <PendingCtx.Provider value={isPending}>
     <FieldErrCtx.Provider value={state && !state.ok ? state.fieldErrors ?? {} : {}}>
-      <form ref={ref} action={formAction} className={className} noValidate>
+      {/* onSubmit em vez de action: o React 19 limparia os campos mesmo quando a validação falha. */}
+      <form
+        ref={ref}
+        className={className}
+        noValidate
+        onSubmit={(e) => {
+          e.preventDefault();
+          const fd = new FormData(e.currentTarget, (e.nativeEvent as SubmitEvent).submitter);
+          startTransition(() => formAction(fd));
+        }}
+      >
         {state && !state.ok && (
           <div role="alert" className="mb-4 rounded-lg bg-danger-soft px-3 py-2 text-sm font-medium text-danger">
             {state.error}
@@ -87,6 +99,7 @@ export function ActionForm({
         {children}
       </form>
     </FieldErrCtx.Provider>
+    </PendingCtx.Provider>
   );
 }
 
@@ -96,7 +109,8 @@ export function FieldError({ name }: { name: string }) {
 }
 
 export function SubmitButton({ children, variant = "primary", size = "md", className = "", pendingText }: { children: ReactNode; variant?: Parameters<typeof btnClass>[0]; size?: Parameters<typeof btnClass>[1]; className?: string; pendingText?: string }) {
-  const { pending } = useFormStatus();
+  const { pending: native } = useFormStatus();
+  const pending = native || useContext(PendingCtx);
   return (
     <button type="submit" disabled={pending} aria-busy={pending} className={btnClass(variant, size, className)}>
       {pending && <Loader2 className="size-4 animate-spin" />}
