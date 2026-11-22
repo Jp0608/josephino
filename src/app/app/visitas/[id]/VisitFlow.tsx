@@ -118,8 +118,26 @@ export function VisitFlow(p: FlowProps) {
     } catch {}
   }, [draft, baseVersion, dirty, key]);
 
+  // Um salvamento por vez: se outro estiver em andamento, espera ele terminar e envia o estado mais recente.
+  const inFlight = useRef<Promise<boolean> | null>(null);
+  const latest = useRef({ draft, baseVersion });
+  latest.current = { draft, baseVersion };
   const pushDraft = useCallback(
-    async (overwrite = false) => {
+    async (overwrite = false): Promise<boolean> => {
+      while (inFlight.current) await inFlight.current.catch(() => false);
+      const run = doPush(overwrite);
+      inFlight.current = run;
+      try {
+        return await run;
+      } finally {
+        inFlight.current = null;
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+  const doPush = async (overwrite = false) => {
+      const { draft, baseVersion } = latest.current;
       if (!navigator.onLine) {
         setSync("offline");
         return false;
@@ -138,16 +156,16 @@ export function VisitFlow(p: FlowProps) {
           return false;
         }
         setBaseVersion(j.data.version);
-        setDirty(false);
+        latest.current = { ...latest.current, baseVersion: j.data.version };
+        // Só marca como salvo se nada mudou durante o envio.
+        if (latest.current.draft === draft) setDirty(false);
         setSync("saved");
         return true;
       } catch {
         setSync("offline");
         return false;
       }
-    },
-    [draft, baseVersion, p.visitId, toast],
-  );
+  };
 
   // Autosave no servidor (2,5 s depois da última alteração)
   useEffect(() => {

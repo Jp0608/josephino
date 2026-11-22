@@ -254,8 +254,10 @@ const TRANSITIONS: Partial<Record<VisitStatus, VisitStatus[]>> = {
   cancelled: ["scheduled"],
 };
 
-async function loadVisitFor(tx: Tx, ctx: C, id: string) {
-  const [v] = await tx.select().from(visits).where(and(eq(visits.tenantId, ctx.tenantId), eq(visits.id, id))).limit(1);
+async function loadVisitFor(tx: Tx, ctx: C, id: string, opts: { lock?: boolean } = {}) {
+  const q = tx.select().from(visits).where(and(eq(visits.tenantId, ctx.tenantId), eq(visits.id, id))).limit(1);
+  // lock: trava a visita até o fim da transação — salvamentos simultâneos do mesmo atendimento entram em fila.
+  const [v] = opts.lock ? await q.for("update") : await q;
   if (!v) throw new NotFoundError("Visita não encontrada.");
   if (!can(ctx.role, "agenda.view_all") && v.assignedUserId !== ctx.userId) throw new NotFoundError("Visita não encontrada.");
   return v;
@@ -458,7 +460,7 @@ export type DraftInput = z.input<typeof draftSchema>;
 export async function saveDraft(ctx: C, id: string, input: DraftInput, opts: { overwrite?: boolean } = {}) {
   const d = draftSchema.parse(input);
   return withTenant(ctx.tenantId, async (tx) => {
-    const v = await loadVisitFor(tx, ctx, id);
+    const v = await loadVisitFor(tx, ctx, id, { lock: true });
     if (v.status === "completed") throw new UserError("Esta visita já foi finalizada. O relatório emitido não pode ser alterado.");
     if (!["in_progress", "waiting_info"].includes(v.status)) {
       if (!OPEN_VISIT_STATUSES.includes(v.status)) throw new UserError("Esta visita não está em aberto.");
@@ -592,7 +594,7 @@ export const completeSchema = z.object({
 export async function completeVisit(ctx: C, id: string, input: z.input<typeof completeSchema>) {
   const d = completeSchema.parse(input);
   return withTenant(ctx.tenantId, async (tx) => {
-    const v = await loadVisitFor(tx, ctx, id);
+    const v = await loadVisitFor(tx, ctx, id, { lock: true });
     if (v.status === "completed") {
       const [rep] = await tx.select().from(technicalReports).where(and(eq(technicalReports.tenantId, ctx.tenantId), eq(technicalReports.visitId, id)));
       return { alreadyCompleted: true, reportId: rep?.id, publicToken: rep?.publicToken, protocol: rep?.protocol, warnings: [] as string[] };
