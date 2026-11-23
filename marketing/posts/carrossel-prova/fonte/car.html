@@ -1,0 +1,113 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=block" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden;background:#06263a}
+body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;color:#fff;position:relative}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.shade{position:absolute;inset:0}
+.d{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.98;text-wrap:balance}
+em{font-style:normal;color:#5eead4}
+.top{position:absolute;left:72px;right:72px;top:64px;display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82);z-index:5}
+.logo{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-weight:800;font-size:32px;letter-spacing:-.04em;text-transform:none;color:#fff}
+.prog{position:absolute;left:72px;right:72px;bottom:56px;height:3px;background:rgba(255,255,255,.18);z-index:5}
+.prog i{position:absolute;left:0;top:0;bottom:0;background:#5eead4}
+.foot{position:absolute;left:72px;right:72px;bottom:80px;display:flex;justify-content:space-between;font-size:22px;font-weight:600;color:rgba(255,255,255,.7);z-index:5;letter-spacing:.04em}
+.kick{font-size:24px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5eead4;display:flex;align-items:center;gap:16px}
+.kick:before{content:"";width:48px;height:2px;background:#5eead4}
+.body{font-size:34px;line-height:1.38;color:rgba(255,255,255,.86);max-width:820px}
+.blk{position:absolute;left:72px;right:72px;z-index:4}
+.phone{position:absolute;width:430px;height:930px;border-radius:58px;background:#020f18;padding:12px;box-shadow:0 60px 120px -30px rgba(0,0,0,.7),0 0 0 1.5px rgba(255,255,255,.14) inset;z-index:3}
+.phone .s{width:100%;height:100%;border-radius:47px;overflow:hidden;background:#fff;position:relative}
+.phone img{width:100%;display:block}
+.phone .n{position:absolute;left:50%;top:22px;width:110px;height:28px;margin-left:-55px;border-radius:16px;background:#020f18;z-index:2}
+.num{font-family:Manrope,sans-serif;font-weight:800;font-size:220px;line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px rgba(94,234,212,.55)}
+.tag{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:12px 22px;font-size:24px;font-weight:600}
+.tag b{width:10px;height:10px;border-radius:50%;background:#5eead4}
+.callout{position:absolute;z-index:4;background:#fff;color:#0b1d29;border-radius:22px;padding:18px 24px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);font-size:24px;font-weight:600;display:flex;gap:14px;align-items:center}
+.callout i{width:44px;height:44px;border-radius:12px;background:#dff7f2;display:grid;place-items:center;color:#0f8f7f;font-style:normal;font-weight:800}
+.callout small{display:block;font-size:19px;color:#566874;font-weight:500}
+.btn{display:inline-block;background:#5eead4;color:#06263a;font-family:Manrope,sans-serif;font-weight:800;font-size:36px;padding:24px 40px;border-radius:999px}
+</style></head><body><div id="r"></div>
+<script>
+const N = 8;
+const LOGO = `<svg width="40" height="40" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12.5" stroke="#1391BE" stroke-width="4.5"/><path d="M5.5 17.2c2.6-2.4 5.2-2.4 7.8 0s5.2 2.4 7.8 0 4.4-2 5.8-.9" stroke="#5EEAD4" stroke-width="2.6" stroke-linecap="round"/></svg>ondaro`;
+const chrome = (i, label) => `<div class="top"><span class="logo">${LOGO}</span><span>${label}</span></div>
+<div class="foot"><span>${String(i).padStart(2,"0")} / ${String(N).padStart(2,"0")}</span><span>${i < N ? "arraste →" : "ondaro.vercel.app"}</span></div>
+<div class="prog"><i style="width:${(i / N) * 100}%"></i></div>`;
+const phone = (img, x, y, rot = 0, h = 930, w = 430) => `<div class="phone" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;transform:rotate(${rot}deg)"><div class="s"><div class="n"></div><img src="${img}" alt=""></div></div>`;
+const S = {
+1: () => `<div class="bg" style="background-image:url(heroi.jpg);background-position:50% 78%"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.55) 0%,rgba(6,38,58,0) 22%,rgba(6,38,58,0) 38%,rgba(6,38,58,.86) 62%,#06263a 100%)"></div>
+${chrome(1, "Manutenção de piscina")}
+<div class="blk" style="bottom:170px">
+  <div class="kick">Para quem leva a profissão a sério</div>
+  <h1 class="d" style="font-size:104px;margin-top:28px">Piscina limpa, todo mundo entrega.</h1>
+  <h1 class="d" style="font-size:104px;margin-top:10px"><em>Profissional entrega prova.</em></h1>
+</div>`,
+2: () => `<div class="bg" style="background-image:url(amanhecer.jpg);background-position:62% 50%"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.7) 0%,rgba(6,38,58,.25) 35%,rgba(6,38,58,.9) 66%,#06263a 100%)"></div>
+${chrome(2, "O problema")}
+<div class="blk" style="bottom:170px">
+  <div class="kick">06:40 · Primeira visita do dia</div>
+  <h2 class="d" style="font-size:84px;margin:26px 0 30px">O cliente não está lá quando você <em>trabalha.</em></h2>
+  <p class="body">Ele não viu você medir, escovar e aspirar. Para ele, só existe o que chega no celular dele.</p>
+</div>`,
+3: () => `<div class="bg" style="background-image:url(agua.jpg)"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.35),rgba(6,38,58,.2) 40%,rgba(6,38,58,.92) 72%,#06263a)"></div>
+${chrome(3, "A verdade")}
+<div class="blk" style="bottom:170px">
+  <h2 class="d" style="font-size:112px">Água cristalina <em>não é prova.</em></h2>
+  <p class="body" style="margin-top:34px">Hoje ela está perfeita. Se em 3 dias ficar turva depois de uma chuva, o que você mostra?</p>
+</div>`,
+4: () => `<div class="bg" style="background-image:url(fundo.jpg);opacity:.32"></div>
+<div class="shade" style="background:radial-gradient(120% 80% at 80% 40%,rgba(6,38,58,.2),#06263a 70%)"></div>
+${chrome(4, "Prova nº 1")}
+<div class="blk" style="top:190px;width:500px;right:auto">
+  <div class="num">01</div>
+  <h2 class="d" style="font-size:72px;margin:34px 0 26px">Medição <em>registrada</em>, não lembrada.</h2>
+  <p class="body" style="font-size:30px">pH, cloro e alcalinidade anotados na hora, comparados com a faixa que <b>você</b> definiu.</p>
+</div>
+${phone("07b-relatorio-agua.png", 575, 220, 4)}
+<div class="callout" style="left:520px;top:880px"><i>✓</i><div>pH 7,6<small>Dentro da faixa</small></div></div>`,
+5: () => `<div class="bg" style="background-image:url(casa.jpg);background-position:50% 70%"></div>
+<div class="shade" style="background:linear-gradient(90deg,#06263a 0%,rgba(6,38,58,.92) 42%,rgba(6,38,58,.35) 70%,rgba(6,38,58,.1))"></div>
+${chrome(5, "Prova nº 2")}
+<div class="blk" style="top:190px;width:500px;right:auto">
+  <div class="num">02</div>
+  <h2 class="d" style="font-size:72px;margin:34px 0 26px">Antes e depois, <em>com hora marcada.</em></h2>
+  <p class="body" style="font-size:30px">As fotos vão para o relatório, junto com a data e o horário da visita. Nada se perde na galeria.</p>
+</div>
+${phone("05-fotos.png", 600, 230, -3)}`,
+6: () => `<div class="bg" style="background-image:url(agua2.jpg);opacity:.28"></div>
+<div class="shade" style="background:radial-gradient(110% 80% at 75% 45%,rgba(6,38,58,.15),#06263a 72%)"></div>
+${chrome(6, "Prova nº 3")}
+<div class="blk" style="top:190px;width:500px;right:auto">
+  <div class="num">03</div>
+  <h2 class="d" style="font-size:72px;margin:34px 0 26px">Relatório com <em>a sua marca.</em></h2>
+  <p class="body" style="font-size:30px">Você envia pelo seu WhatsApp em um toque. O cliente abre e registra que viu.</p>
+</div>
+${phone("07-relatorio.png", 580, 220, 3)}
+<div class="callout" style="left:540px;top:960px"><i>↗</i><div>Link enviado às 07:12<small>Pelo seu WhatsApp</small></div></div>`,
+7: () => `<div class="bg" style="background-image:url(deck.jpg)"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.6) 0%,rgba(6,38,58,.15) 30%,rgba(6,38,58,.88) 60%,#06263a 100%)"></div>
+${chrome(7, "A diferença")}
+<div class="blk" style="bottom:170px">
+  <div class="kick">Regra da profissão</div>
+  <h2 class="d" style="font-size:118px;margin-top:28px">Quem documenta <em>não discute.</em></h2>
+  <p class="body" style="margin-top:30px">Com registro, a conversa com o cliente é sobre o próximo serviço. Não sobre se você foi.</p>
+</div>`,
+8: () => `<div class="bg" style="background-image:url(heroi.jpg);background-position:50% 30%;opacity:.22;filter:grayscale(.3)"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.7),#06263a 75%)"></div>
+${chrome(8, "Ondaro")}
+<div class="blk" style="top:300px;text-align:center">
+  <svg width="150" height="150" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12.5" stroke="#1391BE" stroke-width="4.5"/><path d="M5.5 17.2c2.6-2.4 5.2-2.4 7.8 0s5.2 2.4 7.8 0 4.4-2 5.8-.9" stroke="#5EEAD4" stroke-width="2.6" stroke-linecap="round"/></svg>
+  <h2 class="d" style="font-size:88px;margin:40px 0 24px">Cada piscina com prontuário.<br><em>Cada visita com prova.</em></h2>
+  <p class="body" style="margin:0 auto 56px">Gestão de manutenção de piscinas no celular.</p>
+  <span class="btn">Teste 14 dias grátis</span>
+  <p style="margin-top:28px;font-size:28px;color:rgba(255,255,255,.75);font-weight:600">link na bio · salve e mande para um colega</p>
+</div>`,
+};
+const i = +(location.hash.slice(1) || 1);
+document.getElementById("r").innerHTML = S[i]();
+</script></body></html>
