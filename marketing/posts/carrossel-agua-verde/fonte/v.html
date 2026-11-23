@@ -1,0 +1,128 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=block" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden;background:#06263a}
+body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;color:#fff;position:relative}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.shade{position:absolute;inset:0}
+.d{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.98;text-wrap:balance}
+em{font-style:normal;color:#5eead4}
+.g{color:#b5e04a}
+.top{position:absolute;left:72px;right:72px;top:64px;display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);z-index:5}
+.logo{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-weight:800;font-size:32px;letter-spacing:-.04em;text-transform:none;color:#fff}
+.prog{position:absolute;left:72px;right:72px;bottom:56px;height:3px;background:rgba(255,255,255,.18);z-index:5}
+.prog i{position:absolute;left:0;top:0;bottom:0;background:#5eead4}
+.foot{position:absolute;left:72px;right:72px;bottom:80px;display:flex;justify-content:space-between;font-size:22px;font-weight:600;color:rgba(255,255,255,.72);z-index:5;letter-spacing:.04em}
+.kick{font-size:24px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5eead4;display:flex;align-items:center;gap:16px}
+.kick:before{content:"";width:48px;height:2px;background:currentColor}
+.body{font-size:34px;line-height:1.38;color:rgba(255,255,255,.88);max-width:860px}
+.blk{position:absolute;left:72px;right:72px;z-index:4}
+.phone{position:absolute;width:430px;height:930px;border-radius:58px;background:#020f18;padding:12px;box-shadow:0 60px 120px -30px rgba(0,0,0,.7),0 0 0 1.5px rgba(255,255,255,.14) inset;z-index:3}
+.phone .s{width:100%;height:100%;border-radius:47px;overflow:hidden;background:#fff;position:relative}
+.phone img{width:100%;display:block}
+.phone .n{position:absolute;left:50%;top:22px;width:110px;height:28px;margin-left:-55px;border-radius:16px;background:#020f18;z-index:2}
+.card{background:rgba(6,38,58,.62);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:38px 36px;display:grid;grid-template-columns:96px 1fr;gap:22px;align-items:center}
+.card .k{font-family:Manrope,sans-serif;font-weight:800;font-size:64px;line-height:1;color:transparent;-webkit-text-stroke:2px #b5e04a}
+.card h3{font-family:Manrope,sans-serif;font-weight:800;font-size:52px;letter-spacing:-.03em;line-height:1.05}
+.card p{font-size:26px;color:rgba(255,255,255,.75);margin-top:6px}
+.chk{display:grid;gap:28px}
+.chk div{display:flex;align-items:center;gap:24px;font-family:Manrope,sans-serif;font-weight:700;font-size:54px;letter-spacing:-.02em;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.14)}
+.chk i{flex:none;width:52px;height:52px;border-radius:14px;border:3px solid #5eead4;display:grid;place-items:center;font-style:normal;color:#5eead4;font-size:30px}
+.src{font-size:20px;color:rgba(255,255,255,.55);margin-top:22px}
+.rule{display:flex;gap:22px;align-items:flex-start;padding:26px 0;border-top:1px solid rgba(255,255,255,.16)}
+.rule b{flex:none;width:64px;height:64px;border-radius:50%;background:#5eead4;color:#06263a;display:grid;place-items:center;font-family:Manrope,sans-serif;font-size:30px}
+.rule h3{font-family:Manrope,sans-serif;font-weight:800;font-size:46px;letter-spacing:-.03em;line-height:1.05}
+.rule p{font-size:27px;color:rgba(255,255,255,.75);margin-top:8px}
+.callout{position:absolute;z-index:4;background:#fff;color:#0b1d29;border-radius:22px;padding:18px 24px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);font-size:24px;font-weight:600;display:flex;gap:14px;align-items:center}
+.callout i{width:44px;height:44px;border-radius:12px;background:#fff4e0;display:grid;place-items:center;color:#b3561f;font-style:normal;font-weight:800}
+.callout small{display:block;font-size:19px;color:#566874;font-weight:500}
+.btn{display:inline-block;background:#5eead4;color:#06263a;font-family:Manrope,sans-serif;font-weight:800;font-size:36px;padding:24px 40px;border-radius:999px}
+.lbl{position:absolute;z-index:4;font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;border-radius:999px;background:rgba(6,38,58,.7);backdrop-filter:blur(8px)}
+</style></head><body><div id="r"></div>
+<script>
+const N = 7;
+const LOGO = `<svg width="40" height="40" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12.5" stroke="#1391BE" stroke-width="4.5"/><path d="M5.5 17.2c2.6-2.4 5.2-2.4 7.8 0s5.2 2.4 7.8 0 4.4-2 5.8-.9" stroke="#5EEAD4" stroke-width="2.6" stroke-linecap="round"/></svg>ondaro`;
+const chrome = (i, label) => `<div class="top"><span class="logo">${LOGO}</span><span>${label}</span></div>
+<div class="foot"><span>${String(i).padStart(2,"0")} / ${String(N).padStart(2,"0")}</span><span>${i < N ? "arraste →" : "salve 📌"}</span></div>
+<div class="prog"><i style="width:${(i / N) * 100}%"></i></div>`;
+const phone = (img, x, y, rot = 0) => `<div class="phone" style="left:${x}px;top:${y}px;transform:rotate(${rot}deg)"><div class="s"><div class="n"></div><img src="${img}" alt=""></div></div>`;
+const S = {
+1: () => `<div class="bg" style="background-image:url(aerea.jpg);background-position:50% 40%"></div>
+<div class="bg" style="background-image:url(aerea-verde.jpg);background-position:50% 40%;clip-path:polygon(0 0,58% 0,38% 100%,0 100%)"></div>
+<svg class="abs" style="position:absolute;inset:0;z-index:2" width="1080" height="1350"><line x1="626" y1="0" x2="410" y2="1350" stroke="#fff" stroke-width="4" opacity=".9"/></svg>
+<div class="shade" style="z-index:2;background:linear-gradient(180deg,rgba(6,38,58,.55) 0%,rgba(6,38,58,0) 18%,rgba(6,38,58,0) 40%,rgba(6,38,58,.88) 64%,#06263a 100%)"></div>
+<span class="lbl g" style="left:72px;top:170px">Chute</span><span class="lbl" style="right:72px;top:170px;color:#5eead4">Diagnóstico</span>
+${chrome(1, "Temporada de chuva")}
+<div class="blk" style="bottom:170px">
+  <div class="kick g">Antes de abrir o balde</div>
+  <h1 class="d" style="font-size:112px;margin-top:28px"><span class="g">Água verde</span> não é só falta de cloro.</h1>
+</div>`,
+2: () => `<div class="bg" style="background-image:url(algas.jpg);background-position:50% 30%"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.6) 0%,rgba(6,38,58,.15) 30%,rgba(6,38,58,.9) 62%,#06263a 100%)"></div>
+${chrome(2, "O reflexo")}
+<div class="blk" style="bottom:170px">
+  <div class="kick g">O que todo mundo faz</div>
+  <h2 class="d" style="font-size:96px;margin:26px 0 30px">Ficou verde? <span class="g">Mais cloro.</span></h2>
+  <p class="body">Às vezes resolve. Às vezes só gasta produto, tempo e a paciência do cliente, porque a causa era outra.</p>
+</div>`,
+3: () => `<div class="bg" style="background-image:url(aerea-verde.jpg);background-position:50% 55%;filter:blur(2px) brightness(.7)"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.75),rgba(6,38,58,.55) 40%,rgba(6,38,58,.9))"></div>
+${chrome(3, "As causas")}
+<div class="blk" style="bottom:170px">
+  <div class="kick g">3 causas que esverdeiam a água</div>
+  <div style="display:grid;gap:22px;margin-top:40px">
+    <div class="card"><span class="k">01</span><div><h3>Cloro baixo</h3><p>A causa que todo mundo lembra.</p></div></div>
+    <div class="card"><span class="k">02</span><div><h3>pH fora da faixa</h3><p>Fora da faixa, também deixa a água esverdeada.</p></div></div>
+    <div class="card"><span class="k">03</span><div><h3>Metais oxidados</h3><p>Também tingem a água de verde.</p></div></div>
+  </div>
+  <p class="src">Fonte: Olhar Digital, 21/08/2026.</p>
+</div>`,
+4: () => `<div class="bg" style="background-image:url(fundo.jpg);opacity:.3"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.4),#06263a 60%)"></div>
+${chrome(4, "Checklist")}
+<div class="blk" style="top:190px">
+  <div class="kick">Confira antes de tratar</div>
+  <h2 class="d" style="font-size:104px;margin:30px 0 60px">5 itens. <em>Antes do balde.</em></h2>
+  <div class="chk">
+    <div><i>✓</i>pH</div>
+    <div><i>✓</i>Cloro livre e total</div>
+    <div><i>✓</i>Alcalinidade</div>
+    <div><i>✓</i>Filtro e bomba funcionando</div>
+    <div style="border:0"><i>✓</i>O que foi aplicado na última visita</div>
+  </div>
+</div>`,
+5: () => `<div class="bg" style="background-image:url(heroi.jpg);background-position:50% 60%;opacity:.35;filter:grayscale(.4)"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.55),#06263a 55%)"></div>
+${chrome(5, "Na hora de tratar")}
+<div class="blk" style="bottom:150px">
+  <div class="kick">3 regras que evitam retrabalho</div>
+  <h2 class="d" style="font-size:96px;margin:28px 0 44px">Diagnóstico feito. <em>Agora sim.</em></h2>
+  <div class="rule"><b>1</b><div><h3>Dose e ordem: o rótulo manda.</h3><p>Quantidade e intervalo são do fabricante, não do palpite.</p></div></div>
+  <div class="rule"><b>2</b><div><h3>Um produto de cada vez.</h3><p>Aplicar tudo junto atrapalha o tratamento. Nunca misture.</p></div></div>
+  <div class="rule"><b>3</b><div><h3>Luva, óculos e tempo de espera.</h3><p>Banho só depois do tempo indicado na embalagem.</p></div></div>
+</div>`,
+6: () => `<div class="bg" style="background-image:url(agua.jpg);opacity:.3"></div>
+<div class="shade" style="background:radial-gradient(110% 80% at 75% 45%,rgba(6,38,58,.15),#06263a 72%)"></div>
+${chrome(6, "O que separa o profissional")}
+<div class="blk" style="top:190px;width:500px;right:auto">
+  <div class="kick">Depois do tratamento</div>
+  <h2 class="d" style="font-size:72px;margin:30px 0 26px">Registre o que <em>estava fora.</em></h2>
+  <p class="body" style="font-size:30px">Na próxima visita, você não começa do zero. E se o cliente perguntar, a resposta está ali, com data e hora.</p>
+</div>
+${phone("04-agua.png", 580, 220, 3)}
+<div class="callout" style="left:520px;top:950px"><i>!</i><div>Fora da faixa<small>O app destaca na hora</small></div></div>`,
+7: () => `<div class="bg" style="background-image:url(aerea.jpg);background-position:50% 40%;opacity:.3"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.6),#06263a 72%)"></div>
+${chrome(7, "Ondaro")}
+<div class="blk" style="top:250px;text-align:center">
+  <div style="font-size:120px;line-height:1">📌</div>
+  <h2 class="d" style="font-size:96px;margin:36px 0 26px">Salve para a próxima <span class="g">água verde.</span></h2>
+  <p class="body" style="margin:0 auto 56px">E mande para o colega que ainda resolve no chute.</p>
+  <span class="btn">Ondaro · 14 dias grátis</span>
+  <p style="margin-top:28px;font-size:28px;color:rgba(255,255,255,.75);font-weight:600">Cada visita com prova · link na bio</p>
+</div>`,
+};
+const i = +(location.hash.slice(1) || 1);
+document.getElementById("r").innerHTML = S[i]();
+</script></body></html>
