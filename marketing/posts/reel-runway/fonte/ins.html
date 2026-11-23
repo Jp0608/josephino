@@ -1,0 +1,52 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&family=Manrope:wght@800&display=block" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#06263a;font-family:Inter,sans-serif;color:#fff}
+.bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(26px) brightness(.55)}
+.cap{position:absolute;left:60px;right:60px;top:300px;text-align:center;font-weight:700;font-size:86px;line-height:1.16;text-shadow:0 4px 18px rgba(0,0,0,.45)}
+.phone{position:absolute;left:250px;top:560px;width:580px;height:1250px;border-radius:72px;background:#041a28;padding:16px;box-shadow:0 70px 140px -40px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.1) inset}
+.s{position:relative;width:100%;height:100%;border-radius:58px;overflow:hidden;background:#fff}
+.s img{position:absolute;left:0;top:0;width:100%;transform-origin:50% 0}
+.n{position:absolute;left:50%;top:30px;width:150px;height:34px;margin-left:-75px;border-radius:20px;background:#041a28;z-index:3}
+#end{position:absolute;inset:0;display:none}
+.d{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.03em}
+.pill{display:inline-block;background:#5eead4;color:#06263a;border-radius:999px;padding:22px 46px;font-size:48px}
+</style></head><body>
+<div id="ins">
+  <div class="bg" style="background-image:url(bg4.png)"></div>
+  <div class="cap" id="cap">pH, cloro e fotos.<br>Com data e hora.</div>
+  <div class="phone" id="ph"><div class="n"></div><div class="s"><img src="04-agua.png"><img src="05-fotos.png"><img src="07-relatorio.png"></div></div>
+</div>
+<div id="end">
+  <div class="bg" style="background-image:url(bg6.png);filter:blur(30px) brightness(.4)"></div>
+  <div style="position:absolute;left:0;right:0;top:560px;text-align:center">
+    <svg id="mk" width="220" height="220" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12.5" stroke="#1391BE" stroke-width="4.5"/><path d="M5.5 17.2c2.6-2.4 5.2-2.4 7.8 0s5.2 2.4 7.8 0 4.4-2 5.8-.9" stroke="#5EEAD4" stroke-width="2.6" stroke-linecap="round"/></svg>
+    <div class="d" id="w" style="font-size:130px;margin-top:20px">ondaro</div>
+    <div id="t" style="font-size:44px;font-weight:600;color:#cfeaf3;margin-top:18px">Cada piscina com prontuário.<br>Cada visita com prova.</div>
+    <div id="b" style="margin-top:70px"><span class="pill d">Teste 14 dias grátis</span></div>
+    <div id="l" style="font-size:40px;font-weight:600;margin-top:34px;color:#fff">link na bio</div>
+  </div>
+</div>
+<script>
+const cl=x=>Math.max(0,Math.min(1,x)), seg=(t,a,b)=>cl((t-a)/(b-a)), eo=x=>1-Math.pow(1-x,3);
+const op=(el,o,y=0,s=1)=>{el.style.opacity=o;el.style.transform=`translateY(${y}px) scale(${s})`};
+window.mode='ins';
+window.renderFast=(t)=>{
+  if(mode==='ins'){
+    document.getElementById('ins').style.display='block';document.getElementById('end').style.display='none';
+    op(document.getElementById('ph'),seg(t,0,.35),80*(1-eo(seg(t,0,.5))));
+    op(document.getElementById('cap'),seg(t,.15,.45),20*(1-eo(seg(t,.15,.5))));
+    const ims=document.querySelectorAll('.s img');const T=[0,1.5,3.0];
+    ims.forEach((im,i)=>{const a=T[i],b=T[i+1]??99;const o=i===0?1-seg(t,b-.2,b):seg(t,a-.2,a)*(i===2?1:1-seg(t,b-.2,b));im.style.opacity=o;im.style.transform=`scale(${1+0.06*seg(t,a,a+1.6)})`;});
+  } else {
+    document.getElementById('ins').style.display='none';document.getElementById('end').style.display='block';
+    op(document.getElementById('mk'),seg(t,0,.4),0,.7+.3*eo(seg(t,0,.6)));
+    op(document.getElementById('w'),seg(t,.25,.6),24*(1-eo(seg(t,.25,.7))));
+    op(document.getElementById('t'),seg(t,.5,.85),20*(1-eo(seg(t,.5,.9))));
+    op(document.getElementById('b'),seg(t,.9,1.2),0,.85+.15*eo(seg(t,.9,1.3)));
+    op(document.getElementById('l'),seg(t,1.2,1.5));
+  }
+};
+renderFast(0);
+</script></body></html>
