@@ -1,0 +1,301 @@
+{
+ "R01": [
+  {
+   "formula": "#12 Objection",
+   "hook": "Ninguém veio ontem? Mostra a prova em 1 toque.",
+   "score": 66.2,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#14 Callout",
+   "hook": "O cliente disse que você não veio.",
+   "score": 48.6,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#6 Receipt",
+   "hook": "Seu cliente diz que você faltou. Você tem foto, hora e medição?",
+   "score": 45.6,
+   "verdict": "WEAK",
+   "weakest": "STAKES"
+  }
+ ],
+ "R02": [
+  {
+   "formula": "#5 Time Collapse",
+   "hook": "Relatório de piscina em 1 toque, sem papel nem caderno.",
+   "score": 56.0,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#18 Cold Open Demo",
+   "hook": "Uma visita inteira em 60 segundos. Do portão ao relatório.",
+   "score": 40.4,
+   "verdict": "WEAK",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#13 Before/After",
+   "hook": "Você sai da casa do cliente e o relatório já chegou nele.",
+   "score": 37.8,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  }
+ ],
+ "R03": [
+  {
+   "formula": "#22 Contrarian",
+   "hook": "Piscina limpa não prova nada para o seu cliente.",
+   "score": 55.8,
+   "verdict": "OK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#3 Nobody Tells",
+   "hook": "Ninguém te conta: cliente não vê química, vê água parada.",
+   "score": 55.8,
+   "verdict": "OK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#7 Wrong/Right",
+   "hook": "O que o cliente vê não é o que você fez.",
+   "score": 48.6,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  }
+ ],
+ "R04": [
+  {
+   "formula": "#2 Negative Command",
+   "hook": "Não cobre cliente atrasado com áudio de 2 minutos.",
+   "score": 85.8,
+   "verdict": "STRONG",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#11 Numbered",
+   "hook": "3 mensagens para cobrar o cliente atrasado sem perder o cliente.",
+   "score": 64.8,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#9 Steal",
+   "hook": "Copie essas 3 mensagens de cobrança. Nessa ordem.",
+   "score": 57.2,
+   "verdict": "OK",
+   "weakest": "STAKES"
+  }
+ ],
+ "R05": [
+  {
+   "formula": "#21 Mid-Sentence",
+   "hook": "Imagina perder um condomínio por uma foto que você não tirou.",
+   "score": 54.4,
+   "verdict": "OK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#19 Deadline",
+   "hook": "O síndico pediu o histórico de 3 meses. Você tem em 5 minutos?",
+   "score": 52.0,
+   "verdict": "OK",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#1 Cost Confession",
+   "hook": "Sem registro, a reclamação do síndico vira palavra contra palavra.",
+   "score": 46.6,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  }
+ ],
+ "R06": [
+  {
+   "formula": "#22 Contrarian",
+   "hook": "Água verde não se resolve virando o balde de cloro.",
+   "score": 48.0,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#2 Negative Command",
+   "hook": "Antes de jogar cloro, faça isso.",
+   "score": 44.4,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#7 Wrong/Right",
+   "hook": "Cloro primeiro é o jeito errado de começar a visita.",
+   "score": 40.8,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  }
+ ],
+ "R07": [
+  {
+   "formula": "#11 Numbered",
+   "hook": "4 tarefas no dia 1 e você já manda o primeiro relatório.",
+   "score": 84.4,
+   "verdict": "STRONG",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#20 Permission",
+   "hook": "Vai testar o Ondaro? Faz só isso no dia 1.",
+   "score": 62.6,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#5 Time Collapse",
+   "hook": "Do cadastro ao primeiro relatório em 1 dia de teste.",
+   "score": 50.6,
+   "verdict": "OK",
+   "weakest": "STAKES"
+  }
+ ],
+ "R08": [
+  {
+   "formula": "#17 Head to Head",
+   "hook": "Caderno contra app: a mesma terça-feira, dois finais.",
+   "score": 44.0,
+   "verdict": "WEAK",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#15 Flop Record",
+   "hook": "A terça em que o caderno não salvou o piscineiro.",
+   "score": 40.8,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#7 Wrong/Right",
+   "hook": "Mesma terça-feira. Um jeito termina em discussão com o cliente.",
+   "score": 28.6,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  }
+ ],
+ "R09": [
+  {
+   "formula": "#23 Statistic",
+   "hook": "No verão a procura sobe e a sua agenda não estica.",
+   "score": 55.8,
+   "verdict": "OK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#10 If This",
+   "hook": "Se você atende 30 piscinas, janeiro vai te testar.",
+   "score": 55.4,
+   "verdict": "OK",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#19 Deadline",
+   "hook": "Dezembro chegou. Sua agenda aguenta janeiro?",
+   "score": 47.0,
+   "verdict": "WEAK",
+   "weakest": "STAKES"
+  }
+ ],
+ "R10": [
+  {
+   "formula": "#22 Contrarian",
+   "hook": "Relatório não é burocracia. É o que segura o seu preço.",
+   "score": 81.4,
+   "verdict": "STRONG",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#4 Replacement",
+   "hook": "O piscineiro mais barato não tem o que você manda depois da visita.",
+   "score": 78.6,
+   "verdict": "STRONG",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#14 Callout",
+   "hook": "Seu cliente te troca pelo mais barato quando não vê o seu trabalho.",
+   "score": 75.0,
+   "verdict": "STRONG",
+   "weakest": "STAKES"
+  }
+ ],
+ "R11": [
+  {
+   "formula": "#12 Objection",
+   "hook": "Zero sinal no quintal? O atendimento não se perde.",
+   "score": 63.2,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#18 Cold Open Demo",
+   "hook": "Casa de máquinas sem sinal. Olha o que acontece com o registro.",
+   "score": 58.2,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#3 Nobody Tells",
+   "hook": "Ninguém te conta isso: app que depende de sinal não serve para piscineiro.",
+   "score": 53.0,
+   "verdict": "OK",
+   "weakest": "SPECIFICITY"
+  }
+ ],
+ "R12": [
+  {
+   "formula": "#11 Numbered",
+   "hook": "3 coisas para verificar na piscina turva antes de qualquer produto.",
+   "score": 61.8,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#2 Negative Command",
+   "hook": "Choveu e a água ficou turva? Não comece pelo produto.",
+   "score": 59.6,
+   "verdict": "OK",
+   "weakest": "ADDRESS"
+  },
+  {
+   "formula": "#16 Verbatim Question",
+   "hook": "A piscina amanheceu turva depois da chuva. E agora?",
+   "score": 44.4,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  }
+ ],
+ "R13": [
+  {
+   "formula": "#21 Mid-Sentence",
+   "hook": "Por que alguém cria um app só para piscineiro?",
+   "score": 44.4,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  },
+  {
+   "formula": "#24 Reveal",
+   "hook": "Eu criei o Ondaro por causa de uma pergunta de cliente.",
+   "score": 43.4,
+   "verdict": "WEAK",
+   "weakest": "STAKES"
+  },
+  {
+   "formula": "#20 Permission",
+   "hook": "Se você é piscineiro, esse app foi feito pensando em você.",
+   "score": 37.8,
+   "verdict": "WEAK",
+   "weakest": "SPECIFICITY"
+  }
+ ]
+}

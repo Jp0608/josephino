@@ -1,0 +1,1373 @@
+<title>Ondaro Crescimento Orgânico</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap">
+<style>
+/* Layout: documento de operação — coluna de leitura + grade semanal larga; marca Ondaro (abismo/raia/espuma) */
+:root{
+  --bg:#f5f8fa; --surface:#ffffff; --surface-2:#eef3f6; --line:#dde5eb; --ink:#0b1d29; --muted:#566874;
+  --brand:#0b6e99; --brand-soft:#dff3f9; --deep:#06263a; --foam:#0f8f7f;
+  --reel:#0b6e99; --carr:#7a4fd0; --story:#b3561f; --stat:#0f7a52;
+  --display:"Manrope",ui-sans-serif,system-ui,sans-serif; --text:"Inter",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#06141e; --surface:#0b1e2b; --surface-2:#0f2636; --line:#1b3647; --ink:#e6eff4; --muted:#93a9b6;
+  --brand:#38b6db; --brand-soft:#0e3346; --deep:#041a28; --foam:#5eead4;
+  --reel:#38b6db; --carr:#b39af0; --story:#f0a06a; --stat:#45c995; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#06141e; --surface:#0b1e2b; --surface-2:#0f2636; --line:#1b3647; --ink:#e6eff4; --muted:#93a9b6;
+  --brand:#38b6db; --brand-soft:#0e3346; --deep:#041a28; --foam:#5eead4;
+  --reel:#38b6db; --carr:#b39af0; --story:#f0a06a; --stat:#45c995; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:16px;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;padding-block:40px 80px}
+h1,h2,h3,h4{font-family:var(--display);letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5vw,52px);line-height:1.05}
+h2{font-size:clamp(24px,3.2vw,32px);margin-bottom:6px}
+h3{font-size:19px}
+h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-family:var(--text);font-weight:700;margin:14px 0 6px}
+p{margin:0 0 10px;max-width:72ch}
+a{color:var(--brand)}
+.hero{display:grid;gap:18px;padding-block:8px 28px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.lead{font-size:18px;color:var(--muted);max-width:68ch}
+.kpis{display:flex;flex-wrap:wrap;gap:10px}
+.kpis div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:120px}
+.kpis b{display:block;font-family:var(--display);font-size:24px}
+.kpis span{font-size:12px;color:var(--muted)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+nav.toc a{font-size:13px;font-weight:600;text-decoration:none;background:var(--brand-soft);color:var(--brand);padding:6px 10px;border-radius:999px}
+section.blk{padding-block:36px 8px;border-bottom:1px solid var(--line);display:grid;gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.box ul{margin:6px 0 0;padding-left:18px}.box li{margin-bottom:4px}
+.warn{border-color:color-mix(in srgb,var(--story) 45%,var(--line));background:color-mix(in srgb,var(--story) 7%,var(--surface))}
+.src{font-size:12px;color:var(--muted)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+.num,td.t{font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.chip.reel,.pid.reel{color:var(--reel)} .chip.carr,.pid.carr{color:var(--carr)} .chip.story,.pid.story{color:var(--story)} .chip.stat,.pid.stat{color:var(--stat)} .chip.trial{color:var(--reel);border-style:dashed}
+/* semana */
+.week{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;align-content:start;min-width:150px}
+.day h3{font-size:15px}.day h3 small{display:block;font-family:var(--text);font-weight:500;color:var(--muted);font-size:12px}
+.slot{display:grid;gap:2px;border-left:3px solid var(--line);padding:2px 0 2px 8px;text-decoration:none;color:inherit}
+.slot b{font-size:13px;line-height:1.3}.slot span{font-size:11px;color:var(--muted)}
+.slot.reel{border-color:var(--reel)}.slot.trial{border-color:var(--reel);border-left-style:dashed}.slot.carr{border-color:var(--carr)}.slot.stat{border-color:var(--stat)}.slot.story{border-color:var(--story)}
+.slot:hover b{color:var(--brand)}
+/* peças */
+.peca{background:var(--surface);border:1px solid var(--line);border-radius:14px;scroll-margin-top:16px}
+.peca summary{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 16px;cursor:pointer;list-style:none}
+.peca summary::-webkit-details-marker{display:none}
+.peca summary:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:12px}
+.pid{font-family:var(--display);font-weight:800;font-size:15px;border:1.5px solid currentColor;border-radius:9px;padding:3px 8px}
+.ptitle{display:grid;min-width:0}.ptitle b{font-size:15px}.ptitle small{color:var(--muted);font-size:12px}
+.metric{font-size:12px;color:var(--muted);text-align:right;max-width:200px}
+.pbody{padding:4px 16px 18px;display:grid;gap:12px;border-top:1px solid var(--line)}
+dl.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px;margin:12px 0 0}
+dl.meta dt{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+dl.meta dd{margin:2px 0 0}
+.hooks{display:grid;gap:6px}
+.hook{background:var(--surface-2);border-radius:10px;padding:8px 12px;font-size:14px}
+.hook b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--brand);display:block}
+.arts{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.arts img{width:200px;height:auto;max-width:none;border-radius:10px;border:1px solid var(--line);flex:none}
+.note,.small{font-size:13px;color:var(--muted)}
+table.rot{min-width:680px}table.rot td{font-size:13px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.caption{white-space:normal;background:var(--surface-2);border-radius:10px;padding:12px;font-size:14px}
+.vis{font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:8px;margin-top:8px}
+button.copy{font:inherit;font-size:13px;font-weight:600;margin-top:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.copy:hover{border-color:var(--brand);color:var(--brand)}
+.bars{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.bars li{display:grid;grid-template-columns:170px 1fr 30px;gap:10px;align-items:center;font-size:14px}
+.bars .bar{height:8px;border-radius:6px;background:var(--surface-2);position:relative;overflow:hidden}
+.bars .bar::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--brand);border-radius:6px}
+@media (max-width:640px){.bars li{grid-template-columns:120px 1fr 26px}.metric{display:none}.peca summary{grid-template-columns:auto 1fr}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">Ondaro · marketing orgânico · plano vivo</span>
+  <h1>Crescimento orgânico do Ondaro</h1>
+  <p class="lead">Diagnóstico, posicionamento, operação de 5 peças por dia e a primeira semana pronta para produzir: roteiros, ganchos testados, legendas verificadas e artes. Produzido com a skill instagram-agent-skill, adaptada para português.</p>
+  <div class="kpis">
+    <div><b>37</b><span>peças desenvolvidas</span></div>
+    <div><b>35</b><span>na semana 1 (7 × 5)</span></div>
+    <div><b>13</b><span>Reels com 2 ganchos</span></div>
+    <div><b>82</b><span>artes 1080×1350 prontas</span></div>
+    <div><b>0</b><span>posts publicados (você publica)</span></div>
+  </div>
+  <nav class="toc" aria-label="Seções">
+    <a href="#diagnostico">Diagnóstico</a><a href="#mercado">Mercado</a><a href="#posicionamento">Posicionamento</a><a href="#operacao">5 por dia</a><a href="#semana">Semana 1</a><a href="#pecas">Peças</a><a href="#banco">Semana 2</a><a href="#metricas">Métricas</a><a href="#experimentos">Experimentos</a><a href="#preco">Preço</a>
+  </nav>
+</header>
+
+<section class="blk" id="diagnostico">
+  <h2>Diagnóstico do produto</h2>
+  <div class="grid2">
+    <div class="box"><h3>O que o Ondaro é</h3><p>Gestão da manutenção de piscinas pelo celular: agenda com recorrência, atendimento técnico em 8 etapas, parâmetros da água comparados com as faixas da própria empresa, fotos de antes e depois, relatório com a marca enviado pelo WhatsApp do profissional, portal do cliente, estoque, financeiro, contratos, CRM e equipe com permissões.</p></div>
+    <div class="box"><h3>Para quem vender primeiro</h3><ul><li>Piscineiro em crescimento que atende cliente exigente: condomínio, alto padrão, hotel, academia.</li><li>Empresa com 2 a 10 técnicos que precisa saber o que cada um fez.</li></ul><p class="small">O autônomo que cobra pouco e atende 10 piscinas é o público dos concorrentes de R$ 50 a 70.</p></div>
+    <div class="box"><h3>Diferenciais que dá para provar</h3><ul><li>Faixas técnicas definidas pela empresa, com fonte registrada.</li><li>Histórico permanente por piscina, QR code e registro de ciência do cliente.</li><li>Equipe com 7 funções e técnico que vê só a própria agenda.</li><li>Estoque baixado na visita e custo químico por cliente.</li><li>Funciona sem sinal e sincroniza depois.</li></ul></div>
+    <div class="box warn"><h3>Pontos fracos (dizer com clareza)</h3><ul><li>Preço acima de todos os concorrentes brasileiros com preço público.</li><li>Sem envio automático pelo WhatsApp, sem Pix e sem IA ainda: nenhum conteúdo pode sugerir isso.</li><li>Sem clientes e sem depoimentos reais: zero prova social por enquanto.</li></ul></div>
+  </div>
+</section>
+
+<section class="blk" id="mercado">
+  <h2>Mercado (pesquisa de 23/11/2026)</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Concorrente</th><th>Promessa</th><th>Preço público</th></tr></thead>
+    <tbody>
+      <tr><td>AquApp</td><td>Quanto vai receber no mês, laudo no WhatsApp em ~30 s, portal sem login, offline</td><td class="num">Grátis (10 clientes) · R$ 67 · R$ 147</td></tr>
+      <tr><td>Piscina Prime</td><td>"1º app com IA agêntica", rotas, relatórios automáticos, PWA offline</td><td class="num">R$ 75 · R$ 150 · sob consulta</td></tr>
+      <tr><td>Kloro</td><td>"Parecer empresa", lucro real por piscina, suporte "sem robô"</td><td class="num">R$ 49,90</td></tr>
+      <tr><td>Skimmer (EUA)</td><td>Rotas, agenda e cobrança; relatório com "photo evidence"</td><td class="num">US$ 1–2 por local</td></tr>
+    </tbody></table></div>
+  <p class="src">Fontes: aquapp.com.br, piscinaprimeapp.com.br, página do Kloro, getskimmer.com/pricing, todas vistas em 23/11/2026. Nomes de concorrentes nunca aparecem nos posts.</p>
+  <div class="grid2">
+    <div class="box"><h3>Dores com evidência</h3><ul>
+      <li>Cliente que diz "ninguém veio": a recomendação é ter foto de saída e leituras registradas (pooldial.com).</li>
+      <li>Inadimplência e cobrança, medo de reajustar, "nunca desligar" da cabeça (pooldial.com, citações do Reddit).</li>
+      <li>"Uma das maiores reclamações dos donos de piscina é a falta de comunicação" (podcast no buzzsprout.com).</li>
+      <li>No Reclame Aqui (só os títulos estavam visíveis): "Serviço pago e não realizado", "Falta de compromisso", água verde por 20 dias sem técnico.</li>
+    </ul></div>
+    <div class="box"><h3>Dúvidas e mitos frequentes</h3><ul>
+      <li>Água verde nem sempre é só falta de cloro: pH fora da faixa e metais oxidados também esverdeiam (Olhar Digital, 21/08/2026).</li>
+      <li>O cheiro forte de "cloro" vem das cloraminas (Folha PE).</li>
+      <li>Aplicar todos os produtos juntos atrapalha o tratamento (Olhar Digital).</li>
+      <li>Quanto cobrar: faixas divergentes, de R$ 150–300 (Cronoshare), R$ 350–600 (Revista Oeste) e ~R$ 80 por visita (GetNinjas).</li>
+    </ul></div>
+    <div class="box"><h3>Instagram: o que é oficial</h3><ul>
+      <li>Os três sinais principais são tempo assistido, curtidas e envios. Envios pesam mais com quem não segue (Mosseri, via Social Media Today, 22/01/2025).</li>
+      <li>Conteúdo original é exigido, inclusive em fotos e carrosséis. Marca d'água ou crédito não tornam um post original (Creators Blog, 30/04/2026).</li>
+      <li>Trial Reels aparecem primeiro para quem não segue e não entram no perfil (Creators Blog, 10/12/2024).</li>
+      <li>Até 5 hashtags, que funcionam como rótulo e não como alcance (dado trazido pela skill: mudança de 18/12/2025).</li>
+    </ul></div>
+    <div class="box"><h3>Sazonalidade</h3><p>Pico de procura por piscinas em novembro e dezembro, com o verão trazendo a crise da água verde (Nubimetrics; Jornal do Comércio, 13/03/2025). O Google Trends não estava acessível. Estamos entrando no pico: os conteúdos de água verde, chuva e agenda cheia vêm primeiro.</p></div>
+  </div>
+</section>
+
+<section class="blk" id="posicionamento">
+  <h2>Posicionamento</h2>
+  <div class="grid2">
+    <div class="box"><h3>Promessa</h3><p><b>Cada piscina com prontuário. Cada visita com prova.</b></p><p>Linha de guerra: <b>"Piscineiro que documenta não discute."</b></p></div>
+    <div class="box"><h3>Inimigo comum</h3><p>O achismo: caderno, memória, foto perdida na galeria e "confia em mim". Nunca o concorrente.</p></div>
+    <div class="box"><h3>Tom de voz</h3><p>Direto, de igual para igual com o piscineiro. Frases curtas, humor leve, nada de coach nem "revolucionário". Números só com fonte. Nada de dosagem nem de promessa de resultado.</p></div>
+    <div class="box"><h3>Pilares (proporção inicial, a ajustar com dados)</h3><ul class="bars"><li><span>Educação</span><span class="bar" style="--w:19%"></span><b class="num">7</b></li><li><span>Produto</span><span class="bar" style="--w:19%"></span><b class="num">7</b></li><li><span>Identificação</span><span class="bar" style="--w:16%"></span><b class="num">6</b></li><li><span>Negócio do piscineiro</span><span class="bar" style="--w:14%"></span><b class="num">5</b></li><li><span>Relacionamento</span><span class="bar" style="--w:11%"></span><b class="num">4</b></li><li><span>Conversão</span><span class="bar" style="--w:11%"></span><b class="num">4</b></li><li><span>Descoberta</span><span class="bar" style="--w:8%"></span><b class="num">3</b></li><li><span>Prova</span><span class="bar" style="--w:3%"></span><b class="num">1</b></li></ul></div>
+  </div>
+</section>
+
+<section class="blk" id="operacao">
+  <h2>Como funcionam as 5 peças por dia</h2>
+  <p>A própria skill recomenda de 4 a 5 posts por semana no feed. Para chegar a 5 peças por dia sem cansar os seguidores nem derrubar o alcance de cada post, cada formato tem um papel:</p>
+  <div class="tw"><table>
+    <thead><tr><th>Horário (hipótese)</th><th>Peça</th><th>Para que serve</th></tr></thead>
+    <tbody>
+      <tr><td class="num">06:30</td><td><span class="chip reel">Reel</span> principal</td><td>Alcançar quem não segue. Publicado antes da rota, quando o piscineiro está no celular. Também vai para TikTok e Shorts.</td></tr>
+      <tr><td class="num">12:15</td><td><span class="chip carr">Carrossel</span></td><td>Profundidade e salvamentos, na hora do almoço.</td></tr>
+      <tr><td class="num">07h–20h</td><td><span class="chip story">Stories</span></td><td>Relacionamento e conversão com quem já segue: enquete, quiz, caixa de perguntas, link.</td></tr>
+      <tr><td class="num">18:30</td><td><span class="chip trial">Trial Reel</span></td><td>O mesmo vídeo com o segundo gancho, mostrado só para quem não segue. Testa o gancho sem poluir o perfil e sem gravar de novo.</td></tr>
+      <tr><td class="num">19:30</td><td><span class="chip stat">Post estático</span></td><td>Frase, dado ou tela real, rápido de consumir e fácil de enviar.</td></tr>
+    </tbody></table></div>
+  <p class="small">Os horários são hipóteses de partida. A skill é explícita: o horário importa muito menos que os 2 primeiros segundos. Vamos testar.</p>
+</section>
+
+<section class="blk" id="semana">
+  <h2>Semana 1: 25/11 a 01/12</h2>
+  <p class="small">Clique numa peça para abrir o roteiro, a legenda e as artes.</p>
+  <div class="week"><div class="day"><h3>Dia 1<small>qua 25/11</small></h3><a class="slot reel" href="#R01"><span>06:30 · Reel R01</span><b>O cliente disse que você não veio</b></a><a class="slot carr" href="#C05"><span>12:15 · Carrossel C05</span><b>5 sinais de que seu piscineiro é profissional</b></a><a class="slot story" href="#S01"><span>07–20h · Stories S01</span><b>Como você registra suas visitas hoje?</b></a><a class="slot trial" href="#R01"><span>18:30 · Trial Reel R01</span><b>O cliente disse que você não veio.</b></a><a class="slot stat" href="#E01"><span>19:30 · Estático E01</span><b>Piscineiro que documenta não discute</b></a></div><div class="day"><h3>Dia 2<small>qui 26/11</small></h3><a class="slot reel" href="#R06"><span>06:30 · Reel R06</span><b>Antes de jogar cloro, faça isso</b></a><a class="slot carr" href="#C01"><span>12:15 · Carrossel C01</span><b>Água verde não é só falta de cloro</b></a><a class="slot story" href="#S05"><span>07–20h · Stories S05</span><b>Quiz: água verde é sempre falta de cloro?</b></a><a class="slot trial" href="#R06"><span>18:30 · Trial Reel R06</span><b>Não jogue cloro na água verde antes desses 3 testes.</b></a><a class="slot stat" href="#E04"><span>19:30 · Estático E04</span><b>Água boa o cliente sente</b></a></div><div class="day"><h3>Dia 3<small>sex 27/11</small></h3><a class="slot reel" href="#R04"><span>06:30 · Reel R04</span><b>3 mensagens para cobrar cliente atrasado</b></a><a class="slot carr" href="#C02"><span>12:15 · Carrossel C02</span><b>Quanto cobrar pela manutenção de piscina</b></a><a class="slot story" href="#S07"><span>07–20h · Stories S07</span><b>Caixa: a pergunta que todo cliente faz</b></a><a class="slot trial" href="#R04"><span>18:30 · Trial Reel R04</span><b>3 mensagens para cobrar o cliente atrasado sem perder o cliente.</b></a><a class="slot stat" href="#E06"><span>19:30 · Estático E06</span><b>Pergunta: histórico de 3 meses</b></a></div><div class="day"><h3>Dia 4<small>sáb 28/11</small></h3><a class="slot reel" href="#R10"><span>06:30 · Reel R10</span><b>Relatório não é burocracia</b></a><a class="slot carr" href="#C04"><span>12:15 · Carrossel C04</span><b>O relatório que seu cliente recebe</b></a><a class="slot story" href="#S06"><span>07–20h · Stories S06</span><b>Bastidores: a visita vira relatório</b></a><a class="slot trial" href="#R10"><span>18:30 · Trial Reel R10</span><b>O piscineiro mais barato não tem o que você manda depois da visita.</b></a><a class="slot stat" href="#E05"><span>19:30 · Estático E05</span><b>Visita sem registro × com registro</b></a></div><div class="day"><h3>Dia 5<small>dom 29/11</small></h3><a class="slot reel" href="#R03"><span>06:30 · Reel R03</span><b>O que o cliente vê x o que você fez</b></a><a class="slot carr" href="#C03"><span>12:15 · Carrossel C03</span><b>Mito ou verdade da piscina</b></a><a class="slot story" href="#S03"><span>07–20h · Stories S03</span><b>Quebra de objeções</b></a><a class="slot trial" href="#R03"><span>18:30 · Trial Reel R03</span><b>Ninguém te conta: cliente não vê química, vê água parada.</b></a><a class="slot stat" href="#E02"><span>19:30 · Estático E02</span><b>Dado ANAPP: 3,5 milhões de piscinas</b></a></div><div class="day"><h3>Dia 6<small>seg 30/11</small></h3><a class="slot reel" href="#R12"><span>06:30 · Reel R12</span><b>Água turva depois da chuva</b></a><a class="slot carr" href="#C07"><span>12:15 · Carrossel C07</span><b>6 parâmetros que todo cliente deveria ver</b></a><a class="slot story" href="#S02"><span>07–20h · Stories S02</span><b>Tour do Ondaro em 5 telas</b></a><a class="slot trial" href="#R12"><span>18:30 · Trial Reel R12</span><b>Choveu e a água ficou turva? Não comece pelo produto.</b></a><a class="slot stat" href="#E07"><span>19:30 · Estático E07</span><b>Mediu fora da faixa? O app avisa</b></a></div><div class="day"><h3>Dia 7<small>ter 01/12</small></h3><a class="slot reel" href="#R02"><span>06:30 · Reel R02</span><b>Uma visita inteira em 60 segundos</b></a><a class="slot carr" href="#C09"><span>12:15 · Carrossel C09</span><b>Checklist da visita de manutenção</b></a><a class="slot story" href="#S04"><span>07–20h · Stories S04</span><b>Configuro sua conta com você</b></a><a class="slot trial" href="#R02"><span>18:30 · Trial Reel R02</span><b>Uma visita inteira em 60 segundos. Do portão ao relatório.</b></a><a class="slot stat" href="#E03"><span>19:30 · Estático E03</span><b>Portal do cliente</b></a></div></div>
+</section>
+
+<section class="blk" id="pecas">
+  <h2>As peças</h2>
+  <p class="small">Cada Reel tem 3 ganchos avaliados. O melhor vai no Reel principal e o segundo no Trial Reel. Legendas passaram pelo humanizador e pelo verificador da skill. "Visível no feed" mostra exatamente o que aparece antes do "…mais".</p>
+  
+<article class="peca" id="R01">
+  <details>
+    <summary>
+      <span class="pid reel">R01</span>
+      <span class="ptitle"><b>O cliente disse que você não veio</b><small>Reel · Identificação · qua 25/11</small></span>
+      <span class="metric">Envios por alcance (piscineiro mandando para colega)</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Fazer o piscineiro se reconhecer na acusação mais comum da profissão e mostrar, em segundos, que o relatório com fotos, horário e medições encerra a discussão.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro autônomo ou pequena empresa que atende clientes exigentes (condomínio, alto padrão) e já ouviu um &quot;ninguém veio&quot;.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Ninguém veio ontem? Mostra a prova em 1 toque.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>O cliente disse que você não veio.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Close na tela de um celular: conversa de WhatsApp com a mensagem de um cliente (contato fictício, ex.: &quot;Casa 14&quot;).</td><td>O cliente disse que você não veio.<br></td><td>&quot;Ninguém veio ontem, né?&quot;<br></td></tr><tr><td class="t">3–8s</td><td>Piscineiro na beira de uma piscina limpa, olha o celular, respira fundo. Corte seco.</td><td>Cena comum: você foi, limpou, mediu... E a única prova é a sua palavra.<br></td><td>Sua palavra x a palavra dele<br></td></tr><tr><td class="t">8–14s</td><td>Tela real 07-relatorio em moldura de celular: logo da empresa, protocolo, data e horário da visita. Zoom no horário.</td><td>Com o Ondaro, cada visita fecha com relatório. Data, horário, protocolo.<br></td><td>Data - horário - protocolo<br></td></tr><tr><td class="t">14–19s</td><td>Rolagem no relatório até as fotos de antes e depois (tela 05-fotos).</td><td>Foto de antes e de depois. Da piscina dele.<br></td><td>Antes / depois<br></td></tr><tr><td class="t">19–24s</td><td>Tela 07b-relatorio-agua: tabela de medições com a faixa da empresa.</td><td>E as medições da água, comparadas com as faixas que a sua empresa definiu.<br></td><td>pH - cloro - alcalinidade<br></td></tr><tr><td class="t">24–29s</td><td>Tela 06-finalizado: dedo toca no botão do WhatsApp; a conversa abre com o link do relatório pronto para enviar.</td><td>Você manda o link pelo seu WhatsApp em um toque. O cliente abre e pode registrar que viu.<br></td><td>1 toque - link privado<br></td></tr><tr><td class="t">29–33s</td><td>Piscineiro guarda o celular no bolso e volta ao trabalho, olhando para a câmera.</td><td>Piscineiro que documenta não discute.<br></td><td>Ondaro - 14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R01">O cliente disse que você não veio. E agora?<br><br>Se a sua prova é &quot;confia em mim&quot;, a conversa vira palavra contra palavra. E quem paga é quem tem menos prova.<br><br>No Ondaro, cada visita de manutenção de piscina termina com um relatório:<br>✔ data, horário e protocolo<br>✔ fotos de antes e depois<br>✔ medições de pH, cloro e alcalinidade comparadas com as faixas da sua empresa<br><br>Você manda o link pelo seu próprio WhatsApp, em um toque. O cliente abre, vê e pode registrar ciência.<br><br>Piscineiro que documenta não discute.<br><br>Manda esse vídeo pro colega que já ouviu um &quot;ninguém veio&quot;.<br>Teste 14 dias grátis, sem cartão, link na bio.<br></div>
+          <button class="copy" type="button" data-target="cap-R01">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> O cliente disse que você não veio. E agora?<br><br>Se a sua prova é &quot;confia em mim&quot;, a conversa vira palavra contra palavra. E quem…</div>
+          <p class="small"><b>Chamada:</b> Manda pro colega que já ouviu um &quot;ninguém veio&quot; — e teste 14 dias grátis pelo link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina #limpezadepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: WARN · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração estimada: 30–33 s. Cortes secos a cada 4–5 s, legendas grandes queimadas no vídeo (Manrope ExtraBold, fundo #06263A com destaque #5EEAD4). Gravação vertical original em campo; telas reais inseridas em moldura de celular. Som: ambiente de piscina (água, filtro) baixo + batida discreta que entra no segundo 8, quando a prova aparece. Sem marca d&#x27;água de outro app.</p>
+          <h4>Por que existe</h4><p>Mecanismo de identificação + prova: a dor &quot;cliente que diz que ninguém veio&quot; aparece nas dores documentadas e o Reclame Aqui traz títulos como &quot;Serviço pago e não realizado&quot;. O vídeo cumpre o gancho mostrando a prova real (telas 06, 07, 07b). Feito para gerar envios entre piscineiros, sinal que o Instagram diz pesar mais com não seguidores (Mosseri, 01/2025).</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo corte, legenda curta &quot;Ele disse que você não veio. Você mostrou isso.&quot; Stories: print da mensagem + enquete &quot;Já ouviu um “ninguém veio”?&quot; Carrossel: virar C04 (relatório slide a slide).</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C05">
+  <details>
+    <summary>
+      <span class="pid carr">C05</span>
+      <span class="ptitle"><b>5 sinais de que seu piscineiro é profissional</b><small>Carrossel · Descoberta · qua 25/11</small></span>
+      <span class="metric">Envios por alcance</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Criar um conteúdo que o piscineiro envia ao próprio cliente para valorizar seu trabalho — levando o perfil a donos de piscina e a outros piscineiros por compartilhamento.</dd></div>
+        <div><dt>Público</dt><dd>Donos de piscina (leitor final) e piscineiros (quem compartilha).</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Capa: &quot;5 sinais de que seu piscineiro é profissional&quot; — &quot;Se ele faz isso, segura ele.&quot;</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C05/01.png" alt="5 sinais de que seu piscineiro é profissional, slide 1" loading="lazy" width="200" height="250"><img src="artes/C05/02.png" alt="5 sinais de que seu piscineiro é profissional, slide 2" loading="lazy" width="200" height="250"><img src="artes/C05/03.png" alt="5 sinais de que seu piscineiro é profissional, slide 3" loading="lazy" width="200" height="250"><img src="artes/C05/04.png" alt="5 sinais de que seu piscineiro é profissional, slide 4" loading="lazy" width="200" height="250"><img src="artes/C05/05.png" alt="5 sinais de que seu piscineiro é profissional, slide 5" loading="lazy" width="200" height="250"><img src="artes/C05/06.png" alt="5 sinais de que seu piscineiro é profissional, slide 6" loading="lazy" width="200" height="250"><img src="artes/C05/07.png" alt="5 sinais de que seu piscineiro é profissional, slide 7" loading="lazy" width="200" height="250"></div><p class="note">7 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C05/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C05">Tem piscina? Veja se o seu piscineiro faz essas 5 coisas.<br><br>1. Mede a água, e te mostra o resultado.<br>2. Cumpre o dia combinado (e avisa se precisar remarcar).<br>3. Manda o que fez: fotos de antes e depois, serviços e produtos.<br>4. Não chuta produto: segue o fabricante e registra o que aplicou.<br>5. Avisa o que precisa de atenção antes de virar problema.<br><br>Se ele faz tudo isso, valoriza. Não é todo mundo.<br><br>Piscineiro: manda esse post pro seu cliente. É o seu trabalho explicado, sem você precisar se explicar 😉<br></div>
+          <button class="copy" type="button" data-target="cap-C05">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Tem piscina? Veja se o seu piscineiro faz essas 5 coisas.<br><br>1. Mede a água, e te mostra o resultado.<br>2. Cumpre o dia combinado…</div>
+          <p class="small"><b>Chamada:</b> Piscineiro: envie para o seu cliente. Dono de piscina: envie para quem cuida da sua.</p>
+          <p class="small"><b>Hashtags:</b> #piscina #piscineiro #manutencaodepiscina #casacompiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Carrossel 1080x1350, 7 slides, tema claro e acolhedor (fala com o dono da piscina). Números grandes em espuma #5EEAD4 sobre fundo claro com contorno escuro para contraste. Sem tela de app e sem menção a produto nos slides — a marca aparece só no rodapé, para o conteúdo circular entre clientes sem parecer anúncio.</p>
+          <h4>Por que existe</h4><p>Peça de descoberta desenhada para envio: o piscineiro tem motivo próprio para compartilhar (valorizar o serviço), o que leva o conteúdo a donos de piscina e não seguidores — envios pesam mais com não seguidores (Mosseri, 01/2025). Os 5 sinais espelham as dores documentadas: falta de comunicação, &quot;falta de compromisso&quot; e &quot;serviço pago e não realizado&quot; (Reclame Aqui).</p>
+          <h4>Reaproveitamento</h4><p>Reel: piscineiro lendo os 5 sinais com cortes de trabalho real (&quot;Se o seu piscineiro faz isso, segura ele&quot;). Stories: um sinal por story com enquete &quot;O seu faz?&quot;. Estático: slide de capa como post único.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="S01">
+  <details>
+    <summary>
+      <span class="pid story">S01</span>
+      <span class="ptitle"><b>Como você registra suas visitas hoje?</b><small>Stories · Relacionamento · qua 25/11</small></span>
+      <span class="metric">Respostas (toques em enquete + mensagens na caixa de perguntas)</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Abrir conversa com a audiência, descobrir como ela registra o trabalho e gerar respostas que viram pauta — fazendo a pessoa perceber o próprio &quot;achismo&quot;.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores piscineiros e técnicos de manutenção.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Story 1: &quot;Pergunta rápida pra quem vive de piscina 👇&quot;</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Story</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">Story 1</td><td>Foto ou vídeo curto (5 s) de uma piscina limpa no fim da visita, fundo real de campo.</td><td></td><td>Pergunta rápida pra quem vive de piscina 👇 | Enquete: &quot;Você trabalha com manutenção de piscina?&quot;, &quot;Sim, é meu trabalho&quot; / &quot;Tô começando&quot;<br></td></tr><tr><td class="t">Story 2</td><td>Fundo #06263A liso, texto grande.</td><td></td><td>Como você registra suas visitas hoje? | Enquete de 4 opções: &quot;Caderno&quot; / &quot;Foto na galeria&quot; / &quot;Mensagem no WhatsApp&quot; / &quot;Na memória mesmo&quot;<br></td></tr><tr><td class="t">Story 3</td><td>Fundo claro #F5F8FA.</td><td></td><td>Depois da visita, seu cliente recebe alguma coisa? | Enquete: &quot;Recebe um relatório&quot; / &quot;Recebe um ok, tá feito&quot;<br></td></tr><tr><td class="t">Story 4</td><td>Fundo #06263A.</td><td></td><td>Algum cliente já duvidou que você foi? | Controle deslizante com emoji 😅 (de &quot;nunca&quot; a &quot;toda semana&quot;)<br></td></tr><tr><td class="t">Story 5</td><td>Fundo claro com caixa de perguntas centralizada.</td><td></td><td>O que mais te atrapalha na hora de registrar a visita? | Caixa de perguntas: &quot;Conta aqui (sem julgamento)&quot;<br></td></tr><tr><td class="t">Story 6</td><td>Tela real 07-relatorio em moldura de celular, fundo #06263A.</td><td></td><td>Assim fica uma visita registrada no Ondaro: data, fotos, medições, sua marca. | Figurinha de link: &quot;Testar 14 dias grátis&quot; -&gt; ondaro.vercel.app<br></td></tr><tr><td class="t">Story 7</td><td>Fundo azul #0B6E99, texto curto.</td><td></td><td>Amanhã eu comento as respostas por aqui (sem expor ninguém). Valeu por responder 💙<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-S01"></div>
+          <button class="copy" type="button" data-target="cap-S01">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> …</div>
+          <p class="small"><b>Chamada:</b> Responder às enquetes e conhecer o relatório pelo link (14 dias grátis).</p>
+          
+          
+        </section>
+        <section><h4>Edição</h4><p>Sequência de 7 stories, cada um com uma única pergunta e fonte grande (Manrope). Figurinhas nativas do Instagram (enquete, controle deslizante, caixa de perguntas, link). Publicar de manhã cedo ou à noite, fora do horário de campo. Story 7 cria o compromisso de voltar com as respostas.</p>
+          <h4>Por que existe</h4><p>Relacionamento e pesquisa ao mesmo tempo: as respostas mostram como o público registra (caderno, galeria, memória — o &quot;achismo&quot;, inimigo comum do posicionamento) e alimentam pautas futuras. Enquetes geram interação de baixo esforço; a caixa de perguntas traz a linguagem real do piscineiro. Sem números inventados: resultados só serão comentados depois, com base nas respostas reais.</p>
+          <h4>Reaproveitamento</h4><p>Respostas (anônimas) viram story de resultado, Reel de &quot;vocês responderam&quot; e argumentos para S03 (objeções). A pergunta do Story 2 pode virar post fixo de enquete no feed/TikTok.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="E01">
+  <details>
+    <summary>
+      <span class="pid stat">E01</span>
+      <span class="ptitle"><b>Piscineiro que documenta não discute</b><small>Estático · Descoberta · qua 25/11</small></span>
+      <span class="metric">Envios por alcance</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Fixar a frase-assinatura da marca numa peça simples, compartilhável e fácil de reconhecer no feed.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros e donos de empresa de manutenção de piscinas; não seguidores que chegam pelo compartilhamento.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Frase única na arte: &quot;Piscineiro que documenta não discute.&quot;</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/E01/01.png" alt="Piscineiro que documenta não discute, slide 1" loading="lazy" width="200" height="250"></div><p class="note">1 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/E01/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-E01">Piscineiro que documenta não discute.<br><br>Quando o cliente reclama, quem tem registro mostra. Quem não tem, explica.<br><br>Foto de antes e depois. Horário da visita. Medição da água. Serviços feitos. Produto aplicado.<br><br>Não é burocracia. É o que deixa a conversa curta.<br><br>Concorda? Manda pra quem precisa ler isso hoje.<br></div>
+          <button class="copy" type="button" data-target="cap-E01">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Piscineiro que documenta não discute.<br><br>Quando o cliente reclama, quem tem registro mostra. Quem não tem, explica.<br><br>Foto de an…</div>
+          <p class="small"><b>Chamada:</b> Mande para um piscineiro que precisa ler isso hoje.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Arte única 1080x1350, fundo abismo #06263A, frase em Manrope ExtraBold com &quot;não discute.&quot; em espuma #5EEAD4. Muito respiro; símbolo do anel com onda pequeno no rodapé. Nada além da frase e da linha de apoio.</p>
+          <h4>Por que existe</h4><p>Peça de marca: repete a promessa central do posicionamento (&quot;Piscineiro que documenta não discute&quot;). Frases curtas e afirmativas geram envios e salvamentos; envios pesam mais com não seguidores (Mosseri, 01/2025). Inimigo comum: o &quot;confia em mim&quot;.</p>
+          <h4>Reaproveitamento</h4><p>Stories: arte + figurinha de enquete &quot;Concorda?&quot;. TikTok: vídeo de 6 s com a frase aparecendo sobre imagem de piscina. Pode ser fixado no perfil.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R06">
+  <details>
+    <summary>
+      <span class="pid reel">R06</span>
+      <span class="ptitle"><b>Antes de jogar cloro, faça isso</b><small>Reel · Educação · qui 26/11</small></span>
+      <span class="metric">Salvamentos e envios</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Ensinar a sequência testar → conferir rótulo → segurança → registrar, sem dosagem, posicionando o registro como parte do método profissional.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros iniciantes e donos de piscina que tratam a água por conta própria.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>3 testes antes do cloro. Pule um e o produto pode não resolver.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Não jogue cloro na água verde antes desses 3 testes.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Close: mão inclinando um balde de produto sobre a água. Outra mão entra e segura o balde.</td><td>Antes de jogar cloro, faça isso.<br></td><td>Antes do cloro: 4 passos<br></td></tr><tr><td class="t">3–10s</td><td>Kit de teste: coleta da água, reagente, comparação de cor (ou leitor). Insert da tela 04-agua.</td><td>Um: testa a água. PH, cloro livre e total, alcalinidade. Sem teste, você não sabe se o problema é cloro.<br></td><td>1 - Teste: pH - cloro - alcalinidade<br></td></tr><tr><td class="t">10–17s</td><td>Close no rótulo de uma embalagem (marca desfocada ou coberta).</td><td>Dois: lê o rótulo. Quantidade, ordem e intervalo quem define é o fabricante. Não é chute, não é vídeo da internet.<br></td><td>2 - Dose e ordem: rótulo do fabricante<br></td></tr><tr><td class="t">17–25s</td><td>Piscineiro colocando luvas e óculos; produtos separados lado a lado, um de cada vez.</td><td>Três: segurança. Luva, óculos, um produto de cada vez, nunca misture. E respeita o tempo indicado antes de liberar o banho.<br></td><td>3 - EPI - nunca misturar - tempo de espera<br></td></tr><tr><td class="t">25–32s</td><td>Tela do Ondaro: produto aplicado com lote; campo de observação.</td><td>Quatro: registra. O que mediu, o que aplicou, qual lote. Na próxima visita você sabe o que fez, e o cliente também.<br></td><td>4 - Registre: medição - produto - lote<br></td></tr><tr><td class="t">32–36s</td><td>Piscineiro para a câmera, segurando o kit de teste.</td><td>Testar e registrar leva pouco tempo. Errar o produto leva bem mais.<br></td><td>Salve 📌 - Ondaro<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R06">Antes de jogar cloro na piscina, faça isso:<br><br>1. Teste a água: pH, cloro livre e total, alcalinidade. Sem teste, você nem sabe se o problema é cloro.<br>2. Leia o rótulo. Quantidade, ordem e intervalo são do fabricante, não do palpite.<br>3. Segurança: luva, óculos, um produto de cada vez, nunca misture. E respeite o tempo indicado antes de liberar o banho.<br>4. Registre: o que mediu, o que aplicou e o lote.<br><br>Aplicar tudo junto atrapalha o tratamento (Olhar Digital), e água verde nem sempre é falta de cloro. Por isso o teste vem antes.<br><br>No Ondaro, as medições e os produtos aplicados ficam registrados em cada visita, com lote e baixa no estoque.<br><br>Dica para quem é piscineiro e faz manutenção de piscina toda semana.<br><br>Salva e manda pra quem ainda trata piscina no olho.</div>
+          <button class="copy" type="button" data-target="cap-R06">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Antes de jogar cloro na piscina, faça isso:<br><br>1. Teste a água: pH, cloro livre e total, alcalinidade. Sem teste, você nem sabe…</div>
+          <p class="small"><b>Chamada:</b> Salve e mande para quem ainda trata piscina no olho.</p>
+          <p class="small"><b>Hashtags:</b> #piscina #tratamentodepiscina #piscineiro #cloro #manutencaodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração: 34–36 s. Numeração grande dos 4 passos sempre visível. Planos fechados nas mãos (estética &quot;satisfatória&quot; do teste de água mudando de cor). Nenhuma quantidade de produto aparece ou é dita; marcas de produto desfocadas. Som ambiente + trilha instrumental leve.</p>
+          <h4>Por que existe</h4><p>Educação de segurança com utilidade imediata. Apoiada nas evidências: água verde nem sempre é falta de cloro e aplicar todos os produtos juntos atrapalha (Olhar Digital 21/08/2026). Respeita a regra de não recomendar dosagem e de não presumir piscina liberada (remete ao tempo do fabricante). Conecta ao registro de produto com lote, função real.</p>
+          <h4>Reaproveitamento</h4><p>Carrossel: &quot;4 passos antes do cloro&quot; (salvável). Stories: quiz &quot;Qual vem primeiro: produto ou teste?&quot;. TikTok/Shorts: mesmo vídeo.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C01">
+  <details>
+    <summary>
+      <span class="pid carr">C01</span>
+      <span class="ptitle"><b>Água verde não é só falta de cloro</b><small>Carrossel · Educação · qui 26/11</small></span>
+      <span class="metric">Salvamentos</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Derrubar o mito de que água verde se resolve sempre com mais cloro e posicionar o teste + registro como o passo antes de qualquer produto — conteúdo salvável.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros (iniciantes e experientes) e donos de piscina que resolvem água verde no chute.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Capa: &quot;Água verde não é só falta de cloro&quot; — &quot;O que conferir antes de sair jogando produto&quot;.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C01/01.png" alt="Água verde não é só falta de cloro, slide 1" loading="lazy" width="200" height="250"><img src="artes/C01/02.png" alt="Água verde não é só falta de cloro, slide 2" loading="lazy" width="200" height="250"><img src="artes/C01/03.png" alt="Água verde não é só falta de cloro, slide 3" loading="lazy" width="200" height="250"><img src="artes/C01/04.png" alt="Água verde não é só falta de cloro, slide 4" loading="lazy" width="200" height="250"><img src="artes/C01/05.png" alt="Água verde não é só falta de cloro, slide 5" loading="lazy" width="200" height="250"><img src="artes/C01/06.png" alt="Água verde não é só falta de cloro, slide 6" loading="lazy" width="200" height="250"><img src="artes/C01/07.png" alt="Água verde não é só falta de cloro, slide 7" loading="lazy" width="200" height="250"></div><p class="note">7 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C01/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C01">Água verde não é só falta de cloro.<br><br>É a primeira coisa que vem na cabeça, do cliente e, às vezes, da gente. Mas matéria do Olhar Digital (21/08/2026) lembra que pH fora da faixa e metais oxidados também deixam a água esverdeada.<br><br>Antes de abrir o balde, confira:<br>- pH<br>- cloro livre e total<br>- alcalinidade<br>- filtro e bomba<br>- o que foi aplicado na última visita<br><br>Dose e ordem de aplicação? Rótulo e orientação do fabricante. E nada de jogar todos os produtos juntos.<br><br>O resto é registrar o que você mediu, pra próxima visita não começar do zero.<br><br>Dica para quem é piscineiro e faz manutenção de piscina toda semana.<br><br>Salva pro próximo chamado de água verde e manda pro colega 💧</div>
+          <button class="copy" type="button" data-target="cap-C01">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Água verde não é só falta de cloro.<br><br>É a primeira coisa que vem na cabeça, do cliente e, às vezes, da gente. Mas matéria do O…</div>
+          <p class="small"><b>Chamada:</b> Salve para a próxima água verde e mande para um colega.</p>
+          <p class="small"><b>Hashtags:</b> #aguaverde #piscina #piscineiro #tratamentodepiscina #manutencaodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Carrossel 1080x1350, 7 slides. Alternar fundos escuro/claro para ritmo; destaque em #5EEAD4 só na palavra-chave da capa. Slide 6 com tela real 04-agua em moldura de celular. Pouco texto por slide; fonte citada em corpo pequeno.</p>
+          <h4>Por que existe</h4><p>Utilidade + contraste com mito comum. Evidência: Olhar Digital (21/08/2026) — água verde nem sempre é só falta de cloro; aplicar todos os produtos juntos atrapalha. Sazonal: verão é a época de crise de água verde. Sem dosagem; remete ao fabricante. Carrosséis estão indo bem segundo comunicação oficial do Instagram.</p>
+          <h4>Reaproveitamento</h4><p>Reel/TikTok: piscineiro com kit de teste lendo a lista &quot;confira primeiro&quot; em 20 s. Stories: quiz &quot;Água verde é sempre falta de cloro?&quot; com resposta no story seguinte. Base para R06 e R12.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="S05">
+  <details>
+    <summary>
+      <span class="pid story">S05</span>
+      <span class="ptitle"><b>Quiz: água verde é sempre falta de cloro?</b><small>Stories · Educação · qui 26/11</small></span>
+      <span class="metric">respostas ao quiz</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Ensinar pelo erro com o figurinha de quiz e levar tráfego ao carrossel C01.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores (piscineiros e donos de piscina)</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Água verde é SEMPRE falta de cloro?</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Story</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">Story 1</td><td>Foto de piscina verde (sua, real).</td><td></td><td>Quiz: água verde é SEMPRE falta de cloro? (Sim / Não / Depende)<br></td></tr><tr><td class="t">Story 2</td><td>Fundo azul da marca.</td><td></td><td>Resposta: depende. PH fora da faixa e metais oxidados também esverdeiam a água (Olhar Digital, 21/08/2026).<br></td></tr><tr><td class="t">Story 3</td><td>Mão com kit de teste.</td><td>Por isso eu testo antes de qualquer produto.<br></td><td>Testa antes. Produto depois.<br></td></tr><tr><td class="t">Story 4</td><td>Repost do carrossel C01.</td><td></td><td>O passo a passo está aqui (figurinha de link para o post)<br></td></tr><tr><td class="t">Story 5</td><td>Fundo escuro.</td><td></td><td>Caixa de perguntas: qual foi a pior água verde que você já pegou?<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-S05"></div>
+          <button class="copy" type="button" data-target="cap-S05">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> …</div>
+          <p class="small"><b>Chamada:</b> Responda o quiz e veja o carrossel completo.</p>
+          
+          
+        </section>
+        <section><h4>Edição</h4><p>5 stories, 5–7s cada. Responder as perguntas no dia seguinte.</p>
+          <h4>Por que existe</h4><p>Quiz ataca um mito documentado e gera interação barata; a caixa de perguntas colhe histórias reais para Reels.</p>
+          <h4>Reaproveitamento</h4><p>As respostas viram Reel de resposta (formato #16 Verbatim Question).</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="E04">
+  <details>
+    <summary>
+      <span class="pid stat">E04</span>
+      <span class="ptitle"><b>Água boa o cliente sente</b><small>Estático · Identificação · qui 26/11</small></span>
+      <span class="metric">envios por alcance</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Gerar identificação e salvamento com uma frase que o piscineiro reconhece como verdade do dia a dia.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros autônomos e donos de empresa de manutenção</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Água boa o cliente sente. Trabalho bem feito, ele precisa ver.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/E04/01.png" alt="Água boa o cliente sente, slide 1" loading="lazy" width="200" height="250"></div><p class="note">1 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/E04/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-E04">Água boa o cliente sente. Trabalho bem feito, ele precisa ver.<br><br>O cliente não acompanha você medindo pH, escovando borda ou limpando pré-filtro. Ele vê a água no fim de semana. Se ela está boa, ótimo. Se mudou depois da chuva, a pergunta chega: o que foi feito?<br><br>Quem registra a visita responde com data, medições e foto. Quem não registra responde com &quot;confia em mim&quot;.<br><br>Manda pro colega piscineiro que vive explicando o próprio trabalho.<br></div>
+          <button class="copy" type="button" data-target="cap-E04">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Água boa o cliente sente. Trabalho bem feito, ele precisa ver.<br><br>O cliente não acompanha você medindo pH, escovando borda ou l…</div>
+          <p class="small"><b>Chamada:</b> Envie para um colega piscineiro.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Post único 1080x1350. Sem efeitos. Postar no fim da tarde.</p>
+          <h4>Por que existe</h4><p>Frase curta e verdadeira tende a ser enviada entre pares (envios pesam com não seguidores, segundo Mosseri). Reforça o posicionamento &#x27;prova do trabalho&#x27; sem falar do produto.</p>
+          <h4>Reaproveitamento</h4><p>Texto em tela de Reel de 7s com áudio em alta; capa de destaque &#x27;Prova&#x27;.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R04">
+  <details>
+    <summary>
+      <span class="pid reel">R04</span>
+      <span class="ptitle"><b>3 mensagens para cobrar cliente atrasado</b><small>Reel · Negócio do piscineiro · sex 27/11</small></span>
+      <span class="metric">Salvamentos</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Entregar modelos de mensagem prontos para cobrar sem constrangimento, gerando salvamentos e mostrando o histórico de visitas como apoio da cobrança.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro autônomo com clientes mensais que atrasam pagamento.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Não cobre cliente atrasado com áudio de 2 minutos.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>3 mensagens para cobrar o cliente atrasado sem perder o cliente.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Piscineiro sentado na caminhonete ou na borda da piscina, celular na mão, olhando para a câmera.</td><td>Cliente atrasou a mensalidade? Manda essas três mensagens. Nessa ordem.<br></td><td>3 mensagens pra cobrar sem perder o cliente<br></td></tr><tr><td class="t">3–11s</td><td>Tela com a mensagem 1 digitada num balão de WhatsApp (mockup simples). Piscineiro em quadro menor.</td><td>Primeira, logo depois do vencimento: lembrete leve. Muita gente só esqueceu.<br></td><td>Msg 1 - &quot;Oi, [nome]! Passando pra lembrar da mensalidade da piscina, que venceu dia [data]. Se já pagou, desconsidera 🙂&quot;<br></td></tr><tr><td class="t">11–20s</td><td>Balão da mensagem 2 com um link de relatório anexado.</td><td>Segunda, alguns dias depois: lembra o que você entregou. O histórico das visitas vai junto.<br></td><td>Msg 2 - &quot;Oi, [nome]. Segue o link com as visitas de [mês], com fotos e medições. A mensalidade continua em aberto, consegue ver pra mim até [data]?&quot;<br></td></tr><tr><td class="t">20–29s</td><td>Balão da mensagem 3.</td><td>Terceira: prazo claro e porta aberta. Firme, sem ameaça.<br></td><td>Msg 3 - &quot;[nome], a mensalidade de [mês] segue em aberto. Pra manter a agenda de visitas, preciso do acerto até [data]. Se estiver apertado, me chama que a gente combina.&quot;<br></td></tr><tr><td class="t">29–36s</td><td>Volta para o piscineiro. Insert rápido da tela 08-portal (histórico de relatórios).</td><td>O segredo da segunda mensagem é ter o que mostrar. No Ondaro, o histórico de visitas tá num link, e a conta a receber fica registrada. O pagamento você marca quando cair.<br></td><td>Histórico de visitas - contas a receber<br></td></tr><tr><td class="t">36–40s</td><td>Piscineiro aponta para baixo (botão salvar).</td><td>Salva pra usar no próximo atraso.<br></td><td>Salve 📌 - Ondaro, 14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R04">Cliente atrasou a mensalidade da piscina? Copia essas três. Nessa ordem.<br><br>1️⃣ Logo após o vencimento (lembrete):<br>&quot;Oi, [nome]! Passando pra lembrar da mensalidade da piscina, que venceu dia [data]. Se já pagou, desconsidera.&quot;<br><br>2️⃣ Alguns dias depois (mostra o que você entregou):<br>&quot;Oi, [nome]. Segue o link com as visitas de [mês], com fotos e medições. A mensalidade continua em aberto, consegue ver pra mim até [data]?&quot;<br><br>3️⃣ Firme e com porta aberta:<br>&quot;[nome], a mensalidade de [mês] segue em aberto. Pra manter a agenda de visitas, preciso do acerto até [data]. Se estiver apertado, me chama que a gente combina.&quot;<br><br>Cobrar não é briga. É lembrar, mostrar e combinar.<br><br>No Ondaro, o histórico de visitas fica num link pra você mandar junto, e as contas a receber ficam organizadas (o pagamento você registra quando entrar).<br><br>Para o piscineiro que quer tratar a manutenção de piscina como empresa.<br><br>Salva pra usar no próximo atraso.</div>
+          <button class="copy" type="button" data-target="cap-R04">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Cliente atrasou a mensalidade da piscina? Copia essas três. Nessa ordem.<br><br>1️⃣ Logo após o vencimento (lembrete):<br>&quot;Oi, [nome]!…</div>
+          <p class="small"><b>Chamada:</b> Salve para usar no próximo atraso.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #cobranca #autonomo</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração: 38–40 s. Mensagens em balões grandes e legíveis por pelo menos 4 s cada (o público vai pausar para ler — bom para watch time). Fala calma, tom de conselho entre colegas. Trilha instrumental leve, sem protagonismo. Gravação original.</p>
+          <h4>Por que existe</h4><p>Utilidade direta para uma dor documentada (inadimplência e cobrança). Modelos copiáveis geram salvamento. Mostra o diferencial real (histórico de visitas por link) sem prometer cobrança automática ou Pix — o pagamento é registrado manualmente, como no produto.</p>
+          <h4>Reaproveitamento</h4><p>Carrossel: uma mensagem por slide + slide final de &quot;por que funciona&quot;. Stories: as três mensagens com figurinha &quot;salve&quot; e enquete &quot;Você cobra por mensagem ou ligação?&quot;. TikTok/Shorts: mesmo vídeo.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C02">
+  <details>
+    <summary>
+      <span class="pid carr">C02</span>
+      <span class="ptitle"><b>Quanto cobrar pela manutenção de piscina</b><small>Carrossel · Negócio do piscineiro · sex 27/11</small></span>
+      <span class="metric">Salvamentos</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Responder a pergunta mais buscada do nicho com faixas públicas citadas e, principalmente, com o raciocínio de custo — gerando salvamentos e autoridade sem dar preço pronto.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro autônomo que está precificando, quer reajustar ou está começando.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Capa: &quot;Quanto cobrar pela manutenção de piscina?&quot; — &quot;As faixas que circulam por aí e por que nenhuma serve de preço pronto&quot;.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C02/01.png" alt="Quanto cobrar pela manutenção de piscina, slide 1" loading="lazy" width="200" height="250"><img src="artes/C02/02.png" alt="Quanto cobrar pela manutenção de piscina, slide 2" loading="lazy" width="200" height="250"><img src="artes/C02/03.png" alt="Quanto cobrar pela manutenção de piscina, slide 3" loading="lazy" width="200" height="250"><img src="artes/C02/04.png" alt="Quanto cobrar pela manutenção de piscina, slide 4" loading="lazy" width="200" height="250"><img src="artes/C02/05.png" alt="Quanto cobrar pela manutenção de piscina, slide 5" loading="lazy" width="200" height="250"><img src="artes/C02/06.png" alt="Quanto cobrar pela manutenção de piscina, slide 6" loading="lazy" width="200" height="250"><img src="artes/C02/07.png" alt="Quanto cobrar pela manutenção de piscina, slide 7" loading="lazy" width="200" height="250"></div><p class="note">7 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C02/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C02">Quanto cobrar pela manutenção de piscina? A resposta honesta: depende, e dá pra calcular.<br><br>O que encontramos publicado (fontes comerciais, números divergentes):<br>- R$150-300/mês (Cronoshare)<br>- R$350-600/mês (Revista Oeste, 12/2025)<br>- cerca de R$80 por visita (GetNinjas)<br><br>Viu como não batem? Cada fonte mede de um jeito. Serve pra você se situar, não pra copiar.<br><br>O seu preço sai da sua conta:<br>-&gt; químico gasto em cada piscina<br>-&gt; deslocamento<br>-&gt; tempo por visita<br>-&gt; frequência<br>-&gt; imposto e margem<br><br>O que quase ninguém tem é o custo químico de cada cliente. E sem ele, reajuste vira medo.<br><br>Salva esse post pra quando for montar ou revisar seu preço.<br></div>
+          <button class="copy" type="button" data-target="cap-C02">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Quanto cobrar pela manutenção de piscina? A resposta honesta: depende, e dá pra calcular.<br><br>O que encontramos publicado (fonte…</div>
+          <p class="small"><b>Chamada:</b> Salve para revisar seu preço — e veja o custo químico por cliente no Ondaro (14 dias grátis, link na bio).</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #quantocobrar #empreendedorismo #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: WARN · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Carrossel 1080x1350, 7 slides. Slide 2 com as fontes visíveis (credibilidade). Compare no slide 6 com lado direito em #0B6E99. Nenhum preço recomendado em lugar algum.</p>
+          <h4>Por que existe</h4><p>Utilidade alta para o negócio do piscineiro. Faixas citadas exatamente como no briefing (Cronoshare, Revista Oeste 12/2025, GetNinjas), apresentadas como faixas encontradas, sem recomendação. Ataca a dor documentada do medo de reajustar preço e conecta a uma função real (custo químico por cliente).</p>
+          <h4>Reaproveitamento</h4><p>Reel: &quot;Vi três preços diferentes pra manutenção de piscina. Nenhum serve pra você. Aqui está o porquê.&quot; Stories: caixa &quot;Quanto você cobra hoje? (anônimo)&quot;. Gancho para C06 (de piscineiro a empresa).</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="S07">
+  <details>
+    <summary>
+      <span class="pid story">S07</span>
+      <span class="ptitle"><b>Caixa: a pergunta que todo cliente faz</b><small>Stories · Relacionamento · sex 27/11</small></span>
+      <span class="metric">respostas na caixa de perguntas</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Colher as palavras exatas do público para os próximos ganchos e legendas.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores piscineiros</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Qual pergunta todo cliente te faz?</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Story</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">Story 1</td><td>Selfie rápida ou foto do carro de trabalho.</td><td>Pergunta rápida pra quem é piscineiro.<br></td><td>Pergunta rápida 👇<br></td></tr><tr><td class="t">Story 2</td><td>Fundo da marca.</td><td></td><td>Caixa de perguntas: qual pergunta TODO cliente te faz?<br></td></tr><tr><td class="t">Story 3</td><td>Fundo da marca.</td><td></td><td>As melhores viram vídeo aqui no perfil essa semana.<br></td></tr><tr><td class="t">Story 4</td><td>Repost do Reel mais recente.</td><td></td><td>Enquanto isso: esse vídeo aqui<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-S07"></div>
+          <button class="copy" type="button" data-target="cap-S07">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> …</div>
+          <p class="small"><b>Chamada:</b> Responda na caixa de perguntas.</p>
+          
+          
+        </section>
+        <section><h4>Edição</h4><p>4 stories. Salvar as respostas numa planilha de ganchos.</p>
+          <h4>Por que existe</h4><p>A skill ig-story indica a caixa de perguntas como a ferramenta que entrega as palavras do público para ganchos (fórmula #16).</p>
+          <h4>Reaproveitamento</h4><p>Cada resposta boa vira Reel #16 Verbatim Question.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="E06">
+  <details>
+    <summary>
+      <span class="pid stat">E06</span>
+      <span class="ptitle"><b>Pergunta: histórico de 3 meses</b><small>Estático · Relacionamento · sex 27/11</small></span>
+      <span class="metric">comentários</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Gerar comentários e descobrir como o público registra hoje (pesquisa de mercado orgânica).</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros e empresas que atendem condomínio</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Se o seu cliente pedir o histórico dos últimos 3 meses, você mostra em quanto tempo?</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/E06/01.png" alt="Pergunta: histórico de 3 meses, slide 1" loading="lazy" width="200" height="250"></div><p class="note">1 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/E06/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-E06">Pergunta honesta para quem atende condomínio ou cliente exigente:<br><br>O síndico pediu o histórico de manutenção da piscina dos últimos 3 meses. Medições, produtos, o que foi feito em cada visita.<br><br>Você mostra em 5 minutos, em 1 dia, ou não mostra?<br><br>Pergunta para quem é piscineiro e trabalha com manutenção de piscina.<br><br>Responde aqui embaixo. As respostas viram conteúdo para ajudar quem ainda está no caderno.</div>
+          <button class="copy" type="button" data-target="cap-E06">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Pergunta honesta para quem atende condomínio ou cliente exigente:<br><br>O síndico pediu o histórico de manutenção da piscina dos ú…</div>
+          <p class="small"><b>Chamada:</b> Comente seu tempo: 5 min, 1 dia ou não tenho.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #condominio #manutencaodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: WARN · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Post único 1080x1350. Responder todos os comentários na primeira hora.</p>
+          <h4>Por que existe</h4><p>Comentários dão as palavras exatas do público (insumo para ganchos) e sinalizam interesse; pergunta concreta com 3 opções reduz a fricção de responder.</p>
+          <h4>Reaproveitamento</h4><p>Stories com enquete das 3 opções; melhores respostas viram Reel de resposta a comentário.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R10">
+  <details>
+    <summary>
+      <span class="pid reel">R10</span>
+      <span class="ptitle"><b>Relatório não é burocracia</b><small>Reel · Identificação · sáb 28/11</small></span>
+      <span class="metric">Envios e comentários (opinião gera conversa)</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mudar a percepção do relatório de “papelada” para argumento de valor, tirando o piscineiro da disputa só por preço.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro que já perdeu ou tem medo de perder cliente para alguém mais barato e acha relatório perda de tempo.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Relatório não é burocracia. É o que segura o seu preço.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>O piscineiro mais barato não tem o que você manda depois da visita.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Piscineiro (ou fundador) em plano fechado, na beira da piscina, direto para a câmera, sem introdução.</td><td>Relatório não é burocracia. É o seu argumento contra o piscineiro mais barato.<br></td><td>Relatório não é burocracia.<br></td></tr><tr><td class="t">3–10s</td><td>Plano aberto: ele andando ao redor da piscina limpa e vazia de gente.</td><td>Pensa do lado do cliente. Ele não fica olhando você trabalhar. Ele vê a piscina limpa... E a mensalidade.<br></td><td>O cliente vê: piscina limpa + mensalidade<br></td></tr><tr><td class="t">10–17s</td><td>Volta ao plano fechado, tom mais sério.</td><td>Aí aparece alguém cobrando menos. O que ele compara? Preço com preço. Porque o seu trabalho ficou invisível.<br></td><td>Trabalho invisível = disputa por preço<br></td></tr><tr><td class="t">17–26s</td><td>Inserção de tela do app: relatório (07-relatorio) rolando devagar — horário, inspeção, medições, fotos antes/depois, produtos, recomendações.</td><td>Agora imagina que, em toda visita, ele recebeu isso: horário, medição da água, foto de antes e depois, o que foi aplicado, o que precisa de atenção.<br></td><td>O que ele passa a ver<br></td></tr><tr><td class="t">26–34s</td><td>Plano fechado.</td><td>A conversa muda. Não é mais um preço contra outro. É um serviço que ele enxerga contra um que ele não conhece.<br></td><td>Serviço que ele enxerga x serviço que ele não conhece<br></td></tr><tr><td class="t">34–40s</td><td>Plano fechado, tom honesto.</td><td>Não garante que ninguém vai sair. Mas tira você da briga só por preço.<br></td><td>Sai da briga só por preço<br></td></tr><tr><td class="t">40–45s</td><td>Ele mostra o celular na tela 06-finalizado com o botão do WhatsApp.</td><td>Mandar o relatório leva um toque no seu WhatsApp. Ficar invisível sai bem mais caro. Concorda ou discorda? Comenta aí.<br></td><td>Concorda? Comenta. | 14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R10">Relatório não é burocracia.<br><br>O cliente não fica olhando você trabalhar. Ele vê a piscina limpa e a mensalidade. Quando aparece alguém cobrando menos, ele compara preço com preço, porque o seu trabalho ficou invisível.<br><br>Quando toda visita vira um registro com horário, medição da água, fotos e o que foi aplicado, a comparação muda: é um serviço que ele enxerga contra um que ele não conhece.<br><br>Não é garantia de nada. Mas tira você da briga só por preço.<br><br>Se você é piscineiro e vive de manutenção de piscina, sabe do que estou falando.<br><br>Concorda ou discorda? Quero ler sua opinião nos comentários.</div>
+          <button class="copy" type="button" data-target="cap-R10">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Relatório não é burocracia.<br><br>O cliente não fica olhando você trabalhar. Ele vê a piscina limpa e a mensalidade. Quando aparec…</div>
+          <p class="small"><b>Chamada:</b> Comente sua opinião. Teste 14 dias grátis — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina #precificacao</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração estimada: 42–45s. Formato opinião: talking head com 2 enquadramentos (fechado e aberto), cortes secos a cada frase, zoom leve nas frases-chave. Legendas grandes palavra por palavra, frase-chave em espuma #5EEAD4. Som: sem música ou com fundo muito discreto; a voz é o conteúdo. Gravar em campo, com som direto limpo (microfone de lapela).</p>
+          <h4>Por que existe</h4><p>Mecanismo de opinião/posicionamento: tese clara gera comentários e envios. Sustentado pela pesquisa: falta de comunicação é uma das maiores queixas dos donos de piscina; medo de reajustar preço; concorrentes mais baratos com funções parecidas no mercado (sem citá-los). Reforça a promessa “Cada visita com prova” e evita promessa de resultado (frase explícita “não garante”).</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo corte. Estático: frase do gancho em arte quote. Stories: enquete “Relatório é: Burocracia / Argumento de venda”.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C04">
+  <details>
+    <summary>
+      <span class="pid carr">C04</span>
+      <span class="ptitle"><b>O relatório que seu cliente recebe</b><small>Carrossel · Produto · sáb 28/11</small></span>
+      <span class="metric">Visitas ao perfil e cliques no link</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar, com telas reais, exatamente o que o cliente recebe depois de cada visita, para o piscineiro se imaginar entregando isso.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros e empresas de manutenção avaliando ferramentas; seguidores que já viram o R01.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Capa: &quot;O relatório que seu cliente recebe&quot; — &quot;Depois de cada visita. Com a sua marca.&quot;</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C04/01.png" alt="O relatório que seu cliente recebe, slide 1" loading="lazy" width="200" height="250"><img src="artes/C04/02.png" alt="O relatório que seu cliente recebe, slide 2" loading="lazy" width="200" height="250"><img src="artes/C04/03.png" alt="O relatório que seu cliente recebe, slide 3" loading="lazy" width="200" height="250"><img src="artes/C04/04.png" alt="O relatório que seu cliente recebe, slide 4" loading="lazy" width="200" height="250"><img src="artes/C04/05.png" alt="O relatório que seu cliente recebe, slide 5" loading="lazy" width="200" height="250"><img src="artes/C04/06.png" alt="O relatório que seu cliente recebe, slide 6" loading="lazy" width="200" height="250"><img src="artes/C04/07.png" alt="O relatório que seu cliente recebe, slide 7" loading="lazy" width="200" height="250"><img src="artes/C04/08.png" alt="O relatório que seu cliente recebe, slide 8" loading="lazy" width="200" height="250"></div><p class="note">8 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C04/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C04">É isso que seu cliente recebe depois de cada visita de manutenção de piscina.<br><br>-&gt; Relatório com a sua logo, sua cor e protocolo<br>-&gt; Fotos de antes e depois<br>-&gt; Medições da água (pH, cloro, alcalinidade e outras), comparadas com as faixas que a sua empresa definiu<br>-&gt; Serviços feitos e produtos aplicados<br>-&gt; Espaço para o cliente registrar que viu<br><br>Você finaliza a visita e envia o link pelo seu WhatsApp, em um toque.<br><br>E no portal do cliente fica tudo: próximas visitas, evolução da água em gráfico e histórico de relatórios. Notas internas não aparecem lá.<br><br>Quer mandar isso já na próxima visita? 14 dias grátis, sem cartão. Link na bio.<br></div>
+          <button class="copy" type="button" data-target="cap-C04">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> É isso que seu cliente recebe depois de cada visita de manutenção de piscina.<br><br>-&gt; Relatório com a sua logo, sua cor e protoco…</div>
+          <p class="small"><b>Chamada:</b> Teste 14 dias grátis e mande o primeiro relatório na próxima visita — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #relatoriodevisita #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: WARN · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Carrossel 1080x1350, 8 slides, telas reais em moldura de celular sobre fundo claro #F5F8FA; numeração no kicker guia a leitura. Um único slide de texto (05) em azul para quebrar o ritmo antes do portal.</p>
+          <h4>Por que existe</h4><p>Prova de produto com telas reais (06, 07, 05, 07b, 08), sem exagero. Mostra o diferencial do posicionamento (&quot;cada visita com prova&quot;) e responde à queixa documentada de falta de comunicação com o dono da piscina. Envio descrito corretamente: pelo WhatsApp do próprio profissional, em 1 toque.</p>
+          <h4>Reaproveitamento</h4><p>Reel: rolagem real do relatório no celular com narração (30 s). Stories: S02. Destaque fixo &quot;Relatório&quot; no perfil.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="S06">
+  <details>
+    <summary>
+      <span class="pid story">S06</span>
+      <span class="ptitle"><b>Bastidores: a visita vira relatório</b><small>Stories · Produto · sáb 28/11</small></span>
+      <span class="metric">cliques no link</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar o produto em uso real, sem cara de anúncio, e medir interesse por enquete.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Acabei a visita. Olha o que o cliente recebe.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Story</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">Story 1</td><td>Vídeo curto na beira da piscina, celular na mão.</td><td>Acabei a visita aqui. Olha o que o cliente recebe.<br></td><td>Bastidor de hoje<br></td></tr><tr><td class="t">Story 2</td><td>Gravação de tela: botão Finalizar e tela Atendimento finalizado.</td><td></td><td>1 toque: finalizado<br></td></tr><tr><td class="t">Story 3</td><td>Gravação de tela: relatório aberto com medições e fotos.</td><td></td><td>Relatório com logo, medições e antes/depois<br></td></tr><tr><td class="t">Story 4</td><td>Fundo da marca.</td><td></td><td>Enquete: você manda relatório para o cliente hoje? (Sim, sempre / Às vezes / Nunca)<br></td></tr><tr><td class="t">Story 5</td><td>Fundo da marca.</td><td></td><td>Quer testar? 14 dias grátis (figurinha de link para ondaro.vercel.app)<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-S06"></div>
+          <button class="copy" type="button" data-target="cap-S06">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> …</div>
+          <p class="small"><b>Chamada:</b> Toque no link e teste 14 dias grátis.</p>
+          
+          
+        </section>
+        <section><h4>Edição</h4><p>5 stories; gravações de tela reais do app, sem dados de clientes de verdade (use conta de demonstração).</p>
+          <h4>Por que existe</h4><p>Stories servem para profundidade com quem já segue; mostrar o produto funcionando reduz a dúvida &#x27;é complicado?&#x27;.</p>
+          <h4>Reaproveitamento</h4><p>Destaque fixo &#x27;Como funciona&#x27;.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="E05">
+  <details>
+    <summary>
+      <span class="pid stat">E05</span>
+      <span class="ptitle"><b>Visita sem registro × com registro</b><small>Estático · Produto · sáb 28/11</small></span>
+      <span class="metric">salvamentos</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar o contraste entre o jeito antigo e o jeito com registro, abrindo caminho para o produto.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros que ainda usam caderno, memória ou fotos soltas na galeria</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Visita sem registro × visita com registro</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/E05/01.png" alt="Visita sem registro × com registro, slide 1" loading="lazy" width="200" height="250"></div><p class="note">1 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/E05/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-E05">A visita é a mesma. O que muda é o que sobra dela.<br><br>Sem registro, sobra a sua palavra. Com registro, sobra um relatório com data, horário, pH, cloro, alcalinidade, serviços feitos e fotos de antes e depois.<br><br>Quando o cliente pergunta, um responde com áudio de dois minutos. O outro manda um link.<br><br>Ondaro: gestão da manutenção de piscina para piscineiro autônomo e empresa.<br><br>No Ondaro, o relatório sai quando você finaliza a visita no celular e vai pelo seu WhatsApp em um toque. 14 dias grátis, link na bio.</div>
+          <button class="copy" type="button" data-target="cap-E05">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> A visita é a mesma. O que muda é o que sobra dela.<br><br>Sem registro, sobra a sua palavra. Com registro, sobra um relatório com d…</div>
+          <p class="small"><b>Chamada:</b> Salve para lembrar na próxima visita. Link na bio para testar.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #relatorio</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Post único 1080x1350.</p>
+          <h4>Por que existe</h4><p>Comparação antes/depois é um formato de fácil leitura e salvamento; conecta a dor documentada (cliente que diz que ninguém veio) ao produto.</p>
+          <h4>Reaproveitamento</h4><p>Vira Reel de tela dividida (R08) e slide de carrossel.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R03">
+  <details>
+    <summary>
+      <span class="pid reel">R03</span>
+      <span class="ptitle"><b>O que o cliente vê x o que você fez</b><small>Reel · Identificação · dom 29/11</small></span>
+      <span class="metric">Envios por alcance e curtidas</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Fazer rir e gerar identificação com o trabalho invisível do piscineiro, mostrando o relatório como o que torna esse trabalho visível.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros autônomos (e, como efeito, donos de piscina que veem o vídeo compartilhado).</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Piscina limpa não prova nada para o seu cliente.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Ninguém te conta: cliente não vê química, vê água parada.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Tela dividida. Esquerda: piscina limpa, parada, plano fixo. Direita: piscineiro escovando a parede com força.</td><td></td><td>O que o cliente vê | O que você fez<br></td></tr><tr><td class="t">3–11s</td><td>Esquerda continua imóvel (mesmo plano, só a água mexendo). Direita: cortes secos — cesto do skimmer cheio de folha, aspiração, retrolavagem, kit de teste na água, piscineiro enxugando a testa.</td><td></td><td>Esquerda: &quot;piscina&quot; | Direita: escovou - aspirou - limpou o skimmer - fez retrolavagem - mediu a água<br></td></tr><tr><td class="t">11–15s</td><td>Ator fazendo o cliente (cena encenada) olha a piscina, de braços cruzados.</td><td>Cliente: &quot;Ué... Nem parece que mexeu.&quot;<br></td><td>Cena comum 🙃<br></td></tr><tr><td class="t">15–17s</td><td>Piscineiro olha para a câmera, sem falar nada. Pausa cômica.</td><td></td><td><br></td></tr><tr><td class="t">17–23s</td><td>O mesmo cliente recebe no celular o relatório (tela 07-relatorio, depois 05-fotos com antes/depois e lista de serviços).</td><td>Cliente: &quot;Ah... Tudo isso?&quot;<br></td><td>Agora ele vê.<br></td></tr><tr><td class="t">23–28s</td><td>Piscineiro guardando o material, fala para a câmera.</td><td>Piscina limpa sem prova é só piscina limpa. Com relatório, é serviço.<br></td><td>Cada visita com prova - Ondaro<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R03">O que o cliente vê: uma piscina limpa.<br>O que você fez: escovou, aspirou, limpou o skimmer, fez retrolavagem, mediu a água, conferiu a bomba...<br><br>E o comentário? &quot;Nem parece que mexeu.&quot; 🙃<br><br>O trabalho bem feito é invisível. Por isso ele precisa de registro.<br><br>No Ondaro, cada visita vira um relatório com fotos de antes e depois, serviços e medições. Você manda pelo seu WhatsApp em um toque, e o cliente finalmente vê o que pagou.<br><br>Marca aquele piscineiro que já ouviu essa frase.<br></div>
+          <button class="copy" type="button" data-target="cap-R03">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> O que o cliente vê: uma piscina limpa.<br>O que você fez: escovou, aspirou, limpou o skimmer, fez retrolavagem, mediu a água, co…</div>
+          <p class="small"><b>Chamada:</b> Marque um piscineiro que já ouviu &quot;nem parece que mexeu&quot;.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #humorpiscineiro #piscina #manutencaodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: WARN · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração: 25–28 s. Humor no contraste: lado esquerdo propositalmente parado e silencioso, lado direito acelerado com som de esforço (escova, água, respiração). Pausa de 1–2 s antes da virada. Legendas grandes. Gravação original; o &quot;cliente&quot; é ator/colega, sem apresentar como caso real.</p>
+          <h4>Por que existe</h4><p>Humor + identificação: o formato &quot;o que veem x o que eu faço&quot; é fácil de entender sem som e gera marcações/envios. Sustentado pela dor documentada de que a falta de comunicação é uma das maiores queixas dos donos de piscina. Usa vídeo de limpeza real, que no nicho costuma prender atenção (vídeos &quot;satisfatórios&quot; de limpeza viralizam).</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo vídeo, com texto &quot;Ninguém vê o que o piscineiro faz&quot;. Stories: corte de 10 s + enquete &quot;Já ouviu isso?&quot;. Estático: frase final como quote.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C03">
+  <details>
+    <summary>
+      <span class="pid carr">C03</span>
+      <span class="ptitle"><b>Mito ou verdade da piscina</b><small>Carrossel · Educação · dom 29/11</small></span>
+      <span class="metric">Envios por alcance e salvamentos</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Corrigir 4 crenças comuns de donos de piscina com fontes, e mostrar que medir e registrar acaba com o chute — conteúdo para salvar e mandar ao cliente.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros que precisam explicar essas coisas ao cliente; donos de piscina curiosos.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Capa: &quot;Mito ou verdade? 4 coisas que seu cliente jura que é verdade&quot;.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C03/01.png" alt="Mito ou verdade da piscina, slide 1" loading="lazy" width="200" height="250"><img src="artes/C03/02.png" alt="Mito ou verdade da piscina, slide 2" loading="lazy" width="200" height="250"><img src="artes/C03/03.png" alt="Mito ou verdade da piscina, slide 3" loading="lazy" width="200" height="250"><img src="artes/C03/04.png" alt="Mito ou verdade da piscina, slide 4" loading="lazy" width="200" height="250"><img src="artes/C03/05.png" alt="Mito ou verdade da piscina, slide 5" loading="lazy" width="200" height="250"><img src="artes/C03/06.png" alt="Mito ou verdade da piscina, slide 6" loading="lazy" width="200" height="250"><img src="artes/C03/07.png" alt="Mito ou verdade da piscina, slide 7" loading="lazy" width="200" height="250"><img src="artes/C03/08.png" alt="Mito ou verdade da piscina, slide 8" loading="lazy" width="200" height="250"></div><p class="note">8 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C03/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C03">Mito ou verdade? Quantas dessas você já ouviu do cliente hoje?<br><br>1. &quot;Cheiro forte é cloro demais.&quot; Mito. O cheiro vem das cloraminas, cloro que reagiu com suor e urina (Folha PE).<br>2. &quot;Olho vermelho é culpa do cloro.&quot; Depende. Sem teste, é chute.<br>3. &quot;Gelatina limpa piscina.&quot; Receita caseira não é tratamento.<br>4. &quot;Joga tudo junto que é mais rápido.&quot; Mito. Aplicar todos os produtos juntos atrapalha (Olhar Digital).<br><br>Dose, ordem e intervalo: sempre o rótulo do fabricante.<br><br>Todo mito desses nasce da falta de medição. Quando o cliente vê o pH e o cloro no relatório, a conversa muda.<br><br>Dica para quem é piscineiro e faz manutenção de piscina toda semana.<br><br>Manda pro cliente que jura que é o cloro 😄</div>
+          <button class="copy" type="button" data-target="cap-C03">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Mito ou verdade? Quantas dessas você já ouviu do cliente hoje?<br><br>1. &quot;Cheiro forte é cloro demais.&quot; Mito. O cheiro vem das clor…</div>
+          <p class="small"><b>Chamada:</b> Envie para o cliente (ou amigo) que jura que é o cloro.</p>
+          <p class="small"><b>Hashtags:</b> #piscina #piscineiro #tratamentodepiscina #cloro #manutencaodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Carrossel 1080x1350, 8 slides. Selo grande &quot;MITO&quot; / &quot;DEPENDE&quot; no kicker de cada slide 2–5 (cor espuma para mito, raia para depende). Fontes em corpo pequeno no fim do body. Slide 7 com tela real 07b-relatorio-agua.</p>
+          <h4>Por que existe</h4><p>Formato mito/verdade gera curiosidade e envio. Todas as afirmações vêm de evidências do briefing: cloraminas (Folha PE), aplicar tudo junto atrapalha (Olhar Digital), receitas caseiras circulam em portais. O item &quot;olho vermelho&quot; é tratado com cautela (&quot;depende&quot;) por não haver fonte específica. Sem dosagem.</p>
+          <h4>Reaproveitamento</h4><p>Reel/TikTok: piscineiro respondendo &quot;mito ou verdade&quot; com placas, um item a cada 5 s. Stories: 4 quizzes em sequência com a resposta no story seguinte.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="S03">
+  <details>
+    <summary>
+      <span class="pid story">S03</span>
+      <span class="ptitle"><b>Quebra de objeções</b><small>Stories · Conversão · dom 29/11</small></span>
+      <span class="metric">Cliques no link (sticker de link)</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Responder de forma honesta as quatro objeções mais comuns ao app (tempo, preço, cliente que não liga, internet ruim) e levar quem já segue o perfil ao teste grátis.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores que já viram o Ondaro e ainda não testaram.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>O que te impede de testar? Vota aqui.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Story</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">Story 1</td><td>Foto do piscineiro na beira da piscina, celular na mão, fundo #06263A na metade de baixo.</td><td></td><td>Texto: &quot;Sendo bem sincero: o que te trava pra usar um app nas visitas?&quot; | Enquete (4 opções): &quot;Falta de tempo&quot; / &quot;Preço&quot; / &quot;Meu cliente não liga&quot; / &quot;Internet ruim&quot;<br></td></tr><tr><td class="t">Story 2</td><td>Gravação de tela curta do atendimento (03-inspecao), dedo tocando Normal/Atenção/Problema.</td><td>(opcional, voz do fundador) &quot;Tempo: o atendimento segue a ordem da visita. Você toca, mede, fotografa e o relatório sai quando você finaliza.&quot;<br></td><td>Título: &quot;Não tenho tempo.&quot; | Texto: &quot;O app segue a ordem da visita: inspeção, água, serviço, produto, foto. O relatório sai ao finalizar.&quot; | Sticker deslizante: &quot;Parece rápido?&quot;<br></td></tr><tr><td class="t">Story 3</td><td>Arte simples, fundo claro #F5F8FA.</td><td></td><td>Título: &quot;É caro?&quot; | Texto: &quot;Profissional: R$129/mês, até 3 usuários. Empresa: R$299/mês, até 30. E dá pra testar 14 dias grátis, sem cartão, antes de decidir.&quot; | Enquete: &quot;Vale testar?&quot; Sim / Ainda não<br></td></tr><tr><td class="t">Story 4</td><td>Tela do portal do cliente (08-portal) em moldura de celular.</td><td></td><td>Título: &quot;Meu cliente não liga pra relatório.&quot; | Texto: &quot;Até o dia em que ele acha que ninguém veio. Com o relatório e o portal, ele vê visitas, fotos e a evolução da água sem te ligar.&quot; | Caixa de perguntas: &quot;Qual reclamação de cliente mais te irrita?&quot;<br></td></tr><tr><td class="t">Story 5</td><td>Vídeo curto: celular sem sinal (ícone de sem serviço visível) na casa de máquinas, atendimento sendo preenchido normalmente.</td><td></td><td>Título: &quot;No quintal não pega sinal.&quot; | Texto: &quot;Funciona sem internet. O rascunho fica salvo no aparelho e sincroniza quando o sinal voltar.&quot;<br></td></tr><tr><td class="t">Story 6</td><td>Fundo azul #0B6E99, símbolo do anel com onda.</td><td></td><td>Título: &quot;Testa e tira a dúvida na prática.&quot; | Sticker de link: &quot;Testar 14 dias grátis&quot; (ondaro.vercel.app) | Texto pequeno: &quot;Sem cartão.&quot; | Caixa de perguntas: &quot;Ficou alguma dúvida? Manda aqui.&quot;<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-S03"></div>
+          <button class="copy" type="button" data-target="cap-S03">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> …</div>
+          <p class="small"><b>Chamada:</b> Testar 14 dias grátis, sem cartão (sticker de link).</p>
+          
+          
+        </section>
+        <section><h4>Edição</h4><p>6 stories, 5–7s cada (os de vídeo até 10s). Fundo e tipografia da marca (Manrope ExtraBold nos títulos). Cada story responde exatamente uma objeção, na mesma ordem das opções da enquete. Responder as caixas de perguntas nos dias seguintes, em stories separados.</p>
+          <h4>Por que existe</h4><p>Mecanismo de conversão por objeção: stories alcançam principalmente quem já segue, público mais quente. As objeções vêm da pesquisa (apps lentos/difíceis de configurar; cliente que diz “ninguém veio”; falta de comunicação) e de fatos do produto (preços oficiais, 14 dias sem cartão, funcionamento offline). A enquete inicial gera dado real sobre qual objeção pesa mais, para orientar próximas peças.</p>
+          <h4>Reaproveitamento</h4><p>Cada objeção vira um Reel curto de 15s (“Não tenho tempo”, “É caro”, “Meu cliente não liga”, “No quintal não pega sinal”). Resultado da enquete vira post de bastidor. Destaque fixo “Dúvidas” no perfil.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="E02">
+  <details>
+    <summary>
+      <span class="pid stat">E02</span>
+      <span class="ptitle"><b>Dado ANAPP: 3,5 milhões de piscinas</b><small>Estático · Descoberta · dom 29/11</small></span>
+      <span class="metric">Envios e visitas ao perfil</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Gerar autoridade e reflexão com um dado de mercado citado com fonte, provocando o piscineiro a pensar em padrão, não só em volume.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros e donos de empresa de manutenção, inclusive não seguidores alcançados pelo Explorar.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>O Brasil tem mais de 3,5 milhões de piscinas. Quantas você atende com padrão?</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/E02/01.png" alt="Dado ANAPP: 3,5 milhões de piscinas, slide 1" loading="lazy" width="200" height="250"></div><p class="note">1 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/E02/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-E02">O Brasil tem mais de 3,5 milhões de piscinas, segundo a ANAPP (dado divulgado pela imprensa).<br><br>Piscina não falta. O que separa um piscineiro do outro é o padrão: chegar no dia combinado, medir a água, registrar o que fez, mostrar para o cliente.<br><br>Quem atende com padrão não disputa só preço. Disputa confiança.<br><br>E aí: quantas das suas piscinas têm histórico de cada visita hoje?<br><br>Manda pra quem trabalha com você.<br></div>
+          <button class="copy" type="button" data-target="cap-E02">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> O Brasil tem mais de 3,5 milhões de piscinas, segundo a ANAPP (dado divulgado pela imprensa).<br><br>Piscina não falta. O que separ…</div>
+          <p class="small"><b>Chamada:</b> Comente quantas piscinas você atende hoje.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina #mercadodepiscinas</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Arte única 1080x1350, fundo abismo #06263A, “3,5 milhões” em espuma #5EEAD4. Pergunta em branco, menor, com bastante respiro. Fonte discreta no rodapé, legível. Símbolo do anel com onda pequeno no canto inferior.</p>
+          <h4>Por que existe</h4><p>Mecanismo de autoridade + pergunta aberta (comentários). Dado com fonte explícita conforme o briefing (ANAPP via imprensa, sem data — por isso “via imprensa” fica no slide). Reforça o posicionamento “padrão profissional” sem prometer resultado. Peça simples, de alto potencial de envio entre colegas.</p>
+          <h4>Reaproveitamento</h4><p>Stories: repostar com caixa “Quantas piscinas você atende?”. Reel curto: piscineiro falando o dado para a câmera em 7s e fazendo a pergunta. Abertura de carrossel sobre padrão de atendimento.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R12">
+  <details>
+    <summary>
+      <span class="pid reel">R12</span>
+      <span class="ptitle"><b>Água turva depois da chuva</b><small>Reel · Educação · seg 30/11</small></span>
+      <span class="metric">Salvamentos e envios</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Ensinar a ordem certa de verificação depois da chuva (olhar, equipamento, testar, registrar, só então tratar), posicionando o piscineiro como quem investiga antes de jogar produto.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros, especialmente iniciantes, e donos de piscina no verão chuvoso.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>3 coisas para verificar na piscina turva antes de qualquer produto.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Choveu e a água ficou turva? Não comece pelo produto.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Piscina turva depois da chuva, folhas boiando, céu ainda nublado. Piscineiro entra no quadro.</td><td>Choveu e a piscina amanheceu turva? Não comece pelo produto.<br></td><td>Água turva depois da chuva: o que verificar primeiro<br></td></tr><tr><td class="t">3–10s</td><td>Close: folhas, terra na borda, marca de enxurrada perto do deck, nível da água alto no skimmer.</td><td>Primeiro, olha. Entrou terra ou enxurrada? Tem muita folha? O nível subiu demais? Isso muda tudo o que vem depois.<br></td><td>1. Olhe antes de mexer<br></td></tr><tr><td class="t">10–17s</td><td>Casa de máquinas: piscineiro abre o pré-filtro, mostra o cesto cheio, olha o manômetro do filtro.</td><td>Segundo, equipamento. Cesto entupido, bomba parada por falta de energia, filtro sujo. Sem filtração funcionando, nenhum produto resolve.<br></td><td>2. Bomba e filtro funcionando?<br></td></tr><tr><td class="t">17–25s</td><td>Kit de teste na mão, coletando amostra com o braço inteiro dentro da água.</td><td>Terceiro, testa a água. Chuva traz sujeira e pode desequilibrar o pH e o cloro. Sem medir, você está chutando.<br></td><td>3. Teste pH, cloro e alcalinidade<br></td></tr><tr><td class="t">25–31s</td><td>Celular: medições digitadas (04-agua) e foto do “antes” sendo tirada (05-fotos).</td><td>Quarto, registra o antes. Foto e medição. Se o cliente perguntar depois, você mostra como encontrou.<br></td><td>4. Registre o antes<br></td></tr><tr><td class="t">31–38s</td><td>Piscineiro com uma embalagem fechada na mão, lendo o rótulo.</td><td>Só aí você decide o tratamento. Seguindo o rótulo do fabricante e um produto de cada vez, nunca tudo junto.<br></td><td>5. Só então trate (siga o fabricante, nunca misture)<br></td></tr><tr><td class="t">38–43s</td><td>Piscineiro para a câmera, segurando o celular.</td><td>Olhar, equipamento, testar, registrar, tratar. Salva pra próxima chuva.<br></td><td>Salve para a próxima chuva<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R12">Choveu e a água ficou turva? Antes de abrir qualquer embalagem:<br><br>1. Olhe: entrou terra, enxurrada, muita folha? O nível subiu?<br>2. Equipamento: bomba ligada, cesto limpo, filtro funcionando?<br>3. Teste a água: pH, cloro e alcalinidade. Chuva traz sujeira e pode desequilibrar a água.<br>4. Registre o antes: foto e medição.<br>5. Só então trate, seguindo o rótulo do fabricante e um produto de cada vez. Nunca misture produtos.<br><br>Cada piscina é um caso. Quem testa antes de tratar não trabalha no chute.<br><br>Dica para quem é piscineiro e faz manutenção de piscina toda semana.<br><br>Salva pra próxima chuva e manda pro colega. 🌧️</div>
+          <button class="copy" type="button" data-target="cap-R12">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Choveu e a água ficou turva? Antes de abrir qualquer embalagem:<br><br>1. Olhe: entrou terra, enxurrada, muita folha? O nível subiu…</div>
+          <p class="small"><b>Chamada:</b> Salve o vídeo e siga para mais conteúdo de manutenção de piscina.</p>
+          <p class="small"><b>Hashtags:</b> #piscina #aguaturva #tratamentodepiscina #piscineiro #manutencaodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração estimada: 40–43s. Gravado em campo, logo depois de uma chuva real (a imagem da água turva é o gancho). Número do passo grande no canto a cada bloco. Cortes secos, ritmo de checklist. Som: chuva/ambiente no começo, batida leve depois. Nenhuma embalagem com marca aparente em close; nenhuma quantidade de produto em tela ou fala.</p>
+          <h4>Por que existe</h4><p>Mecanismo de utilidade sazonal (verão = chuva e crise de água turva/verde, segundo o briefing). Apoia-se na evidência de que a água turva/verde nem sempre é só falta de cloro (Olhar Digital, 21/08/2026) e de que aplicar todos os produtos juntos atrapalha (Olhar Digital). Sem dosagem, com reforço de segurança (seguir o fabricante, não misturar). Conecta naturalmente ao registro do “antes”, sem virar propaganda.</p>
+          <h4>Reaproveitamento</h4><p>Carrossel “5 passos depois da chuva”. Stories: quiz “Choveu. Qual o primeiro passo?”. TikTok/Shorts: mesmo corte, postar logo após previsão de chuva forte na região.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C07">
+  <details>
+    <summary>
+      <span class="pid carr">C07</span>
+      <span class="ptitle"><b>6 parâmetros que todo cliente deveria ver</b><small>Carrossel · Educação · seg 30/11</small></span>
+      <span class="metric">Salvamentos e envios</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Ensinar, em linguagem simples, o que cada parâmetro significa, para o piscineiro usar o conteúdo com o cliente e entender por que vale mostrar as medições no relatório.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros (para salvar e mandar ao cliente) e donos de piscina curiosos.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>6 parâmetros que todo cliente deveria ver no relatório.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C07/01.png" alt="6 parâmetros que todo cliente deveria ver, slide 1" loading="lazy" width="200" height="250"><img src="artes/C07/02.png" alt="6 parâmetros que todo cliente deveria ver, slide 2" loading="lazy" width="200" height="250"><img src="artes/C07/03.png" alt="6 parâmetros que todo cliente deveria ver, slide 3" loading="lazy" width="200" height="250"><img src="artes/C07/04.png" alt="6 parâmetros que todo cliente deveria ver, slide 4" loading="lazy" width="200" height="250"><img src="artes/C07/05.png" alt="6 parâmetros que todo cliente deveria ver, slide 5" loading="lazy" width="200" height="250"><img src="artes/C07/06.png" alt="6 parâmetros que todo cliente deveria ver, slide 6" loading="lazy" width="200" height="250"><img src="artes/C07/07.png" alt="6 parâmetros que todo cliente deveria ver, slide 7" loading="lazy" width="200" height="250"><img src="artes/C07/08.png" alt="6 parâmetros que todo cliente deveria ver, slide 8" loading="lazy" width="200" height="250"></div><p class="note">8 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C07/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C07">Seu cliente paga todo mês para cuidar da água. Ele sabe o que está sendo medido?<br><br>Os 6 parâmetros mais comuns, em português claro:<br>- pH: se a água está ácida ou básica<br>- Cloro livre: o cloro que ainda está desinfetando<br>- Cloro total: livre + combinado (a diferença está ligada ao cheiro forte)<br>- Alcalinidade: o amortecedor do pH<br>- Dureza cálcica: quanto cálcio tem na água<br>- Ácido cianúrico: o protetor do cloro contra o sol<br><br>Faixa ideal? Quem define é você e a referência técnica que você segue, não um post de internet.<br><br>Dica para quem é piscineiro e faz manutenção de piscina toda semana.<br><br>Salva e manda para aquele cliente que acha que piscina é &quot;só jogar cloro&quot;.</div>
+          <button class="copy" type="button" data-target="cap-C07">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Seu cliente paga todo mês para cuidar da água. Ele sabe o que está sendo medido?<br><br>Os 6 parâmetros mais comuns, em português c…</div>
+          <p class="small"><b>Chamada:</b> Salve e envie para um cliente. Teste 14 dias grátis — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscina #tratamentodepiscina #phdapiscina #cloro #piscineiro</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>8 slides. Capa escura; slides 2 a 6 claros, com o nome do parâmetro em destaque no kicker e um ícone simples de gota numerado. Slide 7 com a tela real 07b-relatorio-agua em moldura de celular. Nada de números de faixa na arte. Último slide escuro com botão.</p>
+          <h4>Por que existe</h4><p>Mecanismo de utilidade compartilhável: o piscineiro manda para o cliente, o que gera envios (sinal forte com não seguidores, segundo Mosseri). Responde à dor documentada de falta de comunicação com o dono da piscina. Usa a evidência das cloraminas (Folha PE) e respeita a regra do produto: o app não define limites técnicos — as faixas são configuradas pela empresa. Sem dosagem e sem números de faixa.</p>
+          <h4>Reaproveitamento</h4><p>Reel: “O que significa cada número do relatório”, 6 cortes rápidos apontando para a tela 07b-relatorio-agua. TikTok: série “1 parâmetro por dia”. Stories: quiz “O que o cloro total mede?”.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="S02">
+  <details>
+    <summary>
+      <span class="pid story">S02</span>
+      <span class="ptitle"><b>Tour do Ondaro em 5 telas</b><small>Stories · Produto · seg 30/11</small></span>
+      <span class="metric">Cliques no link</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar o fluxo principal do app em 5 telas reais e levar quem se interessou ao teste grátis pelo link.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores que já conhecem o perfil e ainda não testaram.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Story 1: &quot;Do agendamento ao relatório: 5 telas. Toca pra passar →&quot;</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Story</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">Story 1</td><td>Tela real 02-agenda em moldura de celular sobre fundo #06263A.</td><td></td><td>Do agendamento ao relatório: 5 telas. 1 - Agenda com recorrência (toda terça e sexta às 8h, por exemplo), aviso de conflito e rota no Maps/Waze.<br></td></tr><tr><td class="t">Story 2</td><td>Tela real 03-inspecao.</td><td></td><td>2 - Inspeção: cada item como Normal, Atenção, Problema ou Não verificado. | Enquete: &quot;Você faz checklist na visita?&quot;, &quot;Sempre&quot; / &quot;De cabeça&quot;<br></td></tr><tr><td class="t">Story 3</td><td>Tela real 04-agua.</td><td></td><td>3 - Água: pH, cloro, alcalinidade e mais, comparados com as faixas que VOCÊ configura.<br></td></tr><tr><td class="t">Story 4</td><td>Tela real 05-fotos.</td><td></td><td>4 - Fotos de antes e depois, direto no atendimento. Funciona até sem internet.<br></td></tr><tr><td class="t">Story 5</td><td>Tela real 07-relatorio (opcional: vídeo curto do toque no botão de WhatsApp da tela 06-finalizado).</td><td></td><td>5 - Relatório com a sua marca. Você envia pelo seu WhatsApp em 1 toque.<br></td></tr><tr><td class="t">Story 6</td><td>Fundo azul #0B6E99, símbolo Ondaro.</td><td></td><td>Testa na sua próxima visita: 14 dias grátis, sem cartão. | Figurinha de link: &quot;Testar o Ondaro&quot; -&gt; ondaro.vercel.app | Caixa de perguntas: &quot;Ficou alguma dúvida? Pergunta aqui&quot;<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-S02"></div>
+          <button class="copy" type="button" data-target="cap-S02">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> …</div>
+          <p class="small"><b>Chamada:</b> Toque no link e teste 14 dias grátis, sem cartão.</p>
+          
+          
+        </section>
+        <section><h4>Edição</h4><p>Sequência de 6 stories, 1 tela por story, texto curto no topo e moldura de celular centralizada. Fundo escuro nas telas, azul no story final. Adicionar ao destaque &quot;Como funciona&quot; depois de publicar.</p>
+          <h4>Por que existe</h4><p>Stories atingem quem já segue e está mais perto da decisão; o tour curto com telas reais mostra o fluxo (agenda, inspeção, água, fotos, relatório) sem promessa além do produto. Inclui offline e envio em 1 toque pelo WhatsApp do profissional, conforme briefing. Enquete e caixa de perguntas mantêm interação e trazem objeções para S03.</p>
+          <h4>Reaproveitamento</h4><p>Destaque fixo &quot;Como funciona&quot;. Vira Reel de tela gravada (R02 é a versão em campo). Cada story vira slide de um carrossel de produto.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="E07">
+  <details>
+    <summary>
+      <span class="pid stat">E07</span>
+      <span class="ptitle"><b>Mediu fora da faixa? O app avisa</b><small>Estático · Produto · seg 30/11</small></span>
+      <span class="metric">visitas ao perfil</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar uma tela real com um benefício concreto: o aviso de medição fora da faixa configurada pela empresa.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros técnicos e empresas com padrão de atendimento</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Mediu fora da faixa? O app avisa na hora.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/E07/01.png" alt="Mediu fora da faixa? O app avisa, slide 1" loading="lazy" width="200" height="250"></div><p class="note">1 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/E07/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-E07">Mediu fora da faixa? O app avisa na hora.<br><br>No Ondaro, cada medição (pH, cloro livre, alcalinidade e o que mais você mede) aparece ao lado da faixa que a SUA empresa definiu. Abaixo ou acima, você vê na hora e já registra a orientação.<br><br>O app não inventa limite técnico e não manda dosagem. Ele registra o que você mediu e o que você fez.<br><br>Ondaro: gestão da manutenção de piscina para piscineiro autônomo e empresa.<br><br>Teste 14 dias grátis. Link na bio.</div>
+          <button class="copy" type="button" data-target="cap-E07">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Mediu fora da faixa? O app avisa na hora.<br><br>No Ondaro, cada medição (pH, cloro livre, alcalinidade e o que mais você mede) apa…</div>
+          <p class="small"><b>Chamada:</b> Link na bio: 14 dias grátis, sem cartão.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #phdapiscina #manutencaodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Post único 1080x1350 com tela real.</p>
+          <h4>Por que existe</h4><p>Tela real gera confiança (conteúdo original, sem promessa). Reforça diferencial verificável: faixas definidas pela empresa e registro técnico.</p>
+          <h4>Reaproveitamento</h4><p>Corte de 6s no Reel R02; slide no carrossel C04.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R02">
+  <details>
+    <summary>
+      <span class="pid reel">R02</span>
+      <span class="ptitle"><b>Uma visita inteira em 60 segundos</b><small>Reel · Produto · ter 01/12</small></span>
+      <span class="metric">Tempo médio de visualização (watch time) e visitas ao perfil</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar, em POV real, que registrar a visita inteira no celular é rápido e cabe na rotina — do portão ao relatório enviado.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro que acha que &quot;app dá trabalho&quot; e empresa que quer padronizar o atendimento dos técnicos.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Relatório de piscina em 1 toque, sem papel nem caderno.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Uma visita inteira em 60 segundos. Do portão ao relatório.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>POV (câmera no peito ou na mão): portão abrindo, piscina aparece ao fundo. Cronômetro no canto da tela começa em 00:00.</td><td>Uma visita inteira em 60 segundos. Do portão ao relatório.<br></td><td>Visita completa - 60s<br></td></tr><tr><td class="t">3–9s</td><td>Tela 01-inicio → toque no próximo atendimento. Aparece a identificação: última visita e recomendações pendentes.</td><td>Abro o atendimento. Já vejo a última visita e o que ficou pendente.<br></td><td>1 - Identificação<br></td></tr><tr><td class="t">9–16s</td><td>Tela 03-inspecao: toques rápidos em Normal / Atenção / Problema. Intercalar com plano da borda e do skimmer.</td><td>Inspeção: borda, filtro, bomba. Normal, atenção ou problema.<br></td><td>2 - Inspeção<br></td></tr><tr><td class="t">16–24s</td><td>Mão com kit de teste na água; corte para tela 04-agua digitando pH e cloro, com o indicador de faixa aparecendo.</td><td>Mediu, digitou. O app compara com a faixa que a minha empresa configurou.<br></td><td>3 - Água<br></td></tr><tr><td class="t">24–32s</td><td>Escova na parede, aspirador, cesto do skimmer. Na tela, serviços marcados e produto aplicado com lote.</td><td>Serviços feitos e produto aplicado, com lote. Já sai do estoque.<br></td><td>4-5 - Serviços e produtos<br></td></tr><tr><td class="t">32–40s</td><td>Câmera do celular tirando foto de antes e depois (tela 05-fotos). Campo de recomendação: &quot;Rejunte soltando na escada&quot;.</td><td>Observação pro cliente, foto de antes e de depois.<br></td><td>6-7 - Recomendações e fotos<br></td></tr><tr><td class="t">40–50s</td><td>Tela 06-finalizado: toque em finalizar; relatório 07-relatorio abre com a marca da empresa.</td><td>Finalizo. O relatório sai com a minha marca e protocolo.<br></td><td>8 - Finalizado<br></td></tr><tr><td class="t">50–57s</td><td>Toque no botão do WhatsApp; conversa abre com o link pronto; envio. Cronômetro para.</td><td>Um toque e vai pelo meu WhatsApp.<br></td><td>Enviado pelo seu WhatsApp<br></td></tr><tr><td class="t">57–60s</td><td>Portão fechando, POV.</td><td>Próxima piscina.<br></td><td>Ondaro - 14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R02">Uma visita de manutenção de piscina inteira, do portão ao relatório. Em 60 segundos de vídeo.<br><br>(A visita leva o tempo que precisa. O que fica rápido é o registro.)<br><br>As 8 etapas no celular:<br>1. Identificação, última visita e pendências<br>2. Inspeção visual<br>3. Água, pH, cloro, alcalinidade e outros, comparados com as faixas da sua empresa<br>4. Serviços realizados<br>5. Produtos aplicados, com lote e baixa no estoque<br>6. Observações e recomendações<br>7. Fotos de antes e depois<br>8. Finalização, relatório com a sua marca<br><br>E funciona sem internet: fica salvo no aparelho e sincroniza depois.<br><br>Quer testar na sua próxima visita? 14 dias grátis, sem cartão. Link na bio.<br></div>
+          <button class="copy" type="button" data-target="cap-R02">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Uma visita de manutenção de piscina inteira, do portão ao relatório. Em 60 segundos de vídeo.<br><br>(A visita leva o tempo que pre…</div>
+          <p class="small"><b>Chamada:</b> Teste na sua próxima visita: 14 dias grátis, sem cartão — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #appparapiscineiro #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração: 60 s. Montagem acelerada (o tempo real da visita é comprimido — o cronômetro marca o vídeo, não a visita; deixar isso claro na legenda). Cortes secos sincronizados com toques na tela; som de toque/clique suave a cada etapa; som ambiente de água. Numeração das 8 etapas fixa no topo. Legendas grandes. Gravação original, vertical.</p>
+          <h4>Por que existe</h4><p>Demonstração de produto em formato POV, que segura retenção (watch time é sinal principal, Mosseri 01/2025). Responde à dor documentada de apps lentos e difíceis de configurar mostrando o fluxo real das 8 etapas. Honesto: aviso de que o vídeo é acelerado.</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo vídeo. Stories: base do S02 (tour). Carrossel: cada etapa vira um slide (futuro &quot;8 etapas da visita&quot;).</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C09">
+  <details>
+    <summary>
+      <span class="pid carr">C09</span>
+      <span class="ptitle"><b>Checklist da visita de manutenção</b><small>Carrossel · Educação · ter 01/12</small></span>
+      <span class="metric">Salvamentos</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Entregar um checklist salvável que organiza a visita inteira (inspeção, teste, limpeza, produtos, registro) e mostra que essa ordem já existe no app.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros iniciantes e intermediários e empresas que querem padronizar o trabalho dos técnicos.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Checklist da visita de manutenção. Salve e use na próxima.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C09/01.png" alt="Checklist da visita de manutenção, slide 1" loading="lazy" width="200" height="250"><img src="artes/C09/02.png" alt="Checklist da visita de manutenção, slide 2" loading="lazy" width="200" height="250"><img src="artes/C09/03.png" alt="Checklist da visita de manutenção, slide 3" loading="lazy" width="200" height="250"><img src="artes/C09/04.png" alt="Checklist da visita de manutenção, slide 4" loading="lazy" width="200" height="250"><img src="artes/C09/05.png" alt="Checklist da visita de manutenção, slide 5" loading="lazy" width="200" height="250"><img src="artes/C09/06.png" alt="Checklist da visita de manutenção, slide 6" loading="lazy" width="200" height="250"><img src="artes/C09/07.png" alt="Checklist da visita de manutenção, slide 7" loading="lazy" width="200" height="250"></div><p class="note">7 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C09/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C09">Salva esse checklist e usa na próxima visita. 📌<br><br>1. Chegada e inspeção: nível da água, bordas, cestos, bomba, filtro e casa de máquinas.<br>2. Teste da água: pH, cloro livre e total, alcalinidade, dureza e ácido cianúrico, comparando com as faixas que você usa.<br>3. Limpeza: peneirar, escovar, aspirar, esvaziar cestos, cuidar do filtro.<br>4. Produtos: rótulo do fabricante, um de cada vez, anotar o que foi aplicado e o lote.<br>5. Registro: fotos de antes e depois, recomendações e relatório para o cliente.<br><br>Faltou alguma coisa que você faz em toda visita? Comenta que eu atualizo.<br><br>Dica para quem é piscineiro e faz manutenção de piscina toda semana.<br><br>Manda para o técnico novo da equipe.</div>
+          <button class="copy" type="button" data-target="cap-C09">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Salva esse checklist e usa na próxima visita. 📌<br><br>1. Chegada e inspeção: nível da água, bordas, cestos, bomba, filtro e casa d…</div>
+          <p class="small"><b>Chamada:</b> Salve o checklist. Teste o Ondaro 14 dias grátis — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #limpezadepiscina #tratamentodepiscina #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>7 slides em fundo claro, visual de checklist imprimível (marcadores ✓ em #1391BE, muito espaço entre itens). Kicker “Etapa 1–5” sempre no mesmo lugar para criar ritmo. Capa clara com “manutenção” em destaque. Último slide escuro, com a tela 03-inspecao opcional ao fundo.</p>
+          <h4>Por que existe</h4><p>Mecanismo de utilidade salvável (checklist = salvamento e envio para equipe). Reflete as 8 etapas reais do atendimento descritas no briefing, sem dosagem e com a regra de não misturar produtos (Olhar Digital). Atende o público 2 (empresas padronizando técnicos) e reforça o posicionamento “padrão profissional” contra o achismo.</p>
+          <h4>Reaproveitamento</h4><p>PDF/arte única para destaque “Checklist”. Reel “Minha visita em 5 etapas” seguindo a mesma ordem. Stories: um story por etapa com caixa “O que você acrescentaria?”.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="S04">
+  <details>
+    <summary>
+      <span class="pid story">S04</span>
+      <span class="ptitle"><b>Configuro sua conta com você</b><small>Stories · Conversão · ter 01/12</small></span>
+      <span class="metric">Mensagens diretas com a palavra “CONFIGURAR” e cliques no link</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Oferecer ajuda real e pessoal do fundador na configuração inicial para remover a barreira de “não sei mexer” e converter interessados em teste ativo.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores interessados que ainda não começaram o teste ou começaram e não configuraram.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Configuro sua conta com você em uns 10 minutos.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Story</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">Story 1</td><td>Selfie do fundador, vídeo de 10–12s, tom de conversa.</td><td>&quot;Quero fazer uma coisa simples: configurar a sua conta do Ondaro junto com você, numa chamada rápida. Uns 10 minutos.&quot;<br></td><td>&quot;Configuro sua conta com você em ~10 minutos.&quot; | Texto pequeno: &quot;De graça. Sem compromisso.&quot; [ajustar o tempo se a configuração real levar mais]<br></td></tr><tr><td class="t">Story 2</td><td>Arte em fundo claro com 4 itens e a tela 07-relatorio pequena ao lado.</td><td></td><td>Título: &quot;O que a gente faz junto&quot; | Lista: &quot;✓ Sua logo e sua cor no relatório&quot; / &quot;✓ Seus primeiros clientes cadastrados&quot; / &quot;✓ A agenda recorrente montada&quot; / &quot;✓ As faixas da água que você usa&quot;<br></td></tr><tr><td class="t">Story 3</td><td>Fundo #06263A, texto grande.</td><td></td><td>Título: &quot;Não precisa saber mexer em sistema.&quot; | Enquete: &quot;Você prefere configurar...&quot; &quot;Sozinho&quot; / &quot;Com ajuda&quot;<br></td></tr><tr><td class="t">Story 4</td><td>Arte com 3 passos numerados.</td><td></td><td>Título: &quot;Como funciona&quot; | &quot;1. Comece o teste de 14 dias grátis, sem cartão.&quot; / &quot;2. Me mande CONFIGURAR na DM.&quot; / &quot;3. A gente marca um horário que caiba na sua rotina.&quot; | Texto pequeno: &quot;Se não servir pra você, tudo bem.&quot;<br></td></tr><tr><td class="t">Story 5</td><td>Selfie do fundador sorrindo, ou fundo azul com o símbolo.</td><td></td><td>Sticker de link: &quot;Começar teste grátis&quot; (ondaro.vercel.app) | Caixa de perguntas: &quot;Alguma dúvida antes de começar? Manda aqui.&quot;<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-S04"></div>
+          <button class="copy" type="button" data-target="cap-S04">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> …</div>
+          <p class="small"><b>Chamada:</b> Mande CONFIGURAR na DM ou comece o teste pelo link.</p>
+          
+          
+        </section>
+        <section><h4>Edição</h4><p>5 stories, 6–12s cada. Story 1 em vídeo real do fundador (sem roteiro decorado); demais em arte da marca. Sem contagem regressiva, sem “últimas vagas”, sem urgência. Repetir a sequência periodicamente enquanto o fundador conseguir atender pessoalmente.</p>
+          <h4>Por que existe</h4><p>Mecanismo de redução de atrito com ajuda humana real: a pesquisa aponta apps difíceis de configurar como dor documentada. A oferta é concreta (logo, clientes, agenda recorrente, faixas da água — todas funções reais) e não usa urgência falsa, conforme o tom da marca. A enquete mede quanto do público quer ajuda, orientando o esforço do fundador.</p>
+          <h4>Reaproveitamento</h4><p>Destaque fixo “Comece aqui”. Reel curto do fundador fazendo a oferta (15s). Resposta rápida salva no Instagram para quem mandar CONFIGURAR na DM.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="E03">
+  <details>
+    <summary>
+      <span class="pid stat">E03</span>
+      <span class="ptitle"><b>Portal do cliente</b><small>Estático · Prova · ter 01/12</small></span>
+      <span class="metric">Visitas ao perfil e cliques no link</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar a tela real do portal para provar que o cliente pode acompanhar a piscina sozinho, reduzindo ligações e cobranças de “vieram hoje?”.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros e empresas que atendem cliente exigente (condomínio, alto padrão, hotel, academia).</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Seu cliente acompanha a piscina dele sem te ligar.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/E03/01.png" alt="Portal do cliente, slide 1" loading="lazy" width="200" height="250"></div><p class="note">1 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/E03/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-E03">&quot;Quando é a próxima visita?&quot;<br>&quot;Vocês vieram essa semana?&quot;<br>&quot;Como está a água?&quot;<br><br>No portal do Ondaro, o seu cliente vê isso sozinho, por um link: próximas visitas, evolução da água em gráfico, histórico de relatórios e um botão para pedir visita ou avisar um problema.<br><br>E as suas notas internas ficam só com você, o portal nunca mostra.<br><br>Se você é piscineiro e vive de manutenção de piscina, sabe do que estou falando.<br><br>Qual dessas perguntas você mais recebe no WhatsApp?</div>
+          <button class="copy" type="button" data-target="cap-E03">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> &quot;Quando é a próxima visita?&quot;<br>&quot;Vocês vieram essa semana?&quot;<br>&quot;Como está a água?&quot;<br><br>No portal do Ondaro, o seu cliente vê isso sozi…</div>
+          <p class="small"><b>Chamada:</b> Teste 14 dias grátis e mande o portal para um cliente — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina #atendimentoaocliente</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Arte única 1080x1350, fundo claro #F5F8FA, tela real 08-portal em moldura de celular ocupando boa parte da altura. Título em Manrope ExtraBold #0B1D29, “sem te ligar” pode ir em #0B6E99. Sem selos nem setas exageradas.</p>
+          <h4>Por que existe</h4><p>Mecanismo de prova visual com tela real do produto (exigido pelo briefing para E03: type phone, img 08-portal). Responde à dor documentada de falta de comunicação com o dono da piscina e de clientes que alegam que ninguém veio. Fatos do briefing: portal mostra próximas visitas, gráfico da água, histórico, pedido de visita/problema e nunca mostra notas internas.</p>
+          <h4>Reaproveitamento</h4><p>Reel curto: tela do portal sendo navegada em 10s com as três perguntas na tela. Stories: “Seu cliente te pergunta isso?” com enquete. Slide dentro de carrossel de produto (C04/C10).</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R05">
+  <details>
+    <summary>
+      <span class="pid reel">R05</span>
+      <span class="ptitle"><b>Cena comum: perder o condomínio sem registro</b><small>Reel · Identificação · semana 2</small></span>
+      <span class="metric">Tempo médio de visualização (watch time) e envios</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Usar uma cena hipotética e verossímil para mostrar o custo de não ter registro na hora da reclamação, e como a conversa muda com relatório.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros e empresas que atendem ou querem atender condomínios, clubes e academias.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Imagina perder um condomínio por uma foto que você não tirou.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>O síndico pediu o histórico de 3 meses. Você tem em 5 minutos?</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Tela preta com texto; corte para piscina de condomínio vazia.</td><td>Imagina perder um condomínio por causa de uma foto que você não tirou.<br></td><td>Cena comum:<br></td></tr><tr><td class="t">3–9s</td><td>Celular sobre o painel do carro; chega uma mensagem do &quot;Síndico&quot; (contato encenado).</td><td>Segunda cedo, mensagem do síndico: a piscina ficou verde no fim de semana. &quot;Vocês vieram quinta?&quot;<br></td><td>&quot;Vocês vieram quinta?&quot;<br></td></tr><tr><td class="t">9–16s</td><td>Polegar rolando uma galeria lotada de fotos; corte para um caderno amassado no banco do carro.</td><td>Você veio. Mediu, limpou, deixou tudo certo. Mas a foto tá perdida no meio de mil, e a medição ficou no caderno.<br></td><td>Galeria - caderno - memória<br></td></tr><tr><td class="t">16–22s</td><td>Plano fechado do piscineiro, sério.</td><td>Na reunião, é a sua palavra contra a de um morador. E contrato não se renova na base do &quot;confia em mim&quot;.<br></td><td>Sua palavra x a de um morador<br></td></tr><tr><td class="t">22–24s</td><td>Corte seco, rebobina (efeito simples de voltar).</td><td>Agora, a mesma cena.<br></td><td>Mesma cena. Com registro.<br></td></tr><tr><td class="t">24–32s</td><td>Tela 07-relatorio com protocolo e data de quinta; rolagem até fotos e tabela da água (07b-relatorio-agua).</td><td>Protocolo de quinta, horário, fotos, medição dentro da faixa. E o síndico já tinha registrado ciência do relatório.<br></td><td>Quinta - 8h - protocolo - ciência registrada<br></td></tr><tr><td class="t">32–38s</td><td>Piscineiro fala para a câmera, tom calmo.</td><td>A água pode ter mudado por chuva, por uso, por outra coisa. Mas a conversa muda: sai da culpa e vai pra causa.<br></td><td>Da culpa para a causa<br></td></tr><tr><td class="t">38–42s</td><td>Logo Ondaro sobre fundo #06263A.</td><td>Cada piscina com prontuário. Cada visita com prova.<br></td><td>Ondaro - 14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R05">Cena comum: a piscina do condomínio fica verde no fim de semana. Segunda cedo, o síndico pergunta: &quot;Vocês vieram quinta?&quot;<br><br>Você veio. Mas a foto tá perdida na galeria e a medição ficou no caderno.<br><br>Na reunião, é a sua palavra contra a de um morador.<br><br>Agora a mesma cena com registro: relatório de quinta com protocolo, horário, fotos de antes e depois, medições da água, e a ciência do síndico registrada.<br><br>A água pode ter mudado por mil motivos depois da sua visita. O registro não muda isso. Muda a conversa: da culpa para a causa.<br><br>Quem atende condomínio sabe: contrato não se renova no &quot;confia em mim&quot;.<br><br>Se você é piscineiro e vive de manutenção de piscina, sabe do que estou falando.<br><br>Cada piscina com prontuário. Cada visita com prova.<br>14 dias grátis no link da bio.</div>
+          <button class="copy" type="button" data-target="cap-R05">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Cena comum: a piscina do condomínio fica verde no fim de semana. Segunda cedo, o síndico pergunta: &quot;Vocês vieram quinta?&quot;<br><br>Vo…</div>
+          <p class="small"><b>Chamada:</b> Teste 14 dias grátis antes da próxima reclamação — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #condominio #manutencaodepiscina #aguaverde #sindico</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração: 40–42 s. Primeira metade com cor dessaturada e trilha tensa discreta; a virada (&quot;mesma cena, com registro&quot;) volta à cor normal e a trilha clareia. &quot;Cena comum:&quot; sempre visível no início para deixar claro que é hipotético. Legendas grandes, cortes secos.</p>
+          <h4>Por que existe</h4><p>Storytelling hipotético (marcado como &quot;Cena comum:&quot;) para o público prioritário que atende cliente exigente como condomínio. Sustentado por dores documentadas: cliente que diz que ninguém veio, reclamações de &quot;falta de compromisso&quot; no Reclame Aqui, e verão como época de crise de água verde. Não promete que o registro evita a perda; mostra que muda a conversa.</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo vídeo. Carrossel: &quot;Mesma reclamação, dois finais&quot; (compare). Stories: enquete &quot;Você atende condomínio?&quot; + link.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R07">
+  <details>
+    <summary>
+      <span class="pid reel">R07</span>
+      <span class="ptitle"><b>14 dias grátis: o que fazer no dia 1</b><small>Reel · Conversão · semana 2</small></span>
+      <span class="metric">Cliques no link (cadastros no teste)</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Reduzir o atrito de começar o teste grátis, mostrando 4 tarefas simples do primeiro dia que fazem a pessoa ver valor rápido.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro que já conhece o Ondaro, pensa em testar ou acabou de criar a conta.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>4 tarefas no dia 1 e você já manda o primeiro relatório.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Vai testar o Ondaro? Faz só isso no dia 1.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Piscineiro de manhã, café na mão, celular na outra, na frente da caminhonete.</td><td>Vai testar o Ondaro? Faz só isso no dia 1.<br></td><td>Dia 1 - 4 tarefas<br></td></tr><tr><td class="t">3–9s</td><td>Tela de cadastro de cliente sendo preenchida; contador &quot;1/3, 2/3, 3/3&quot;.</td><td>Um: cadastra três clientes. Começa pelos mais exigentes.<br></td><td>1 - Cadastre 3 clientes<br></td></tr><tr><td class="t">9–15s</td><td>Tela 02-agenda: criando recorrência &quot;toda terça e sexta, 8h&quot;.</td><td>Dois: agenda com recorrência. Toda terça e sexta às oito, por exemplo. O app avisa se der conflito.<br></td><td>2 - Agende com recorrência<br></td></tr><tr><td class="t">15–23s</td><td>Cortes rápidos no campo: tela 03-inspecao, 04-agua, 05-fotos.</td><td>Três: faz uma visita completa pelo app. Antes, configura as faixas da água que você usa. Sem sinal no quintal? Salva no aparelho e sincroniza depois.<br></td><td>3 - 1 visita completa (funciona offline)<br></td></tr><tr><td class="t">23–29s</td><td>Tela 06-finalizado → toque no WhatsApp → relatório 07-relatorio.</td><td>Quatro: manda o relatório pro cliente pelo seu WhatsApp. Um toque.<br></td><td>4 - Envie 1 relatório<br></td></tr><tr><td class="t">29–35s</td><td>Piscineiro para a câmera, fechando a porta da caminhonete.</td><td>Os outros treze dias são pra você ver se faz sentido na sua rotina. Sem cartão.<br></td><td>14 dias grátis - sem cartão<br></td></tr><tr><td class="t">35–38s</td><td>Fundo #06263A com o endereço.</td><td>Link na bio.<br></td><td>ondaro.vercel.app - link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R07">Vai testar o Ondaro? Faz só isso no dia 1:<br><br>✓ Cadastre 3 clientes (comece pelos mais exigentes)<br>✓ Agende com recorrência, ex.: toda terça e sexta às 8h<br>✓ Faça 1 visita completa pelo app (configure antes as faixas da água que você usa; sem sinal, salva no aparelho e sincroniza depois)<br>✓ Mande 1 relatório pelo seu WhatsApp, em um toque<br><br>Pronto. Os outros 13 dias são pra você ver se cabe na sua rotina de manutenção de piscina.<br><br>14 dias grátis, sem cartão. Planos a partir de R$129/mês se decidir continuar.<br><br>Link na bio.<br></div>
+          <button class="copy" type="button" data-target="cap-R07">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Vai testar o Ondaro? Faz só isso no dia 1:<br><br>✓ Cadastre 3 clientes (comece pelos mais exigentes)<br>✓ Agende com recorrência, ex.…</div>
+          <p class="small"><b>Chamada:</b> Comece hoje: 14 dias grátis, sem cartão — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #appparapiscineiro #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração: 35–38 s. Checklist das 4 tarefas fixo na lateral, marcando ✓ a cada passo. Ritmo ágil, cortes secos; telas reais em moldura. Trilha leve e otimista. Gravação original, de manhã, luz natural.</p>
+          <h4>Por que existe</h4><p>Conversão sem urgência falsa: reduz a dúvida &quot;por onde começo?&quot; com um plano concreto que leva ao momento de valor (o primeiro relatório enviado). Fatos do briefing: 14 dias grátis sem cartão, recorrência, offline, faixas configuradas pela empresa, envio em 1 toque pelo WhatsApp do profissional, plano Profissional R$129/mês. Responde à dor documentada de apps difíceis de configurar.</p>
+          <h4>Reaproveitamento</h4><p>Stories: checklist interativo de 4 itens com link. Carrossel: &quot;Dia 1 no Ondaro&quot; em 6 slides. Pode ser enviado por mensagem a quem acabou de se cadastrar. TikTok/Shorts: mesmo vídeo.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R08">
+  <details>
+    <summary>
+      <span class="pid reel">R08</span>
+      <span class="ptitle"><b>Caderno vs app: a mesma terça-feira</b><small>Reel · Identificação · semana 2</small></span>
+      <span class="metric">Envios por alcance (piscineiro mandando para colega) e retenção até o final</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Fazer o piscineiro se ver no lado do caderno e perceber, pelo contraste, onde o achismo custa caro no dia a dia — sem discurso, só mostrando.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro autônomo que ainda anota tudo em caderno, na memória ou no WhatsApp e atende de 4 a 10 piscinas por dia.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>8 piscinas na terça e nenhuma medição perdida no caderno.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Seu caderno não mostra nada quando o cliente reclama.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Tela dividida ao meio. Esquerda: caderno de capa mole, com respingo de água, sobre a borda da piscina. Direita: celular na mão mostrando a agenda do dia (tela 02-agenda).</td><td>Mesma terça-feira. Dois jeitos de trabalhar. Um termina em discussão.<br></td><td>CADERNO x APP, a mesma terça<br></td></tr><tr><td class="t">3–8s</td><td>7h, dentro do carro. Esquerda: mão folheando o caderno e rolando conversas no WhatsApp. Direita: dedo tocando a agenda da terça já montada, com o botão de rota no Maps/Waze.</td><td>Sete da manhã. De um lado, você caçando quem é hoje. Do outro, a terça já tá montada, porque o cliente é toda terça.<br></td><td>7h, quem é hoje?<br></td></tr><tr><td class="t">8–14s</td><td>Na piscina, kit de teste na mão. Esquerda: anota o pH no caderno com a mão molhada e a tinta borra. Direita: digita pH e cloro e a tela mostra se está dentro da faixa (tela 04-agua).</td><td>Mediu a água. No caderno, o número borra. No app, fica salvo e já mostra se tá dentro da faixa que você configurou.<br></td><td>Medição: borrada x registrada<br></td></tr><tr><td class="t">14–19s</td><td>Esquerda: foto tirada pela câmera comum, cai no meio da galeria cheia. Direita: foto de antes e depois anexada ao atendimento (tela 05-fotos).</td><td>Foto do antes e depois? Uma some na galeria. A outra fica presa no atendimento certo.<br></td><td>Galeria x atendimento<br></td></tr><tr><td class="t">19–25s</td><td>Casa de máquinas. Esquerda: piscineiro coçando a cabeça olhando as embalagens. Direita: lista de produtos aplicados com lote, e o aviso de baixa no estoque.</td><td>Semana que vem: &quot;o que eu coloquei aqui mesmo?&quot;. De um lado, memória. Do outro, produto e lote registrados.<br></td><td>&quot;Joguei o quê mesmo?&quot;<br></td></tr><tr><td class="t">25–31s</td><td>18h, celular vibra com mensagem do cliente: “Vocês vieram hoje?”. Esquerda: resposta digitada “Vim sim, pode confiar”. Direita: tela 06-finalizado, toque no botão do WhatsApp e o relatório (07-relatorio) aparece na conversa.</td><td>Seis da tarde: &quot;vieram hoje?&quot;. Num lado, &quot;vim sim, confia&quot;. No outro, o relatório que você mandou com um toque, pelo seu WhatsApp.<br></td><td>&quot;Confia&quot; x prova<br></td></tr><tr><td class="t">31–36s</td><td>A divisão some, tela cheia no relatório com a marca da empresa. Corte para o piscineiro guardando o celular no bolso.</td><td>Mesma terça. Mesmo trabalho. Só um lado consegue provar. Testa 14 dias grátis, link na bio.<br></td><td>Piscineiro que documenta não discute. | 14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R08">Mesma terça-feira. Mesmo trabalho. Só um lado consegue provar que fez.<br><br>O caderno não é o problema. O problema é quando o cliente pergunta &quot;vocês vieram hoje?&quot; e tudo o que você tem é a sua palavra.<br><br>No app, a terça já vem montada (cliente recorrente é recorrente), a medição de pH e cloro fica salva, a foto de antes e depois fica no atendimento certo e o relatório sai no fim da visita, para você mandar com um toque no seu WhatsApp.<br><br>Você está em qual lado hoje? Conta aqui nos comentários.<br><br>Manda pro piscineiro que ainda vive no caderno. 👀<br></div>
+          <button class="copy" type="button" data-target="cap-R08">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Mesma terça-feira. Mesmo trabalho. Só um lado consegue provar que fez.<br><br>O caderno não é o problema. O problema é quando o cli…</div>
+          <p class="small"><b>Chamada:</b> Teste 14 dias grátis, sem cartão — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina #tratamentodepiscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração estimada: 35–38s. Tela dividida o tempo todo (até o fechamento), com rótulo fixo “CADERNO” e “APP” no topo de cada lado. Cortes secos a cada 5–6s, marcados pelo horário no canto (7h, 9h, 11h, 18h). Gravar em campo, com luz natural, sem atores posados. Legendas grandes em Manrope ExtraBold, fundo #06263A no rótulo do caderno e #1391BE no do app. Som: ambiente real (água, bomba, carro) baixo + batida leve e constante; notificação do WhatsApp em destaque no bloco das 18h.</p>
+          <h4>Por que existe</h4><p>Mecanismo de contraste e identificação: o piscineiro reconhece a própria rotina no lado do caderno sem se sentir atacado. Ataca o inimigo comum do posicionamento (o achismo: caderno, memória, foto perdida na galeria, “confia em mim”) e fecha na dor documentada do cliente que diz que ninguém veio. Formato tela dividida favorece retenção (watch time) e envio entre colegas (sends), sinais citados por Mosseri (01/2025).</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo corte, com o rótulo “Parte do caderno” fixado como comentário. Stories: cada bloco de horário vira um story com enquete “Você faz assim?”. Carrossel: compare de 6 slides (7h, medição, foto, produto, 18h, CTA) usando o tipo compare.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R09">
+  <details>
+    <summary>
+      <span class="pid reel">R09</span>
+      <span class="ptitle"><b>Dezembro chegou: sua agenda aguenta o verão?</b><small>Reel · Negócio do piscineiro · semana 2</small></span>
+      <span class="metric">Salvamentos e envios por alcance</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Usar a virada da estação para fazer o piscineiro reorganizar a agenda antes do pico e mostrar recorrência, encaixe e prioridade funcionando no app.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro autônomo e pequena empresa que sente a agenda estourar entre dezembro e fevereiro.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>No verão a procura sobe e a sua agenda não estica.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Se você atende 30 piscinas, janeiro vai te testar.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Piscineiro de frente para a câmera, ao lado de uma piscina cheia de folhas, sol forte. Ele levanta o celular com a agenda lotada.</td><td>Dezembro chegou. Sua agenda aguenta janeiro?<br></td><td>Dezembro chegou. Sua agenda aguenta o verão?<br></td></tr><tr><td class="t">3–9s</td><td>Close na mão rolando mensagens de clientes no WhatsApp (borradas): pedidos de visita extra, “a água tá verde”, “dá pra vir amanhã?”.</td><td>Todo ano é igual: calor, piscina cheia de gente, água verde, cliente pedindo visita extra. Quem chega sem plano passa o verão apagando incêndio.<br></td><td>Calor + uso + chuva = agenda no limite<br></td></tr><tr><td class="t">9–17s</td><td>Tela do celular (02-agenda): criando um atendimento recorrente “toda terça e sexta às 8h”.</td><td>Primeiro: fixe os recorrentes. Quem é toda terça e sexta entra como recorrente, e a agenda se monta sozinha toda semana.<br></td><td>1. Recorrentes primeiro<br></td></tr><tr><td class="t">17–25s</td><td>Tela do app: tentativa de encaixar um cliente num horário já ocupado e o aviso de conflito aparecendo.</td><td>Segundo: deixe janela para encaixe. Chuva, água turva, cliente novo, vai aparecer. E se você tentar marcar em cima de outro horário, o app avisa o conflito.<br></td><td>2. Janela para encaixe<br></td></tr><tr><td class="t">25–33s</td><td>Piscineiro de volta à câmera, contando nos dedos.</td><td>Terceiro: decida antes quem tem prioridade. Quem tem contrato vem antes de avulso. Condomínio com uso pesado não pode esperar a semana que vem. Decide agora, não no meio da crise.<br></td><td>3. Prioridade definida antes<br></td></tr><tr><td class="t">33–38s</td><td>Tela do app com o botão de rota abrindo o Waze. Corte para o carro saindo.</td><td>E rota pelo Maps ou Waze direto do atendimento, sem copiar endereço.<br></td><td>Rota em 1 toque<br></td></tr><tr><td class="t">38–43s</td><td>Piscineiro fecha o portão de um cliente e olha para a câmera.</td><td>Verão não perdoa agenda no improviso. Testa 14 dias grátis e monta a sua antes de janeiro.<br></td><td>14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R09">Dezembro chegou. Sua agenda aguenta janeiro?<br><br>No verão a piscina é mais usada, chove mais e a água verde aparece. Quem chega sem plano passa a estação apagando incêndio.<br><br>Três coisas para fazer agora:<br>1. Fixe os recorrentes (toda terça e sexta às 8h, por exemplo).<br>2. Deixe janela para encaixe: chuva, água turva e cliente novo vão aparecer.<br>3. Defina prioridade antes: contrato vem antes de avulso.<br><br>No Ondaro, o recorrente se repete sozinho, o conflito de horário é avisado e a rota abre no Maps ou no Waze.<br><br>Para o piscineiro que quer tratar a manutenção de piscina como empresa.<br><br>Salva e manda pro sócio ou pro ajudante. ☀️</div>
+          <button class="copy" type="button" data-target="cap-R09">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Dezembro chegou. Sua agenda aguenta janeiro?<br><br>No verão a piscina é mais usada, chove mais e a água verde aparece. Quem chega …</div>
+          <p class="small"><b>Chamada:</b> Monte sua agenda de verão com 14 dias grátis — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #verao #aguaverde #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração estimada: 40–45s. Alternar falas para câmera (gravadas em campo, sol forte, sem tripé sofisticado) com gravação de tela do app em moldura de celular. Número do passo grande no canto (1, 2, 3) a cada bloco. Cortes secos. Som: batida animada de verão sem letra, ou áudio em alta no momento se combinar com tom de “preparação”; volume baixo sob a fala.</p>
+          <h4>Por que existe</h4><p>Mecanismo sazonal + utilidade: o pico de vendas é nov–dez e o verão é a crise da água verde (briefing, sazonalidade). Toca na dor documentada de “nunca desligar da cabeça” e mostra funções reais (recorrência, aviso de conflito, Maps/Waze). Postar no começo de dezembro aproveita o momento em que o piscineiro está pensando na temporada.</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo corte. Carrossel: “3 ajustes na agenda antes do verão”. Stories: enquete “Sua agenda de janeiro já está montada? Sim / Ainda não”.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R11">
+  <details>
+    <summary>
+      <span class="pid reel">R11</span>
+      <span class="ptitle"><b>Sem sinal no quintal</b><small>Reel · Produto · semana 2</small></span>
+      <span class="metric">Retenção (watch time) e envios</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Derrubar a objeção da internet ruim mostrando, em campo, o atendimento sendo feito offline e sincronizando depois.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiros que atendem casas de campo, chácaras, condomínios afastados ou casas de máquinas no subsolo.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Zero sinal no quintal? O atendimento não se perde.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Casa de máquinas sem sinal. Olha o que acontece com o registro.</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Close no celular mostrando o ícone de sem serviço. Câmera desce e revela a casa de máquinas apertada.</td><td>Casa de máquinas no fundo do quintal. Zero sinal. E aí?<br></td><td>Zero sinal. E o atendimento?<br></td></tr><tr><td class="t">3–8s</td><td>Piscineiro abre o atendimento no app normalmente, ainda sem sinal.</td><td>E aí que o atendimento continua. O app funciona sem internet.<br></td><td>Funciona sem internet<br></td></tr><tr><td class="t">8–15s</td><td>Gravação de tela: inspeção (03-inspecao), depois medições (04-agua) sendo preenchidas.</td><td>Inspeção, medição da água, serviços, produtos... Tudo sendo preenchido aqui, sem sinal nenhum.<br></td><td>Inspeção ✓ Água ✓ Serviços ✓<br></td></tr><tr><td class="t">15–21s</td><td>Piscineiro fotografa o filtro e a piscina (05-fotos).</td><td>Foto de antes e depois também. Fica tudo salvo como rascunho no aparelho.<br></td><td>Rascunho salvo no aparelho<br></td></tr><tr><td class="t">21–28s</td><td>Ele sai do quintal, entra no carro, o sinal volta na barra do celular. Tela mostra o atendimento sincronizado.</td><td>Voltou o sinal? Sincroniza. Nada se perde, nada precisa ser digitado de novo.<br></td><td>Sinal voltou -&gt; sincronizou<br></td></tr><tr><td class="t">28–34s</td><td>Tela 06-finalizado, toque no botão do WhatsApp, relatório aparece na conversa.</td><td>Aí é só mandar o relatório pro cliente pelo seu WhatsApp, com um toque.<br></td><td>Relatório enviado em 1 toque<br></td></tr><tr><td class="t">34–38s</td><td>Piscineiro dá partida no carro e olha para a câmera.</td><td>Internet ruim não é mais desculpa pra visita sem registro. Testa 14 dias grátis.<br></td><td>14 dias grátis, link na bio<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R11">Casa de máquinas no subsolo, chácara longe da cidade, quintal sem sinal. Todo piscineiro conhece.<br><br>No Ondaro, o atendimento funciona sem internet: inspeção, medições, serviços, produtos e fotos ficam salvos como rascunho no aparelho. Quando o sinal volta, sincroniza. Aí é só mandar o relatório pelo seu WhatsApp.<br><br>Qual é o lugar com o pior sinal que você atende? Conta aí. 😅<br></div>
+          <button class="copy" type="button" data-target="cap-R11">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Casa de máquinas no subsolo, chácara longe da cidade, quintal sem sinal. Todo piscineiro conhece.<br><br>No Ondaro, o atendimento f…</div>
+          <p class="small"><b>Chamada:</b> Teste 14 dias grátis, sem cartão — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #piscina #appparapiscineiro</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração estimada: 35–38s. Gravado em campo, num lugar realmente sem sinal (mostrar o ícone na barra de status é a prova visual). Alternar câmera de mão com gravação de tela em moldura de celular. Ícone de sinal animado no canto: cortado → cheio na virada dos 21s. Som ambiente da casa de máquinas (bomba) no começo; batida leve entra quando o sinal volta.</p>
+          <h4>Por que existe</h4><p>Mecanismo de demonstração de produto contra objeção concreta. Fato do briefing: funciona sem internet, com rascunho salvo e sincronização depois. A pesquisa aponta apps lentos/difíceis como dor documentada; mostrar o uso real em condição ruim responde a isso com prova visual, não com promessa. Envio do relatório é manual pelo WhatsApp do próprio profissional, como o briefing exige.</p>
+          <h4>Reaproveitamento</h4><p>TikTok/Shorts: mesmo vídeo. Stories: story 5 do S03. Carrossel de produto: slide “Sem sinal? Sem problema” com a tela 03-inspecao.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="R13">
+  <details>
+    <summary>
+      <span class="pid reel">R13</span>
+      <span class="ptitle"><b>Por que criei o Ondaro</b><small>Reel · Relacionamento · semana 2</small></span>
+      <span class="metric">Visitas ao perfil e mensagens diretas</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Humanizar a marca com o fundador falando de igual para igual, explicando a motivação real e abrindo um canal direto de conversa com piscineiros.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores atuais e piscineiros que estão conhecendo a marca e querem saber quem está por trás.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho A · Reel principal (06:30)</b>Eu criei o Ondaro porque piscineiro não tinha prova do próprio trabalho.</div><div class="hook"><b>Gancho B · Trial Reel (18:30), mesmo vídeo</b>Por que eu fiz um app só para piscineiro? Por causa de 1 pergunta. [confirmar se a história é real]</div></div>
+      
+      <h4>Roteiro</h4><div class="tw"><table class="rot"><thead><tr><th>Tempo</th><th>Cena</th><th>Fala</th><th>Na tela</th></tr></thead><tbody><tr><td class="t">0–3s</td><td>Fundador em plano médio, em um lugar real ligado à história [preencher: local — ex.: beira de piscina, casa de máquinas, escritório], olhando para a câmera.</td><td>Por que alguém cria um app só para piscineiro? Vou te contar.<br></td><td>Por que eu criei o Ondaro<br></td></tr><tr><td class="t">3–10s</td><td>Plano fechado.</td><td>Meu nome é [preencher: nome]. [preencher: sua relação com o setor de piscinas, só fatos reais].<br></td><td>[preencher: nome], fundador do Ondaro<br></td></tr><tr><td class="t">10–20s</td><td>Inserção de imagens reais de arquivo, se existirem [preencher: fotos/vídeos reais do início], ou plano fechado contínuo.</td><td>O que eu vi foi [preencher: situação real que motivou a criação, sem exagero, só o que aconteceu].<br></td><td>[preencher: frase-resumo da situação]<br></td></tr><tr><td class="t">20–28s</td><td>Plano fechado.</td><td>E o padrão era sempre o mesmo: trabalho bem feito guardado no caderno, na memória ou perdido na galeria. Na hora que o cliente reclamava, era a palavra de um contra a do outro.<br></td><td>Trabalho bom, sem prova<br></td></tr><tr><td class="t">28–36s</td><td>Fundador mostra o celular com o relatório (07-relatorio) e depois o portal (08-portal).</td><td>Por isso o Ondaro nasceu com uma ideia só: cada piscina com prontuário, cada visita com prova.<br></td><td>Cada piscina com prontuário. Cada visita com prova.<br></td></tr><tr><td class="t">36–44s</td><td>Plano fechado, tom honesto.</td><td>Ainda tem coisa que eu estou construindo, e eu falo isso abertamente. O que muda o produto é o que vocês me contam do dia a dia.<br></td><td>Em construção, com quem está em campo<br></td></tr><tr><td class="t">44–50s</td><td>Plano fechado, sorriso leve.</td><td>Se você trabalha com piscina, me chama [preencher: canal, DM, WhatsApp]. Eu respondo pessoalmente.<br></td><td>Me chama na DM | [preencher: canal]<br></td></tr></tbody></table></div>
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-R13">Muita gente me pergunta por que um app só para piscineiro. Esse vídeo é a resposta.<br><br>[preencher: 1-2 frases do fundador sobre a origem real do Ondaro, apenas fatos]<br><br>O que eu vi foi trabalho bem feito sem nenhuma prova: tudo no caderno, na memória ou perdido na galeria. E, na hora da reclamação, era palavra contra palavra.<br><br>O Ondaro nasceu para isso: cada piscina com prontuário, cada visita com prova.<br><br>Ainda tem muita coisa em construção, e eu quero construir junto com quem está em campo. Se você é piscineiro, me chama na DM. Eu respondo pessoalmente.<br></div>
+          <button class="copy" type="button" data-target="cap-R13">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Muita gente me pergunta por que um app só para piscineiro. Esse vídeo é a resposta.<br><br>[preencher: 1-2 frases do fundador sobre…</div>
+          <p class="small"><b>Chamada:</b> Me chame na DM e conte como é o seu dia a dia.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #empreendedorismo #bastidores</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>Duração estimada: 45–50s. Talking head simples, sem roteiro decorado demais (usar tópicos para soar natural). Dois enquadramentos alternados, cortes secos para tirar pausas. Legendas grandes. Som: só a voz, ou fundo instrumental bem baixo e calmo. Nada de imagem de banco; se não houver arquivo real, manter o fundador na tela.</p>
+          <h4>Por que existe</h4><p>Mecanismo de relacionamento e confiança: rosto e motivação real do fundador diferenciam a marca de “mais um app”. Os fatos pessoais ficam em [preencher] para não inventar nenhuma história (regra do briefing). O trecho genérico usa apenas o inimigo comum e a promessa central do posicionamento, e admite que há itens em desenvolvimento sem nomear prazos.</p>
+          <h4>Reaproveitamento</h4><p>Fixar no perfil. TikTok/Shorts: mesmo vídeo. Stories: trechos de 15s com caixa “Pergunte ao fundador”. Base para S04 (oferta de configuração com o fundador).</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C06">
+  <details>
+    <summary>
+      <span class="pid carr">C06</span>
+      <span class="ptitle"><b>De piscineiro a empresa: 6 passos</b><small>Carrossel · Negócio do piscineiro · semana 2</small></span>
+      <span class="metric">Salvamentos e envios</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Dar um caminho prático e salvável para o piscineiro que quer crescer, posicionando o registro de visita e o padrão de atendimento como parte natural de virar empresa.</dd></div>
+        <div><dt>Público</dt><dd>Piscineiro autônomo, ainda informal ou recém-MEI, que quer atender condomínio, hotel e cliente de alto padrão e, no futuro, ter equipe.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>De piscineiro a empresa: 6 passos (sem curso milagroso).</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C06/01.png" alt="De piscineiro a empresa: 6 passos, slide 1" loading="lazy" width="200" height="250"><img src="artes/C06/02.png" alt="De piscineiro a empresa: 6 passos, slide 2" loading="lazy" width="200" height="250"><img src="artes/C06/03.png" alt="De piscineiro a empresa: 6 passos, slide 3" loading="lazy" width="200" height="250"><img src="artes/C06/04.png" alt="De piscineiro a empresa: 6 passos, slide 4" loading="lazy" width="200" height="250"><img src="artes/C06/05.png" alt="De piscineiro a empresa: 6 passos, slide 5" loading="lazy" width="200" height="250"><img src="artes/C06/06.png" alt="De piscineiro a empresa: 6 passos, slide 6" loading="lazy" width="200" height="250"><img src="artes/C06/07.png" alt="De piscineiro a empresa: 6 passos, slide 7" loading="lazy" width="200" height="250"><img src="artes/C06/08.png" alt="De piscineiro a empresa: 6 passos, slide 8" loading="lazy" width="200" height="250"></div><p class="note">8 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C06/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C06">Virar empresa não começa com logo nem com uniforme. Começa com estrutura.<br><br>1. Formalize: piscineiro pode ser MEI, CNAE 8129-0/00 (fonte: contabilidade.com). Confirme com um contador.<br>2. Contrato por escrito: frequência, o que está incluso, produto, reajuste e aviso prévio.<br>3. Registre cada visita: horário, medições, fotos e produtos.<br>4. Preço por piscina: produto, deslocamento, tempo e frequência entram na conta.<br>5. Padrão de atendimento: a mesma sequência em toda visita.<br>6. Equipe só depois do padrão.<br><br>Qual desses passos você já cumpriu? Comenta o número.<br><br>Salva pra rever quando for fechar o próximo condomínio. 📌<br></div>
+          <button class="copy" type="button" data-target="cap-C06">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Virar empresa não começa com logo nem com uniforme. Começa com estrutura.<br><br>1. Formalize: piscineiro pode ser MEI, CNAE 8129-0…</div>
+          <p class="small"><b>Chamada:</b> Salve o post e teste o Ondaro por 14 dias grátis — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #mei #empreendedorismo #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: WARN</p>
+        </section>
+        <section><h4>Edição</h4><p>8 slides. Capa escura com “empresa” em espuma #5EEAD4. Slides 2 a 6 em fundo claro com número grande (01–06) em #1391BE, para dar sensação de progresso; slide 7 em azul para marcar a virada (equipe). Muito respiro, sem ícones decorativos. Último slide escuro com botão.</p>
+          <h4>Por que existe</h4><p>Mecanismo de utilidade com progressão (lista numerada = salvamento). Usa fatos verificados do briefing: MEI com CNAE 8129-0/00 (contabilidade.com). Toca nas dores documentadas de cobrança/inadimplência (contrato) e medo de reajustar preço (preço por piscina), e conecta ao posicionamento “padrão profissional” e ao público 1 (piscineiro em crescimento que quer clientes exigentes). Carrosséis estão performando bem segundo comunicação oficial do Instagram.</p>
+          <h4>Reaproveitamento</h4><p>Reel falado: “6 passos em 40 segundos”, um corte por passo. TikTok: série de 6 vídeos curtos, um por passo. Stories: caixa “Em qual passo você está?” e respostas comentadas.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C08">
+  <details>
+    <summary>
+      <span class="pid carr">C08</span>
+      <span class="ptitle"><b>O que cada técnico fez, sem ligar</b><small>Carrossel · Negócio do piscineiro · semana 2</small></span>
+      <span class="metric">Salvamentos e visitas ao perfil</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Mostrar ao dono de empresa de manutenção como acompanhar a equipe por registro, não por ligação, levando ao plano Empresa.</dd></div>
+        <div><dt>Público</dt><dd>Donos e gestores de empresas de manutenção de piscinas com 2 ou mais técnicos em campo.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Como saber o que cada técnico fez sem ligar para ele.</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C08/01.png" alt="O que cada técnico fez, sem ligar, slide 1" loading="lazy" width="200" height="250"><img src="artes/C08/02.png" alt="O que cada técnico fez, sem ligar, slide 2" loading="lazy" width="200" height="250"><img src="artes/C08/03.png" alt="O que cada técnico fez, sem ligar, slide 3" loading="lazy" width="200" height="250"><img src="artes/C08/04.png" alt="O que cada técnico fez, sem ligar, slide 4" loading="lazy" width="200" height="250"><img src="artes/C08/05.png" alt="O que cada técnico fez, sem ligar, slide 5" loading="lazy" width="200" height="250"><img src="artes/C08/06.png" alt="O que cada técnico fez, sem ligar, slide 6" loading="lazy" width="200" height="250"><img src="artes/C08/07.png" alt="O que cada técnico fez, sem ligar, slide 7" loading="lazy" width="200" height="250"><img src="artes/C08/08.png" alt="O que cada técnico fez, sem ligar, slide 8" loading="lazy" width="200" height="250"></div><p class="note">8 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C08/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C08">Se para saber o que aconteceu na visita você precisa ligar para o técnico, a gestão está no celular dele, não no seu.<br><br>No Ondaro, cada técnico tem a própria agenda e vê só os atendimentos dele. Cada visita fica registrada: horário, protocolo, inspeção, medição da água, fotos de antes e depois, produtos aplicados com lote e recomendações. O produto aplicado dá baixa no estoque, e você enxerga o custo químico por cliente.<br><br>Quando o cliente reclamar, você abre o registro em vez de ligar para alguém.<br><br>Plano Empresa: até 30 usuários, funções e permissões e suporte prioritário.<br><br>Para o piscineiro que quer tratar a manutenção de piscina como empresa.<br><br>Manda para o seu sócio.</div>
+          <button class="copy" type="button" data-target="cap-C08">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Se para saber o que aconteceu na visita você precisa ligar para o técnico, a gestão está no celular dele, não no seu.<br><br>No Ond…</div>
+          <p class="small"><b>Chamada:</b> Teste o plano Empresa por 14 dias grátis — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #manutencaodepiscina #empresadepiscina #gestaodeequipe #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>8 slides. Capa escura, “sem ligar para ele” em espuma. Slides 3 a 5 com telas reais em moldura de celular e título curto acima. Numeração 1–5 no kicker para dar sensação de sistema. Slide 7 azul para destacar estoque/custo. Fechamento escuro com o plano.</p>
+          <h4>Por que existe</h4><p>Mecanismo de problema/solução para o público 2 do posicionamento (empresas que precisam saber o que cada técnico fez). Todas as funções citadas estão no briefing: técnico vê só a própria agenda, permissões, produtos com lote e baixa no estoque, custo químico por cliente, indicadores, plano Empresa a R$299 com até 30 usuários. Combate o achismo dentro da própria empresa.</p>
+          <h4>Reaproveitamento</h4><p>Reel: “Um dia na gestão sem ligar para técnico” (dono no escritório abrindo os atendimentos do dia). LinkedIn/Stories para donos de empresa. Estático: slide 2 (“Ligar não é gestão”).</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+<article class="peca" id="C10">
+  <details>
+    <summary>
+      <span class="pid carr">C10</span>
+      <span class="ptitle"><b>Profissional ou Empresa: qual plano</b><small>Carrossel · Conversão · semana 2</small></span>
+      <span class="metric">Cliques no link e salvamentos</span>
+    </summary>
+    <div class="pbody">
+      <dl class="meta">
+        <div><dt>Objetivo</dt><dd>Ajudar o piscineiro a escolher o plano certo com honestidade total sobre o que existe hoje e o que ainda está em desenvolvimento, e levar ao teste grátis.</dd></div>
+        <div><dt>Público</dt><dd>Seguidores que já consideram assinar e querem entender a diferença entre os planos.</dd></div>
+      </dl>
+      <div class="hooks"><div class="hook"><b>Gancho</b>Profissional ou Empresa: qual plano é para você?</div></div>
+      <div class="arts" aria-label="Artes prontas"><img src="artes/C10/01.png" alt="Profissional ou Empresa: qual plano, slide 1" loading="lazy" width="200" height="250"><img src="artes/C10/02.png" alt="Profissional ou Empresa: qual plano, slide 2" loading="lazy" width="200" height="250"><img src="artes/C10/03.png" alt="Profissional ou Empresa: qual plano, slide 3" loading="lazy" width="200" height="250"><img src="artes/C10/04.png" alt="Profissional ou Empresa: qual plano, slide 4" loading="lazy" width="200" height="250"><img src="artes/C10/05.png" alt="Profissional ou Empresa: qual plano, slide 5" loading="lazy" width="200" height="250"><img src="artes/C10/06.png" alt="Profissional ou Empresa: qual plano, slide 6" loading="lazy" width="200" height="250"><img src="artes/C10/07.png" alt="Profissional ou Empresa: qual plano, slide 7" loading="lazy" width="200" height="250"></div><p class="note">7 arte(s) em 1080×1350 no repositório, em marketing/conteudo/artes/C10/.</p>
+      
+      <div class="cols">
+        <section><h4>Legenda pronta</h4><div class="caption" id="cap-C10">Profissional ou Empresa? Sem letra miúda:<br><br>Profissional, R$129/mês<br>Até 3 usuários. Para quem trabalha sozinho ou com poucos ajudantes.<br><br>Empresa, R$299/mês<br>Até 30 usuários, funções e permissões (o técnico vê só a própria agenda) e suporte prioritário.<br><br>Em desenvolvimento (ainda não disponível em nenhum plano): assistente com IA, gestão de várias unidades e API. Quando estiver pronto, a gente avisa aqui.<br><br>Os dois começam com 14 dias grátis, sem cartão. Usa primeiro e escolhe depois.<br><br>Ondaro: gestão da manutenção de piscina para piscineiro autônomo e empresa.<br><br>Ficou dúvida sobre qual é o seu caso? Comenta que eu respondo.</div>
+          <button class="copy" type="button" data-target="cap-C10">Copiar legenda</button>
+          <div class="vis"><b>Visível no feed:</b> Profissional ou Empresa? Sem letra miúda:<br><br>Profissional, R$129/mês<br>Até 3 usuários. Para quem trabalha sozinho ou com poucos a…</div>
+          <p class="small"><b>Chamada:</b> Comece o teste de 14 dias grátis, sem cartão — link na bio.</p>
+          <p class="small"><b>Hashtags:</b> #piscineiro #manutencaodepiscina #empresadepiscina #piscina</p>
+          <p class="note"><b>Verificador de legenda:</b> length: PASS · first line: PASS · hook is concrete: PASS · hashtags: PASS · tag placement: PASS · links: PASS · one ask: WARN · emoji: PASS · search terms: PASS</p>
+        </section>
+        <section><h4>Edição</h4><p>7 slides. Capa escura; preços em Manrope ExtraBold bem grandes nos slides 2 e 3. Slide 6 em azul com selo “Em desenvolvimento” visível e marcador ⏳ — não pode parecer recurso disponível. Fechamento escuro. Conferir preços e limites com a página oficial antes de publicar.</p>
+          <h4>Por que existe</h4><p>Mecanismo de conversão por transparência: preços, limites e diferenciais vêm exatamente do briefing (R$129 até 3 usuários; R$299 até 30, funções/permissões, suporte prioritário; 14 dias sem cartão). Os itens em desenvolvimento (IA, várias unidades, API) aparecem marcados como não disponíveis, cumprindo a regra de não prometer o que não está pronto — o que também diferencia a marca de concorrentes que falam em IA, sem citá-los.</p>
+          <h4>Reaproveitamento</h4><p>Destaque fixo “Planos”. Stories com enquete “Você seria: Profissional / Empresa”. Reel curto do fundador explicando a diferença em 20s, com o slide de “Em desenvolvimento” na tela.</p></section>
+      </div>
+    </div>
+  </details>
+</article>
+</section>
+
+<section class="blk" id="banco">
+  <h2>Banco para a semana 2</h2>
+  <p>Já desenvolvidas e prontas: <a href="#R05">R05</a>, <a href="#R07">R07</a>, <a href="#R08">R08</a>, <a href="#R09">R09</a>, <a href="#R11">R11</a>, <a href="#R13">R13</a>, <a href="#C06">C06</a>, <a href="#C08">C08</a>, <a href="#C10">C10</a>. Faltam 7 Stories e 7 estáticos, que entram no próximo ciclo, a partir do que a semana 1 ensinar (comentários, caixas de perguntas e métricas).</p>
+</section>
+
+<section class="blk" id="metricas">
+  <h2>Painel de métricas</h2>
+  <p>Ainda não há dados: o perfil não existe ou não está conectado. Nenhum número abaixo foi estimado. Preencha a partir dos Insights do Instagram no fim de cada semana e me mande. Eu analiso e replanejo.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Indicador</th><th>Onde ver</th><th>Semana 1</th><th>Decisão que ele orienta</th></tr></thead>
+    <tbody>
+      <tr><td>Tempo médio assistido por Reel</td><td>Insights do Reel</td><td>—</td><td>Gancho e ritmo de edição</td></tr>
+      <tr><td>Envios por alcance</td><td>Insights do post (compartilhamentos ÷ contas alcançadas)</td><td>—</td><td>Que tema vira série</td></tr>
+      <tr><td>Salvamentos por alcance</td><td>Insights do carrossel</td><td>—</td><td>Que conteúdo educativo repetir</td></tr>
+      <tr><td>Alcance de quem não segue (%)</td><td>Insights da conta</td><td>—</td><td>Se a descoberta está funcionando</td></tr>
+      <tr><td>Trial Reel × Reel principal (tempo assistido)</td><td>Insights dos dois</td><td>—</td><td>Qual fórmula de gancho funciona no nicho</td></tr>
+      <tr><td>Visitas ao perfil → seguidores</td><td>Insights da conta</td><td>—</td><td>Bio e destaques</td></tr>
+      <tr><td>Cliques no link da bio</td><td>Insights da conta</td><td>—</td><td>Chamadas e página inicial</td></tr>
+      <tr><td>Contas criadas no Ondaro vindas do Instagram</td><td>/admin do Ondaro (novos cadastros) + pergunta "como nos conheceu"</td><td>—</td><td>O que realmente gera cliente</td></tr>
+      <tr><td>Testes que viraram assinatura</td><td>/admin do Ondaro</td><td>—</td><td>Meta final</td></tr>
+    </tbody></table></div>
+  <h3>Rotina</h3>
+  <div class="grid2">
+    <div class="box"><h3>Diária (40 min)</h3><ul><li>Publicar as 5 peças do dia.</li><li>20 minutos de comentários antes de postar, em 10 contas: 5 com o público que queremos, 3 do mesmo tamanho e 2 que podem comprar. É a rodada de engajamento da skill ig-plan.</li><li>Responder todos os comentários na primeira hora.</li><li>Guardar as respostas das caixas de perguntas: elas viram ganchos.</li></ul></div>
+    <div class="box"><h3>Semanal</h3><ul><li>Ranquear os posts por envios por alcance e tempo assistido, não por visualizações.</li><li>Comparar cada Trial Reel com o Reel principal.</li><li>Transformar o melhor post em série com o mesmo mecanismo e um ângulo novo.</li><li>Montar a semana seguinte (eu faço, com os seus números).</li></ul></div>
+    <div class="box"><h3>Mensal</h3><ul><li>Cadastros e assinaturas vindos do Instagram.</li><li>Revisar a proporção dos pilares.</li><li>Revisar posicionamento e preço contra o mercado.</li></ul></div>
+  </div>
+</section>
+
+<section class="blk" id="experimentos">
+  <h2>Registro de experimentos</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Experimento</th><th>Hipótese</th><th>Resultado</th><th>Aprendizado</th><th>Próxima ação</th></tr></thead>
+    <tbody>
+      <tr><td>Gancho A × B (Trial Reels, 7 pares)</td><td>Ganchos com número e algo em jogo seguram mais nos 3 primeiros segundos</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Reel postado às 06:30 × 19:30</td><td>Piscineiro vê o celular antes da rota</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Conteúdo para o cliente final (C05) × para o piscineiro (C02)</td><td>Conteúdo que o piscineiro repassa ao cliente gera mais envios</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Tela real do app × sem produto</td><td>Mostrar o produto não derruba o alcance quando a dor vem primeiro</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Chamada "comente PROVA" × "link na bio"</td><td>Palavra-chave nos comentários gera mais conversas</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody></table></div>
+  <p class="small">Regra: nenhuma conclusão com base em um único post.</p>
+</section>
+
+<section class="blk" id="preco">
+  <h2>Recomendação de preço</h2>
+  <div class="box warn">
+    <p>O conteúdo pode justificar um preço mais alto, mas o primeiro clique vem de comparação. Hoje o Profissional (R$ 129) custa quase o dobro do plano equivalente dos concorrentes, e não temos prova social para sustentar isso.</p>
+    <p><b>Recomendo testar o Profissional a R$ 79 e o Empresa a R$ 199 durante os primeiros 90 dias</b>, de preferência como preço de lançamento para os primeiros clientes, e coletar depoimentos reais. A troca é feita em /admin, sem mexer no código. A decisão é sua: se mantiver os preços, o conteúdo fala com o público de condomínio e empresas, que é quem paga por prova.</p>
+  </div>
+</section>
+
+<section class="blk">
+  <h2>Ferramentas</h2>
+  <p>Skill instagram-agent-skill (MIT, Jake Schincariol): fluxos de Reel, carrossel, legenda, Stories e plano. Os scripts originais são em inglês, então criei adaptações em português, sem alterar o original. Estão no repositório, em <code>marketing/ferramentas-ig-ptbr/</code>:</p>
+  <ul>
+    <li><b>Avaliador de ganchos:</b> números falados, R$, palavras de tensão do nicho, aberturas fracas e "você".</li>
+    <li><b>Humanizador:</b> o léxico em inglês mais vícios de texto em português.</li>
+    <li><b>Verificador de legendas:</b> usado como está, com os termos de busca "manutenção de piscina" e "piscineiro".</li>
+  </ul>
+  <p class="small">O verificador ainda marca "uma chamada só" em todas as legendas, porque procura chamadas escritas em inglês. A conferência dessa regra foi manual.</p>
+</section>
+</div>
+<script>
+document.addEventListener("click", async (ev) => {
+  const b = ev.target.closest("button.copy"); if (!b) return;
+  const el = document.getElementById(b.dataset.target); const text = el.innerText;
+  try { await navigator.clipboard.writeText(text); b.textContent = "Copiada"; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selecionada: copie com Ctrl+C"; }
+  setTimeout(() => (b.textContent = "Copiar legenda"), 2200);
+});
+document.querySelectorAll('.slot').forEach(a => a.addEventListener('click', () => { const id = a.getAttribute('href').slice(1); const d = document.querySelector('#' + id + ' details'); if (d) d.open = true; }));
+</script>
