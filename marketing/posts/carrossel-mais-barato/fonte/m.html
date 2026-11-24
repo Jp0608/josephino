@@ -1,0 +1,163 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=block" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden;background:#06263a}
+body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;color:#fff;position:relative}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.shade{position:absolute;inset:0}
+.d{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.98;text-wrap:balance}
+em{font-style:normal;color:#5eead4}
+.g{color:#b5e04a}
+.top{position:absolute;left:72px;right:72px;top:64px;display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);z-index:5}
+.logo{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-weight:800;font-size:32px;letter-spacing:-.04em;text-transform:none;color:#fff}
+.prog{position:absolute;left:72px;right:72px;bottom:56px;height:3px;background:rgba(255,255,255,.18);z-index:5}
+.prog i{position:absolute;left:0;top:0;bottom:0;background:#5eead4}
+.foot{position:absolute;left:72px;right:72px;bottom:80px;display:flex;justify-content:space-between;font-size:22px;font-weight:600;color:rgba(255,255,255,.72);z-index:5;letter-spacing:.04em}
+.kick{font-size:24px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5eead4;display:flex;align-items:center;gap:16px}
+.kick:before{content:"";width:48px;height:2px;background:currentColor}
+.body{font-size:34px;line-height:1.38;color:rgba(255,255,255,.88);max-width:860px}
+.blk{position:absolute;left:72px;right:72px;z-index:4}
+.phone{position:absolute;width:430px;height:930px;border-radius:58px;background:#020f18;padding:12px;box-shadow:0 60px 120px -30px rgba(0,0,0,.7),0 0 0 1.5px rgba(255,255,255,.14) inset;z-index:3}
+.phone .s{width:100%;height:100%;border-radius:47px;overflow:hidden;background:#fff;position:relative}
+.phone img{width:100%;display:block}
+.phone .n{position:absolute;left:50%;top:22px;width:110px;height:28px;margin-left:-55px;border-radius:16px;background:#020f18;z-index:2}
+.card{background:rgba(6,38,58,.62);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:38px 36px;display:grid;grid-template-columns:96px 1fr;gap:22px;align-items:center}
+.card .k{font-family:Manrope,sans-serif;font-weight:800;font-size:64px;line-height:1;color:transparent;-webkit-text-stroke:2px #b5e04a}
+.card h3{font-family:Manrope,sans-serif;font-weight:800;font-size:52px;letter-spacing:-.03em;line-height:1.05}
+.card p{font-size:26px;color:rgba(255,255,255,.75);margin-top:6px}
+.chk{display:grid;gap:28px}
+.chk div{display:flex;align-items:center;gap:24px;font-family:Manrope,sans-serif;font-weight:700;font-size:54px;letter-spacing:-.02em;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.14)}
+.chk i{flex:none;width:52px;height:52px;border-radius:14px;border:3px solid #5eead4;display:grid;place-items:center;font-style:normal;color:#5eead4;font-size:30px}
+.src{font-size:20px;color:rgba(255,255,255,.55);margin-top:22px}
+.rule{display:flex;gap:22px;align-items:flex-start;padding:26px 0;border-top:1px solid rgba(255,255,255,.16)}
+.rule b{flex:none;width:64px;height:64px;border-radius:50%;background:#5eead4;color:#06263a;display:grid;place-items:center;font-family:Manrope,sans-serif;font-size:30px}
+.rule h3{font-family:Manrope,sans-serif;font-weight:800;font-size:46px;letter-spacing:-.03em;line-height:1.05}
+.rule p{font-size:27px;color:rgba(255,255,255,.75);margin-top:8px}
+.callout{position:absolute;z-index:4;background:#fff;color:#0b1d29;border-radius:22px;padding:18px 24px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);font-size:24px;font-weight:600;display:flex;gap:14px;align-items:center}
+.callout i{width:44px;height:44px;border-radius:12px;background:#fff4e0;display:grid;place-items:center;color:#b3561f;font-style:normal;font-weight:800}
+.callout small{display:block;font-size:19px;color:#566874;font-weight:500}
+.btn{display:inline-block;background:#5eead4;color:#06263a;font-family:Manrope,sans-serif;font-weight:800;font-size:36px;padding:24px 40px;border-radius:999px}
+.lbl{position:absolute;z-index:4;font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;border-radius:999px;background:rgba(6,38,58,.7);backdrop-filter:blur(8px)}
+</style></head><body>
+<style>
+.big{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.045em;line-height:.95}
+.chat{background:#0b141a;border-radius:36px;padding:34px;box-shadow:0 50px 100px -40px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
+.chat .hd{display:flex;align-items:center;gap:18px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:28px}
+.chat .av{width:64px;height:64px;border-radius:50%;background:#6b7c85;display:grid;place-items:center;font-weight:700;font-size:28px}
+.chat .nm{font-size:30px;font-weight:600}.chat .nm small{display:block;font-size:22px;color:#8696a0;font-weight:400}
+.bub{display:inline-block;max-width:800px;background:#1f2c34;color:#e9edef;font-size:48px;line-height:1.3;padding:28px 34px 40px;border-radius:0 28px 28px 28px;position:relative;margin-bottom:16px}
+.bub small{position:absolute;right:20px;bottom:8px;font-size:20px;color:#8696a0}
+.stat{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;padding:28px 0;border-top:1px solid rgba(255,255,255,.14)}
+.stat b{font-family:Manrope,sans-serif;font-weight:800;font-size:84px;letter-spacing:-.04em;color:#5eead4;min-width:190px}
+.stat span{font-size:34px;line-height:1.3;color:rgba(255,255,255,.9)}
+.scale{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px}
+.scale div{border-radius:28px;padding:34px;border:1px solid rgba(255,255,255,.16)}
+.scale .a{background:rgba(240,132,112,.1);border-color:rgba(240,132,112,.4)}
+.scale .b{background:rgba(94,234,212,.1);border-color:rgba(94,234,212,.45)}
+.scale h3{font-family:Manrope,sans-serif;font-weight:800;font-size:44px;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px}
+.scale p{font-size:30px;line-height:1.4;color:rgba(255,255,255,.8)}
+.feat{display:grid}
+.feat div{display:flex;gap:22px;align-items:center;padding:30px 0;border-top:1px solid rgba(255,255,255,.14)}
+.feat i{flex:none;width:50px;height:50px;border-radius:14px;background:rgba(94,234,212,.14);border:2px solid #5eead4;display:grid;place-items:center;color:#5eead4;font-style:normal;font-weight:800;font-size:26px}
+.feat b{font-family:Manrope,sans-serif;font-size:46px;letter-spacing:-.025em;line-height:1.1}
+.feat small{display:block;font-size:27px;color:rgba(255,255,255,.7);margin-top:4px;font-family:Inter,sans-serif;font-weight:500;letter-spacing:0}
+</style>
+<div id="r"></div>
+<script>
+const N = 9;
+const LOGO = `<svg width="40" height="40" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12.5" stroke="#1391BE" stroke-width="4.5"/><path d="M5.5 17.2c2.6-2.4 5.2-2.4 7.8 0s5.2 2.4 7.8 0 4.4-2 5.8-.9" stroke="#5EEAD4" stroke-width="2.6" stroke-linecap="round"/></svg>ondaro`;
+const chrome = (i, label) => `<div class="top"><span class="logo">${LOGO}</span><span>${label}</span></div>
+<div class="foot"><span>${String(i).padStart(2,"0")} / ${String(N).padStart(2,"0")}</span><span>${i < N ? "arraste →" : "salve e compartilhe"}</span></div>
+<div class="prog"><i style="width:${(i / N) * 100}%"></i></div>`;
+const phone = (img, x, y, rot = 0, w = 430, h = 930) => `<div class="phone" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;transform:rotate(${rot}deg)"><div class="s"><div class="n"></div><img src="${img}" alt=""></div></div>`;
+const S = {
+1: () => `<div class="bg" style="background-image:url(casa.jpg);background-position:50% 72%"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.6) 0%,rgba(6,38,58,.05) 22%,rgba(6,38,58,.15) 36%,rgba(6,38,58,.92) 58%,#06263a 100%)"></div>
+${chrome(1, "Acontece toda semana")}
+<div class="blk" style="bottom:170px">
+  <div class="kick">Para quem vive de piscina</div>
+  <h1 class="d" style="font-size:100px;margin-top:28px">Seu cliente vai te trocar por alguém <em>R$ 50 mais barato.</em></h1>
+  <p class="body" style="margin-top:30px">E ele nem vai saber o que está perdendo.</p>
+</div>`,
+2: () => `<div class="bg" style="background-image:url(agua.jpg);opacity:.3"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.5),#06263a 75%)"></div>
+${chrome(2, "Você já recebeu")}
+<div class="blk" style="top:250px">
+  <div class="chat">
+    <div class="hd"><div class="av">C</div><div class="nm">Cliente · Casa 12<small>online</small></div></div>
+    <div class="bub">Oi, tudo bem? Achei um rapaz que cobra menos.<small>19:42</small></div><br>
+    <div class="bub">Acho que vou testar com ele esse mês 🙏<small>19:42</small></div>
+  </div>
+  <h2 class="d" style="font-size:130px;margin-top:110px">Doeu, né?</h2>
+  <p class="body" style="margin-top:24px;font-size:40px">Anos de serviço trocados por R$ 50.</p>
+</div>`,
+3: () => `<div class="bg" style="background-image:url(fundo.jpg);opacity:.35"></div>
+<div class="shade" style="background:radial-gradient(100% 70% at 50% 40%,rgba(6,38,58,.3),#06263a 75%)"></div>
+${chrome(3, "O que está acontecendo")}
+<div class="blk" style="top:330px;text-align:center">
+  <p class="big" style="font-size:112px">Ele não está comparando <em>serviço.</em></p>
+  <p class="big" style="font-size:112px;margin-top:30px;color:rgba(255,255,255,.55)">Está comparando preço.</p>
+  <p class="body" style="margin:60px auto 0;text-align:center">Porque o seu serviço ele nunca viu.</p>
+</div>`,
+4: () => `<div class="bg" style="background-image:url(heroi.jpg);background-position:50% 45%"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.65) 0%,rgba(6,38,58,.25) 24%,rgba(6,38,58,.93) 48%,#06263a 100%)"></div>
+${chrome(4, "Faça a conta")}
+<div class="blk" style="bottom:150px">
+  <div class="kick">Visita semanal, um ano</div>
+  <h2 class="d" style="font-size:84px;margin:24px 0 30px">O que o cliente <em>não vê</em></h2>
+  <div class="stat"><b>52</b><span>visitas no ano</span></div>
+  <div class="stat"><b>52</b><span>medições de pH e cloro</span></div>
+  <div class="stat" style="border-bottom:1px solid rgba(255,255,255,.14)"><b>0</b><span>registros que ele recebeu</span></div>
+</div>`,
+5: () => `<div class="bg" style="background-image:url(deck.jpg)"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.65) 0%,rgba(6,38,58,.3) 25%,rgba(6,38,58,.94) 50%,#06263a 100%)"></div>
+${chrome(5, "Por que isso é grave")}
+<div class="blk" style="bottom:160px">
+  <h2 class="d" style="font-size:92px;margin-bottom:46px">Quem não mostra o trabalho entra na <em>briga de preço.</em></h2>
+  <div class="scale">
+    <div class="a"><h3>Trabalho invisível</h3><p>O cliente compara número com número. Sempre tem alguém mais barato.</p></div>
+    <div class="b"><h3>Trabalho registrado</h3><p>O cliente compara o que recebe. Aí o barato perde.</p></div>
+  </div>
+</div>`,
+6: () => `<div class="bg" style="background-image:url(aerea.jpg);background-position:50% 40%;opacity:.45"></div>
+<div class="shade" style="background:radial-gradient(100% 70% at 50% 45%,rgba(6,38,58,.25),#06263a 78%)"></div>
+${chrome(6, "A virada")}
+<div class="blk" style="top:330px;text-align:center">
+  <h2 class="d" style="font-size:100px">Cliente não paga pelo que você faz.<br><em>Paga pelo que ele vê que você faz.</em></h2>
+</div>`,
+7: () => `<div class="bg" style="background-image:url(fundo.jpg);opacity:.22"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.35),#06263a 55%)"></div>
+${chrome(7, "Ondaro")}
+<div class="blk" style="top:180px">
+  <div class="kick">Deixe o trabalho à mostra</div>
+  <h2 class="d" style="font-size:76px;margin-top:24px">Cada visita vira relatório.<br><em>O cliente acompanha tudo.</em></h2>
+</div>
+${phone("07-relatorio.png", 120, 480, -4, 360, 780)}
+${phone("08-portal.png", 590, 440, 4, 360, 780)}`,
+8: () => `<div class="bg" style="background-image:url(deck.jpg);opacity:.3"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.45),#06263a 55%)"></div>
+${chrome(8, "Na hora do \"tá caro\"")}
+<div class="blk" style="top:190px">
+  <h2 class="d" style="font-size:92px;margin-bottom:40px">Você não discute preço.<br><em>Mostra o histórico.</em></h2>
+  <div class="feat">
+    <div><i>✓</i><b>Relatório de cada visita<small>Com a sua marca, enviado pelo seu WhatsApp.</small></b></div>
+    <div><i>✓</i><b>Fotos de antes e depois<small>Da piscina dele, com data e hora.</small></b></div>
+    <div><i>✓</i><b>Medições comparadas<small>Com as faixas que a sua empresa definiu.</small></b></div>
+    <div style="border-bottom:1px solid rgba(255,255,255,.14)"><i>✓</i><b>Portal do cliente<small>Próximas visitas e histórico da água.</small></b></div>
+  </div>
+</div>`,
+9: () => `<div class="bg" style="background-image:url(casa.jpg);background-position:50% 70%;opacity:.25"></div>
+<div class="shade" style="background:linear-gradient(180deg,rgba(6,38,58,.6),#06263a 72%)"></div>
+${chrome(9, "Ondaro")}
+<div class="blk" style="top:300px;text-align:center">
+  <svg width="150" height="150" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12.5" stroke="#1391BE" stroke-width="4.5"/><path d="M5.5 17.2c2.6-2.4 5.2-2.4 7.8 0s5.2 2.4 7.8 0 4.4-2 5.8-.9" stroke="#5EEAD4" stroke-width="2.6" stroke-linecap="round"/></svg>
+  <h2 class="d" style="font-size:96px;margin:40px 0 26px">Mostre o seu trabalho.<br><em>Saia da briga de preço.</em></h2>
+  <p class="body" style="margin:0 auto 56px">Teste o Ondaro por 14 dias, sem cartão.</p>
+  <span class="btn">Link na bio</span>
+  <p style="margin-top:34px;font-size:28px;color:rgba(255,255,255,.75);font-weight:600">Manda pro colega que já perdeu cliente por R$ 50.</p>
+</div>`,
+};
+const i = +(location.hash.slice(1) || 1);
+document.getElementById("r").innerHTML = S[i]();
+</script></body></html>
